@@ -1,4 +1,4 @@
-// app/events/[slug]/page.tsx
+// app/events/[slug]/page.jsx
 
 import { sanityFetch } from "@/sanity/lib/live";
 import { groq } from "next-sanity";
@@ -15,17 +15,8 @@ const EVENT_QUERY = groq`
   }
 `;
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
-
-export default async function EventPage({ params }: Props) {
+export default async function EventPage({ params }) {
   const event = await sanityFetch({ query: EVENT_QUERY, params: { slug: params.slug } });
-
-  // Unwrap event if it's wrapped inside `data`
   const eventData = event?.data ?? event;
 
   if (!eventData) return notFound();
