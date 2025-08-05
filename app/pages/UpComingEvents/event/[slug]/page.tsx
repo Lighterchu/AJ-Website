@@ -11,30 +11,44 @@ const EVENT_QUERY = groq`
     name,
     description,
     date,
-    "imageUrl": imageUrl.asset->url
+    "imageUrl": image.asset->url
   }
 `;
 
-export default async function EventPage({ params }: { params: { slug: string } }) {
-  const event = await sanityFetch({ query: EVENT_QUERY, params: { slug: params.slug } });
-  console.log(event)
+type Props = {
+  params: {
+    slug: string;
+  };
+};
 
-  if (!event) return notFound();
+
+export default async function EventPage({ params }: Props) {
+  const event = await sanityFetch({ query: EVENT_QUERY, params: { slug: params.slug } });
+
+  // Unwrap event if it's wrapped inside `data`
+  const eventData = event?.data ?? event;
+
+  if (!eventData) return notFound();
 
   return (
     <main className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold mb-4">{event.data.name}</h1>
+      <h1 className="text-4xl font-bold mb-4">{eventData.name}</h1>
       <time className="block text-sm text-gray-500 mb-6">
-        {new Date(event.data.date).toLocaleDateString()}
+        {new Date(eventData.date).toLocaleDateString()}
       </time>
 
-      {event.data.imageUrl && (
+      {eventData.imageUrl && (
         <div className="relative w-full h-64 mb-6">
-          <Image src={event.data.imageUrl} alt={event.data.name} fill className="object-cover rounded" />
+          <Image
+            src={eventData.imageUrl}
+            alt={eventData.name}
+            fill
+            className="object-cover rounded"
+          />
         </div>
       )}
 
-      <p className="text-lg text-gray-700">{event.data.description || "No description available."}</p>
+      <p className="text-lg text-gray-700">{eventData.description || "No description available."}</p>
     </main>
   );
 }

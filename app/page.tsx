@@ -1,6 +1,4 @@
 "use client";
-
-import Navbar from "./components/Navbar";
 // import Image from "next/image";
 import SlindingImages from "./components/SilderImage";
 
