@@ -1,40 +1,43 @@
 "use client";
-// import Image from "next/image";
 import SlindingImages from "./components/SilderImage";
 
 export default function Home() {
   return (
-    <div>
-      <main className="h-screen w-screen text-white overflow-hidden relative">
-        {/* Video Background */}
+    <div className="relative">
+      {/* VIDEO BACKGROUND SECTION */}
+      <div className="relative h-screen sm:h-dvh w-full">
+        {/* Video */}
         <video
-          className=" inset-0 w-full h-full object-cover z-0" // Ensure video covers the entire screen
-          src="/video/Video.mp4" // Path to your video file
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          src="/video/Video.mp4"
           autoPlay
           loop
           muted
+          playsInline
         />
-        {/* Overlay */}
-        <div className="absolute inset-0 z-10" />
 
-        
+        {/* Optional dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
 
-        <div className="absolute bottom-0 w-full flex justify-center pb-12 z-20">
-          <div className=" p-6 max-w-xl text-center">
-            <p className="text-lg mb-4">
-              MVMNT Entertainment Bringing chaos to order, bass to basements,
+        {/* Foreground Content */}
+        <div className="absolute bottom-0 w-full flex justify-center px-4 sm:px-6 pb-12 z-20">
+          <div className="p-4 sm:p-6 max-w-xl text-center bg-black/30 rounded-lg backdrop-blur-md">
+            <p className="text-base sm:text-lg mb-4 leading-relaxed">
+              <strong className="font-semibold">MVMNT Entertainment</strong> — Bringing chaos to order, bass to basements,
               and community to the concrete. We throw parties that don’t ask for
               permission — just your presence.
             </p>
             <a
               href="https://www.eventbrite.com/e/blackout-because-therapy-is-expensive-tickets-1543015774719?aff=oddtdtcreator"
-              className="text-teal-400 hover:underline font-semibold text-xl"
+              className="inline-block text-teal-400 hover:underline font-semibold text-base sm:text-xl"
             >
               See Next Event
             </a>
           </div>
         </div>
-      </main>
+      </div>
+
+      {/* SLIDING IMAGES SECTION */}
       <SlindingImages />
     </div>
   );
