@@ -1,0 +1,40 @@
+// app/events/[slug]/page.tsx
+
+import { sanityFetch } from "@/sanity/lib/live";
+import { groq } from "next-sanity";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+
+const EVENT_QUERY = groq`
+  *[_type == "event" && slug.current == $slug][0] {
+    _id,
+    name,
+    description,
+    date,
+    "imageUrl": imageUrl.asset->url
+  }
+`;
+
+export default async function EventPage({ params }: { params: { slug: string } }) {
+  const event = await sanityFetch({ query: EVENT_QUERY, params: { slug: params.slug } });
+  console.log(event)
+
+  if (!event) return notFound();
+
+  return (
+    <main className="max-w-3xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold mb-4">{event.data.name}</h1>
+      <time className="block text-sm text-gray-500 mb-6">
+        {new Date(event.data.date).toLocaleDateString()}
+      </time>
+
+      {event.data.imageUrl && (
+        <div className="relative w-full h-64 mb-6">
+          <Image src={event.data.imageUrl} alt={event.data.name} fill className="object-cover rounded" />
+        </div>
+      )}
+
+      <p className="text-lg text-gray-700">{event.data.description || "No description available."}</p>
+    </main>
+  );
+}
