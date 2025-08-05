@@ -10,9 +10,9 @@ export default function Footer() {
         {/* Logo Centered on Small, Left on Large */}
         <div className="flex justify-center md:justify-start">
           <Image
-            src="/images/logo1.png"
-            width={150}
-            height={150}
+            src="/logos/MVMNT.png"
+            width={200}
+            height={10}
             alt="MVMNT Entertainment Logo"
             className="object-contain"
           />
