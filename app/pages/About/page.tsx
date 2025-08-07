@@ -12,12 +12,7 @@ export default function About() {
         className="object-cover mb-4"
       />
 
-<iframe
-  src="https://player.mux.com/tWv01nGd004Ov01gfoX400kYGYqVAjl3HF28eR95LJbv2ag?metadata-video-title=Mvmnt&video-title=Mvmnt"
-  style="width: 100%; border: none; aspect-ratio: 16/9;"
-  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-  allowfullscreen
-></iframe>
+
 
       {/* Foreground Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 pt-12">
