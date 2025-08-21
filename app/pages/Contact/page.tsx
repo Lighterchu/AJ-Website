@@ -52,7 +52,7 @@ export default function Contact() {
       {/* Title */}
       <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
       <p className="text-green-200 text-center max-w-xl mb-12">
-        Whether you're planning an event, want to collaborate, or just want to
+        Whether you&apos;re planning an event, want to collaborate, or just want to
         say hi — we’re here for it. Fill out the form below or reach out
         directly via email or phone.
       </p>
