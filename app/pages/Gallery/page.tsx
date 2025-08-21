@@ -76,13 +76,8 @@ export default async function Events() {
       <h1 className="text-4xl font-extrabold mb-12 text-center text-gray-900 dark:text-gray-100">
         Photos Of Recent Events
       </h1>
-      {/* <Gallery photos={events} /> */}
-      <div className=" bg-blue-500 ">
-        <p>testing</p>
-        <p> more testing</p>
-   
-      </div>
-     
+      <Gallery photos={events} />
+    
     </main>
   );
 }
