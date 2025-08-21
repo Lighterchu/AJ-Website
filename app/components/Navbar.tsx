@@ -23,6 +23,7 @@ export default function Navbar() {
         <Link href="/pages/About">About Us</Link>
         <Link href="/pages/UpComingEvents">Upcoming Events</Link>
         <Link href="/pages/Gallery">Gallery</Link>
+        <Link href="/pages/Contact">Contact</Link>
       </div>
 
       {/* Mobile Menu Button */}
@@ -45,6 +46,9 @@ export default function Navbar() {
           </Link>
           <Link href="/pages/Gallery" className="hover:underline" onClick={() => setIsOpen(false)}>
             Gallery
+          </Link>
+          <Link href="/pages/Contact" className="hover:underline" onClick={() => setIsOpen(false)}>
+            Contact
           </Link>
         </div>
       )}
