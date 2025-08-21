@@ -1,33 +1,28 @@
-'use client';
+"use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [isOpen, setIsOpen] = useState(false); // 🔹 Add state for mobile menu
 
   return (
-    <nav className="absolute top-0 z-20 w-full px-6 py-4 flex justify-between items-center text-green-400 font-semibold text-lg bg-black/70 backdrop-blur">
-      {/* Logo / Home Link */}
-      <Link href="/" className="hover:underline">
-        Home
-      </Link>
+    <nav
+      className={`${
+        isHome ? "absolute" : "relative"
+      } top-0 z-20 w-full px-6 py-4 flex justify-between items-center text-green-400 font-semibold text-lg bg-transparent`}
+    >
+      <Link href="/">Home</Link>
 
-      {/* Desktop Menu */}
-      <div className="hidden md:flex space-x-8">
-        <Link href="/pages/About" className="hover:underline">
-          About Us
-        </Link>
-        <Link href="/pages/UpComingEvents" className="hover:underline">
-          Upcoming Events
-        </Link>
-        <Link href="/pages/Gallery" className="hover:underline">
-          Gallery
-        </Link>
-        <Link href="/pages/Contact" className="hover:underline">
-          Contact
-        </Link>
+      {/* Desktop Links */}
+      <div className="hidden md:flex space-x-4 sm:space-x-8 text-sm sm:text-lg">
+        <Link href="/pages/About">About Us</Link>
+        <Link href="/pages/UpComingEvents">Upcoming Events</Link>
+        <Link href="/pages/Gallery">Gallery</Link>
       </div>
 
       {/* Mobile Menu Button */}

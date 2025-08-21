@@ -1,6 +1,7 @@
 import React from "react";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import Image from "next/image";
 
 const fadeImages = [
   "/images/_MG_1062.jpg",
@@ -31,9 +32,10 @@ export default function SlindingImages() {
       >
         {fadeImages.map((img, index) => (
           <div key={index} className="relative h-screen w-screen">
-            <img
+            <Image
               src={img}
               alt={`Slide ${index + 1}`}
+              fill
               className="w-full h-full object-cover"
             />
           </div>

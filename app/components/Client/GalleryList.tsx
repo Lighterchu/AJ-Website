@@ -1,65 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// const events = [
-//   {
-//     id: 1,
-//     title: "Make It Loud",
-//     date: "August 15, 2025",
-//     description: "Let's blow the roof off the venue with the loudest beats and bass!",
-//     image: "/1080p_photos/NmGIxQo-.jpg",
-//   },
-//   {
-//     id: 2,
-//     title: "Summer Vibes",
-//     date: "July 20, 2025",
-//     description: "Sun, music, and good times all around!",
-//     image: "/1080p_photos/NmGIxQo-.jpg",
-//   },
-//   {
-//     id: 3,
-//     title: "Night Beats",
-//     date: "June 10, 2025",
-//     description: "Late night electronic sessions.",
-//     image: "/1080p_photos/NmGIxQo-.jpg",
-//   },
-//   {
-//     id: 4,
-//     title: "Festival Fun",
-//     date: "May 5, 2025",
-//     description: "Outdoor vibes with friends and family.",
-//     image: "/1080p_photos/NmGIxQo-.jpg",
-//   },
-//   {
-//     id: 5,
-//     title: "Urban Groove",
-//     date: "April 1, 2025",
-//     description: "City lights and underground sounds.",
-//     image: "/1080p_photos/NmGIxQo-.jpg",
-//   },
-//   {
-//     id: 6,
-//     title: "Bass Drop",
-//     date: "March 15, 2025",
-//     description: "Feel the bass shake the ground!",
-//     image: "/1080p_photos/NmGIxQo-.jpg",
-//   },
-// ];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Gallery({ photos }: { photos: any[] }) {
-    console.log(photos)
+  console.log(photos);
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
-      
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {photos.map((photos) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {photos.map((photo) => (
           <div
-            key={photos.id}
-            className="group relative rounded-xl overflow-hidden shadow-lg cursor-pointer hover:shadow-2xl transition-shadow duration-300"
+            key={photo.id}
+            className="group relative rounded-xl overflow-hidden shadow-lg cursor-default sm:cursor-pointer hover:shadow-2xl transition-shadow duration-300"
           >
             <div className="relative h-64 w-full">
               <Image
-                src={photos.image}
+                src={photo.image}
                 alt={"something"}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -69,15 +24,19 @@ export default function Gallery({ photos }: { photos: any[] }) {
               />
             </div>
 
-            {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-              <h2 className="text-white text-xl font-semibold">{photos.name}</h2>
+            {/* Overlay always visible on mobile, hover on desktop */}
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent
+                opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+                transition-opacity duration-300 flex flex-col justify-end p-4"
+            >
+              <h2 className="text-white text-xl font-semibold">{photo.name}</h2>
               {/* <time className="text-gray-300 text-sm mb-2">{date}</time> */}
-              <p className="text-gray-200 text-sm line-clamp-2">{photos.short}</p>
+              <p className="text-gray-200 text-sm line-clamp-2">{photo.short}</p>
               <Link
-                href={`/pages/UpComingEvents/event/${photos.id}`}
+                href={`/pages/UpComingEvents/event/${photo.id}`}
                 className="mt-3 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-600"
-                aria-label={`More details about ${photos.title}`}
+                aria-label={`More details about ${photo.name}`}
               >
                 Check out the link up →
               </Link>
