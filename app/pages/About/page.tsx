@@ -12,6 +12,8 @@ export default function About() {
         className="object-cover mb-4"
       />
 
+
+
       {/* Foreground Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 pt-12">
         {/* Logo */}
