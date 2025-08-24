@@ -5,13 +5,14 @@ import SlindingImages from "./components/SilderImage";
 export default function Home() {
   return (
     <div>
-      <main className="w-screen text-white overflow-hidden relative">
+      <main className=" text-white overflow-hidden relative">
         {/* Video Background */}
         <video
-          src="/video/Video.mp4" // Path to your video file
+          src="/video/_AHymsNz.mp4" // Path to your video file
           autoPlay
           loop
           muted
+          className="w-full h-full object-cover z-0"
         />
         {/* Overlay */}
         
