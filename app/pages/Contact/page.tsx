@@ -8,6 +8,8 @@ export default function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, phone, subject }),
       });
 
       const data = await res.json();
@@ -25,7 +27,9 @@ export default function Contact() {
       if (data.success) {
         setStatus("Message sent successfully!");
         setName("");
+        setPhone("")
         setEmail("");
+        setSubject("")
         setMessage("");
       } else {
         setStatus("Failed to send message.");
@@ -58,7 +62,7 @@ export default function Contact() {
       </p>
 
       {/* Contact Card */}
-      <div className="bg-black border border-green-500 rounded-xl shadow-lg max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+      <div className="bg-black border shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80] border-green-400 rounded-xl  max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
         {/* Contact Form */}
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
@@ -68,7 +72,18 @@ export default function Contact() {
               placeholder="Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 rounded bg-black text-white border border-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full px-4 py-2 rounded bg-black text-white border shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80] border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-green-400 mb-1">Phone</label>
+            <input
+              type="Phone"
+              placeholder="Your Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full px-4 py-2 rounded bg-black text-white border shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80] border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400"
               required
             />
           </div>
@@ -79,7 +94,18 @@ export default function Contact() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 rounded bg-black text-white border border-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full px-4 py-2 rounded bg-black text-white border shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80] border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-green-400 mb-1">Subject</label>
+            <textarea
+              placeholder="Enter Subject"
+              rows={1}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              className="w-full px-4 py-2 rounded bg-black text-white border  shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80] border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400"
               required
             />
           </div>
@@ -90,7 +116,7 @@ export default function Contact() {
               rows={5}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-4 py-2 rounded bg-black text-white border border-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full px-4 py-2 rounded bg-black text-white border  shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80] border-green-400 focus:outline-none focus:ring-2 focus:ring-green-400"
               required
             />
           </div>
@@ -114,7 +140,7 @@ export default function Contact() {
           <div>
             <h2 className="text-green-400 text-xl font-semibold mb-2">Phone</h2>
             <a href="tel:+1234567890" className="hover:underline">
-              +1 (234) 567-890
+              0431383674
             </a>
           </div>
           <div>

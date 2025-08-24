@@ -33,7 +33,7 @@ export default function Footer() {
             info@mvmntentertainment.com
           </a>
           <a href="tel:+1234567890" className="hover:underline">
-            +1 (234) 567-890
+            0431383674
           </a>
         </div>
       </div>

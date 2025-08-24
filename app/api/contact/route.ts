@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 export async function POST(req) {
-  const { name, email, message } = await req.json();
+  const { name, email, message, phone, subject } = await req.json();
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -13,16 +13,18 @@ export async function POST(req) {
       
     },
   });
+  
 
   try {
     await transporter.sendMail({
       from: `"${name}" <${email}>`,
       to: "mvmnt.entertainment.melb@gmail.com",
-      subject: `New message from ${name}`,
+      subject: subject,
       text: message,
       html: `
   <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.5;">
     <h2 style="color: #16a34a;">New Contact Form Submission</h2>
+    <p><strong>Phone:</strong> ${phone}</p>
     <p><strong>Name:</strong> ${name}</p>
     <p><strong>Email:</strong> ${email}</p>
     <hr style="border: 0; border-top: 1px solid #ccc; margin: 20px 0;" />
