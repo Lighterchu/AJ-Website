@@ -25,6 +25,12 @@ export const eventType = defineType({
             },  
     }),
     defineField({
+      name: 'Link',
+      type: 'url', 
+      title: 'Event Link',
+        description: 'Place the link to the event here.',   
+    }),
+    defineField({
       name: 'date',
       type: 'datetime', 
       title: 'Event Date',

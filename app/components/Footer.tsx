@@ -30,7 +30,7 @@ export default function Footer() {
         {/* Contact Info */}
         <div className="flex flex-col items-center md:items-end text-sm space-y-1">
           <a href="mailto:info@mvmntentertainment.com" className="hover:underline">
-            info@mvmntentertainment.com
+          mvmnt.entertainment.melb@gmail.com
           </a>
           <a href="tel:+1234567890" className="hover:underline">
             0431383674

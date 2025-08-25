@@ -134,7 +134,7 @@ export default function Contact() {
           <div>
             <h2 className="text-green-400 text-xl font-semibold mb-2">Email</h2>
             <a href="mailto:info@mvmntentertainment.com" className="hover:underline">
-              info@mvmntentertainment.com
+            mvmnt.entertainment.melb@gmail.com
             </a>
           </div>
           <div>

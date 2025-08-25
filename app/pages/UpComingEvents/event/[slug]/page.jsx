@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const EVENT_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
@@ -11,13 +12,15 @@ const EVENT_QUERY = groq`
     name,
     description,
     date,
-    "imageUrl": image.asset->url
+    "imageUrl": image.asset->url,
+    Link
   }
 `;
 
 export default async function EventPage({ params }) {
   const event = await sanityFetch({ query: EVENT_QUERY, params: { slug: params.slug } });
   const eventData = event?.data ?? event;
+  const eventLink = eventData?.Link || null;
 
   if (!eventData) return notFound();
 
@@ -39,7 +42,25 @@ export default async function EventPage({ params }) {
         </div>
       )}
 
-      <p className="text-lg text-gray-700">{eventData.description || "No description available."}</p>
+      <p className="text-lg text-gray-700 mb-6">
+        {eventData.description || "No description available."}
+      </p>
+
+      <div className=" flex justify-center">  
+      {eventLink && (
+        <p>
+          <Link
+            href={eventLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-teal-300 transition-colors"
+          >
+            Get your tickets here
+          </Link>
+        </p>
+      )}
+      </div>
+      
     </main>
   );
 }
