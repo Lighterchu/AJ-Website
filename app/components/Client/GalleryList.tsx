@@ -34,7 +34,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
               {/* <time className="text-gray-300 text-sm mb-2">{date}</time> */}
               <p className="text-gray-200 text-sm line-clamp-2">{photo.short}</p>
               <Link
-                href={`/pages/UpComingEvents/event/${photo.id}`}
+                href={`/pages/Gallerys/gallery/${photo.slug.current}`}
                 className="mt-3 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-600"
                 aria-label={`More details about ${photo.name}`}
               >
