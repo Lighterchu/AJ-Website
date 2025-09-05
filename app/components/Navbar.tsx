@@ -14,7 +14,7 @@ export default function Navbar() {
     <nav
       className={`${
       "absolute"
-      } top-0 z-20 w-full px-6 py-4 flex justify-between items-center text-green-400 font-semibold text-lg bg-transparent`}
+      } top-0 z-20 w-full px-6 py-4 flex justify-between items-center text-white font-semibold text-lg bg-transparent`}
     >
       <Link href="/">Home</Link>
 
@@ -37,7 +37,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-black/90 text-green-400 flex flex-col items-center py-4 space-y-4 md:hidden">
+        <div className="absolute top-full left-0 w-full bg-black/90 text-white flex flex-col items-center py-4 space-y-4 md:hidden">
           <Link href="/pages/About" className="hover:underline" onClick={() => setIsOpen(false)}>
             About Us
           </Link>
