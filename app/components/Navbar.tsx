@@ -13,8 +13,8 @@ export default function Navbar() {
   return (
     <nav
       className={`${
-        isHome ? "absolute" : "relative"
-      } top-0 z-20 w-full px-6 py-4 flex justify-between items-center text-green-400 font-semibold text-lg bg-transparent`}
+      "absolute"
+      } top-0 z-20 w-full px-6 py-4 flex justify-between items-center text-white font-semibold text-lg bg-transparent`}
     >
       <Link href="/">Home</Link>
 
@@ -22,7 +22,7 @@ export default function Navbar() {
       <div className="hidden md:flex space-x-4 sm:space-x-8 text-sm sm:text-lg">
         <Link href="/pages/About">About Us</Link>
         <Link href="/pages/UpComingEvents">Upcoming Events</Link>
-        <Link href="/pages/Gallery">Gallery</Link>
+        <Link href="/pages/Gallerys">Gallery</Link>
         <Link href="/pages/Contact">Contact</Link>
       </div>
 
@@ -37,14 +37,14 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-black/90 text-green-400 flex flex-col items-center py-4 space-y-4 md:hidden">
+        <div className="absolute top-full left-0 w-full bg-black/90 text-white flex flex-col items-center py-4 space-y-4 md:hidden">
           <Link href="/pages/About" className="hover:underline" onClick={() => setIsOpen(false)}>
             About Us
           </Link>
           <Link href="/pages/UpComingEvents" className="hover:underline" onClick={() => setIsOpen(false)}>
             Upcoming Events
           </Link>
-          <Link href="/pages/Gallery" className="hover:underline" onClick={() => setIsOpen(false)}>
+          <Link href="/pages/Gallerys" className="hover:underline" onClick={() => setIsOpen(false)}>
             Gallery
           </Link>
           <Link href="/pages/Contact" className="hover:underline" onClick={() => setIsOpen(false)}>
