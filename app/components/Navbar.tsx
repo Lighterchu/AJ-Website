@@ -38,14 +38,14 @@ export default function Navbar() {
       {/* Mobile Dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-black/90 text-white flex flex-col items-center py-4 space-y-4 md:hidden">
-          <Link href="/pages/About" className="hover:underline" onClick={() => setIsOpen(false)}>
-            About Us
-          </Link>
           <Link href="/pages/UpComingEvents" className="hover:underline" onClick={() => setIsOpen(false)}>
             Upcoming Events
           </Link>
           <Link href="/pages/Gallerys" className="hover:underline" onClick={() => setIsOpen(false)}>
             Gallery
+          </Link>
+          <Link href="/pages/About" className="hover:underline" onClick={() => setIsOpen(false)}>
+            About Us
           </Link>
           <Link href="/pages/Contact" className="hover:underline" onClick={() => setIsOpen(false)}>
             Contact
