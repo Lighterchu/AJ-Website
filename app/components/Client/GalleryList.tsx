@@ -38,7 +38,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
                 className="mt-3 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-600"
                 aria-label={`More details about ${photo.name}`}
               >
-                Check out the link up →
+                See More →
               </Link>
             </div>
           </div>

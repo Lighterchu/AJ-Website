@@ -42,7 +42,7 @@ export default function EventList({ events }: { events: any[] }) {
             href={`/pages/UpComingEvents/event/${event.slug.current}`}
             className="text-white hover:underline font-medium"
           >
-            Check Out Line Up
+            Check Out Line Up →
           </Link>
         </div>
       </article>
