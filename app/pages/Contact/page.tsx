@@ -90,7 +90,7 @@ export default function Contact() {
               placeholder="Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 focus:ring-green-400 ${getBorderClass(
+              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${getBorderClass(
                 name
               )}`}
               required
@@ -103,7 +103,7 @@ export default function Contact() {
               placeholder="Your Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 focus:ring-green-400 ${getBorderClass(
+              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2  ${getBorderClass(
                 phone
               )}`}
               required
@@ -116,7 +116,7 @@ export default function Contact() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 focus:ring-green-400 ${getBorderClass(
+              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2  ${getBorderClass(
                 email
               )}`}
               required
@@ -129,7 +129,8 @@ export default function Contact() {
               rows={1}
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 focus:ring-green-400 ${getBorderClass(
+              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 
+                 ${getBorderClass(
                 subject
               )}`}
               required
@@ -142,7 +143,7 @@ export default function Contact() {
               rows={5}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 focus:ring-green-400 ${getBorderClass(
+              className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2  ${getBorderClass(
                 message
               )}`}
               required
