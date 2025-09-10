@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 
+
+
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

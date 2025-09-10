@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+
+
+
 export default function About() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">

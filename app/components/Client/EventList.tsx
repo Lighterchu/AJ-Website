@@ -7,8 +7,6 @@ import Link from "next/link";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function EventList({ events }: { events: any[] }) {
 
-    console.log(events)
-
   return (
     <div className="grid gap-8 md:grid-cols-2">
       {events.map((event) => (

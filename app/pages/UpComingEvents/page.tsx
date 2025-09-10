@@ -18,7 +18,7 @@ export default async function EventsPage() {
   const res = await sanityFetch({ query: EVENTS_QUERY });
   const events = res.data; // ✅ <- important
 
-  console.log(events)
+  
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-12">

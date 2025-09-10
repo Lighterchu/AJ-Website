@@ -3,13 +3,12 @@ import Link from "next/link";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Gallery({ photos }: { photos: any[] }) {
-  console.log(photos);
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {photos.map((photo) => (
           <div
-            key={photo.id}
+            key={photo.id  || photo.slug.current}
             className="group relative rounded-xl overflow-hidden shadow-lg cursor-default sm:cursor-pointer hover:shadow-2xl transition-shadow duration-300"
           >
             <div className="relative h-64 w-full">
