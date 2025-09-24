@@ -13,13 +13,18 @@ const EVENT_QUERY = groq`
     description,
     date,
     "imageUrl": image.asset->url,
+    djs,
     Link
   }
 `;
 
 export default async function EventPage({ params }) {
-  const event = await sanityFetch({ query: EVENT_QUERY, params: { slug: params.slug } });
+  const event = await sanityFetch({
+    query: EVENT_QUERY,
+    params: { slug: params.slug },
+  });
   const eventData = event?.data ?? event;
+  console.log(eventData.djs)
   const eventLink = eventData?.Link || null;
 
   if (!eventData) return notFound();
@@ -46,21 +51,40 @@ export default async function EventPage({ params }) {
         {eventData.description || "No description available."}
       </p>
 
-      <div className=" flex justify-center">  
-      {eventLink && (
-        <p>
-          <Link
-            href={eventLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-teal-300 transition-colors"
-          >
-            Get your tickets here
-          </Link>
-        </p>
-      )}
+      <div className=" ">
+        <div className="text-center py-8">
+          <h1 className="text-4xl font-bold mb-6 tracking-wide uppercase">
+            The Line Up
+          </h1>
+          {eventData.djs && eventData.djs.length > 0 ? (
+            <div className="space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {eventData.djs.map((dj, index) => (
+                <div>
+                    <p key={index} className="text-xl font-semibold">{dj.name}</p>
+                    <p>{dj.time}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500">No DJs available.</p>
+          )}
+        </div>
+
+        <div className=" flex justify-center">
+          {eventLink && (
+            <p>
+              <Link
+                href={eventLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-teal-300 transition-colors"
+              >
+                Get your tickets here
+              </Link>
+            </p>
+          )}
+        </div>
       </div>
-      
     </main>
   );
 }
