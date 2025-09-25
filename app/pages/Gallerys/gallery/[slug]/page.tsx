@@ -23,7 +23,7 @@ const EVENT_QUERY = groq`
 export default async function EventPage({ params }) {
   const event = await sanityFetch({ query: EVENT_QUERY, params: { slug: params.slug } });
   const eventData = event?.data ?? event;
-  const eventLink = eventData?.Link || null;
+  
 
   if (!eventData) return notFound();
 

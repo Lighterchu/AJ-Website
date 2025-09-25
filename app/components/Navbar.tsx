@@ -1,13 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
+  
   const [isOpen, setIsOpen] = useState(false); // 🔹 Add state for mobile menu
 
   return (

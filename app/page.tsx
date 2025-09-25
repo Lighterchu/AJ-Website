@@ -5,7 +5,11 @@ import { nextEventQuery } from "../sanity/lib/allquries";
 import { client } from "../sanity/lib/client";
 
 export default function Home() {
-  const [event, setEvent] = useState<any>(null);
+  interface Event {
+    Link: string;
+  }
+
+  const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

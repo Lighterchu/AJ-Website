@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import Gallery from "@/app/components/Client/GalleryList";
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
