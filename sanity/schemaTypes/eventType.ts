@@ -25,6 +25,44 @@ export const eventType = defineType({
             },  
     }),
     defineField({
+      name: 'djs',
+      title: 'Lineup',
+      type: 'array',
+      of: [
+        defineField({
+          type: 'object',
+          name: 'dj',
+          title: 'DJ',
+          fields: [
+            defineField({
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+            }),
+            defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'soundcloud',
+              title: 'SoundCloud',
+              type: 'url',
+            }),
+            defineField({
+              name: 'time',
+              title: 'Set Time',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: { title: 'name', media: 'image' },
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'Link',
       type: 'url', 
       title: 'Event Link',

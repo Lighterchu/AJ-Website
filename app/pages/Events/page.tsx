@@ -18,11 +18,11 @@ export default async function EventsPage() {
   const res = await sanityFetch({ query: EVENTS_QUERY });
   const events = res.data; // ✅ <- important
 
-  console.log(events)
+  
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-center">Upcoming Events</h1>
+    <main className="w-full mx-2  px-6 py-12">
+      <h1 className="text-4xl font-bold mb-8 text-center">Events</h1>
       <EventList events={events} />
     </main>
   );
