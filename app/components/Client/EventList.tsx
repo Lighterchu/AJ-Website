@@ -7,9 +7,13 @@ import Link from "next/link";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function EventList({ events }: { events: any[] }) {
 
+  const sortedEvents = [...events].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
   return (
-    <div className="grid gap-8 md:grid-cols-2">
-      {events.map((event) => (
+    <div className="grid gap-8 md:grid-cols-3 ">
+      {sortedEvents.map((event) => (
         <article
         key={event._id}
         className="flex flex-col rounded-lg  overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
@@ -37,7 +41,7 @@ export default function EventList({ events }: { events: any[] }) {
         {/* push this section to the bottom */}
         <div className="p-6 bg-gray-100/30 text-center mt-auto">
           <Link
-            href={`/pages/UpComingEvents/event/${event.slug.current}`}
+            href={`/pages/Events/event/${event.slug.current}`}
             className="text-white hover:underline font-medium"
           >
             Check Out Line Up →

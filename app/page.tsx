@@ -38,12 +38,15 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/50 z-0" />
 
         {/* Content */}
-        <div className="relative z-10 flex items-center justify-center h-full px-4">
-          <div className="max-w-2xl text-center">
-            <p className="text-base sm:text-lg md:text-2xl mb-6 leading-relaxed">
-              MVMNT Entertainment — Bringing chaos to order, bass to basements,
-              and community to the concrete.  
-              We throw parties that don’t ask for permission — just your presence.
+        <div className="relative z-10 flex items-center justify-center h-full px-4 p-4">
+          <div className="w-full text-center">
+            <div>
+              <p> MVMNT Entertainment </p>
+            </div>
+            <p className="text-sm sm:text-base md:text-lg w-full mb-6 leading-relaxed text-gray-300">
+              Bringing chaos to order, bass to basements,
+              and community to the concrete. We throw parties that don’t ask for
+              permission — just your presence.
             </p>
 
             {loading ? (

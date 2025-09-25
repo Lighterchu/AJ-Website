@@ -21,7 +21,7 @@ export default async function EventsPage() {
   
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12">
+    <main className="w-full mx-2  px-6 py-12">
       <h1 className="text-4xl font-bold mb-8 text-center">Events</h1>
       <EventList events={events} />
     </main>

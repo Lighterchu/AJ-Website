@@ -21,7 +21,7 @@ export default function Navbar() {
       {/* Desktop Links */}
       <div className="hidden md:flex space-x-4 sm:space-x-8 text-sm sm:text-lg">
         <Link href="/pages/About">About Us</Link>
-        <Link href="/pages/UpComingEvents">Events</Link>
+        <Link href="/pages/Events">Events</Link>
         <Link href="/pages/Gallerys">Gallery</Link>
         <Link href="/pages/Contact">Contact</Link>
       </div>
@@ -41,7 +41,7 @@ export default function Navbar() {
           <Link href="/pages/About" className="hover:underline" onClick={() => setIsOpen(false)}>
             About Us
           </Link>
-          <Link href="/pages/UpComingEvents" className="hover:underline" onClick={() => setIsOpen(false)}>
+          <Link href="/pages/Events" className="hover:underline" onClick={() => setIsOpen(false)}>
             Events
           </Link>
           <Link href="/pages/Gallerys" className="hover:underline" onClick={() => setIsOpen(false)}>
