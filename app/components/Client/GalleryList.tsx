@@ -28,7 +28,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
             {/* Overlay always visible on mobile, hover on desktop */}
             <div
               className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent
-                opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+                
                 transition-opacity duration-300 flex flex-col justify-end p-4"
             >
               <h2 className="text-white text-xl font-semibold">{photo.name}</h2>
