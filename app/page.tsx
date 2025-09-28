@@ -2,21 +2,31 @@
 import { useEffect, useState } from "react";
 import SlindingImages from "./components/SilderImage";
 import { nextEventQuery } from "../sanity/lib/allquries";
+import {ImagesFromEvent} from "../sanity/lib/imagesFromEventImage"
 import { client } from "../sanity/lib/client";
 
 export default function Home() {
   interface Event {
     Link: string;
   }
+  interface ImageEvent {
+    asset: {
+      url: string;
+      _id: string;
+    };
+  }
 
   const [event, setEvent] = useState<Event | null>(null);
+  const [imageEvent, setImageEvent] = useState<ImageEvent | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadEvent() {
       try {
         const data = await client.fetch(nextEventQuery);
+        const imagesEventData = await client.fetch(ImagesFromEvent);
         setEvent(data);
+        setImageEvent(imagesEventData);
       } catch (err) {
         console.error("Failed to fetch event:", err);
       } finally {
@@ -26,7 +36,7 @@ export default function Home() {
     loadEvent();
   }, []);
 
-  console.log(event)
+  console.log(imageEvent)
 
   return (
     <div>
@@ -74,7 +84,7 @@ export default function Home() {
       </main>
 
       {/* Slider Section */}
-      <SlindingImages />
+      <SlindingImages data={imageEvent} />
     </div>
   );
 }

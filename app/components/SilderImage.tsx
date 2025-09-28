@@ -3,41 +3,34 @@ import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import Image from "next/image";
 
-const fadeImages = [
-  "/images/_MG_1062.jpg",
-  "/images/_MG_1235.jpg",
-  "/images/_MG_1258.jpg",
-  "/images/_MG_1282.jpg",
-  "/images/IMG_3104.JPG",
-  "/images/IMG_3106.JPG",
-  "/images/IMG_3108.JPG",
-  "/images/IMG_3110.JPG",
-  "/images/IMG_3111.JPG",
-  "/images/IMG_3113.JPG",
-  "/images/IMG_3127.JPG",
-  "/images/IMG_3128.JPG",
-  "/images/IMG_3209.JPG",
-  "/images/IMG_3238.JPG",
-];
+interface ImageEvent {
+  _id: string;
+  imageUrl: string;
+}
 
-export default function SlindingImages() {
-  
+interface SlindingImagesProps {
+  data: ImageEvent[];
+}
+
+export default function SlindingImages({ data }: SlindingImagesProps) {
+  if (!data || data.length === 0) return null; // optional: hide slider if no images
+
   return (
     <div className="h-screen w-screen overflow-hidden">
       <Fade
         duration={4000}
         transitionDuration={1000}
-        infinite={true}
+        infinite
         arrows={false}
         pauseOnHover={false}
       >
-        {fadeImages.map((img, index) => (
-          <div key={index} className="relative h-screen w-screen">
+        {data.map((img, index) => (
+          <div key={img._id} className="relative h-screen w-screen">
             <Image
-              src={img}
+              src={img.imageUrl}
               alt={`Slide ${index + 1}`}
               fill
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit"
             />
           </div>
         ))}
