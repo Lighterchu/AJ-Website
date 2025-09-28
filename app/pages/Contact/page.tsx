@@ -68,7 +68,7 @@ export default function Contact() {
 
       {/* Title */}
       <h1 className="text-4xl text-white md:text-5xl font-bold mb-4">Contact Us</h1>
-      <p className="text-green-200 text-center max-w-xl mb-12">
+      <p className="text-white text-center max-w-xl mb-12">
         Whether you&apos;re planning an event, want to collaborate, or just want to
         say hi — we’re here for it. Fill out the form below or reach out
         directly via email or phone.
@@ -161,9 +161,9 @@ export default function Contact() {
         </form>
 
         {/* Contact Info */}
-        <div className="flex flex-col justify-center space-y-6 text-green-200">
+        <div className="flex flex-col justify-center space-y-6 text-white">
           <div>
-            <h2 className="text-green-400 text-xl font-semibold mb-2">Email</h2>
+            <h2 className="text-white text-xl font-semibold mb-2">Email</h2>
             <a
               href="mailto:info@mvmntentertainment.com"
               className="hover:underline"
@@ -172,13 +172,13 @@ export default function Contact() {
             </a>
           </div>
           <div>
-            <h2 className="text-green-400 text-xl font-semibold mb-2">Phone</h2>
+            <h2 className="text-white text-xl font-semibold mb-2">Phone</h2>
             <a href="tel:+1234567890" className="hover:underline">
               0431383674
             </a>
           </div>
           <div>
-            <h2 className="text-green-400 text-xl font-semibold mb-2">Location</h2>
+            <h2 className="text-white text-xl font-semibold mb-2">Location</h2>
             <p>Naarm / Melbourne, Australia</p>
           </div>
         </div>

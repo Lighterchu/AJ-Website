@@ -30,21 +30,21 @@ export default function About() {
           <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center mb-6">
             About MVMNT Entertainment. Born in the back alleys of
             Naarm/Melbourne’s underground and raised on sweat, strobe lights,
-            and stubborn ambition — MVMNT Entertainment isn’t just a brand. It’s
+            and stubborn ambition MVMNT Entertainment isn’t just a brand. It’s
             a resistance. A rhythm. A response to a city that’s too often
             forgotten what it means to truly move.
           </p>
           <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center mb-6">
             We throw events that hit harder than your ex’s closure speech.
             Blending hard techno, psytrance, DnB, and whatever other sonic
-            weaponry we’ve got on hand — we don’t just curate lineups; we
+            weaponry we’ve got on hand we don’t just curate lineups; we
             engineer chaos. The good kind.
           </p>
           <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center mb-6">
             MVMNT’s ethos is simple: No elitism. No ego. Just energy. Whether
             it’s your first rave or your hundredth, if you&apos;re down to
             dance, you&apos;re family. We’ve hosted everyone from local legends
-            to up-and-coming freaks with fire in their USBs — always with an eye
+            to up-and-coming freaks with fire in their USBs always with an eye
             toward inclusivity, intensity, and integrity.
           </p>
           <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center">
