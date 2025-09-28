@@ -34,7 +34,7 @@ export default function SlindingImages({ data }: SlindingImagesProps) {
               src={img.imageUrl}
               alt={`Slide ${index + 1}`}
               fill
-              className="object-cover"
+              className="object-fit"
               sizes="(max-width: 640px) 100vw, 100vw"
             />
           </div>

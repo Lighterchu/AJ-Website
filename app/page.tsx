@@ -9,15 +9,10 @@ export default function Home() {
   interface Event {
     Link: string;
   }
-  interface ImageEvent {
-    asset: {
-      url: string;
-      _id: string;
-    };
-  }
+
 
   const [event, setEvent] = useState<Event | null>(null);
-  const [imageEvent, setImageEvent] = useState<ImageEvent | null>(null);
+  const [imageEvent, setImageEvent] = useState<[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -84,7 +79,7 @@ export default function Home() {
       </main>
 
       {/* Slider Section */}
-      <SlindingImages data={imageEvent} />
+      {imageEvent && <SlindingImages data={imageEvent} />}
     </div>
   );
 }
