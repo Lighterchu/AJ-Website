@@ -26,6 +26,8 @@ export default function Home() {
     loadEvent();
   }, []);
 
+  console.log(event)
+
   return (
     <div>
       <main className="text-white overflow-hidden relative">

@@ -21,6 +21,7 @@ const fadeImages = [
 ];
 
 export default function SlindingImages() {
+  
   return (
     <div className="h-screen w-screen overflow-hidden">
       <Fade
