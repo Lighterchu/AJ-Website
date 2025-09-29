@@ -80,6 +80,7 @@ export default function Home() {
 
       {/* Slider Section */}
       {imageEvent && <SlindingImages data={imageEvent} />}
+      {/* {imageEvent && <SlindingImages data={imageEvent} />} */}
     </div>
   );
 }

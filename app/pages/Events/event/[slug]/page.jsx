@@ -77,7 +77,7 @@ export default async function EventPage({ params }) {
                 href={eventLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-teal-300 transition-colors"
+                className="inline-block bg-green-400 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-teal-300 transition-colors"
               >
                 Get your tickets here
               </Link>

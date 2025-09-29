@@ -58,11 +58,11 @@ export default function Contact() {
       {/* Logo */}
       <div className="mb-6">
         <Image
-          src="/images/logo2.png"
+          src="/images/logo1.png"
           alt="MVMNT Logo"
           width={300}
           height={200}
-          className="object-contain"
+          className="object-contain rotate-90"
         />
       </div>
 
@@ -70,7 +70,7 @@ export default function Contact() {
       <h1 className="text-4xl text-white md:text-5xl font-bold mb-4">Contact Us</h1>
       <p className="text-white text-center max-w-xl mb-12">
         Whether you&apos;re planning an event, want to collaborate, or just want to
-        say hi — we’re here for it. Fill out the form below or reach out
+        say hi, we’re here for it. Fill out the form below or reach out
         directly via email or phone.
       </p>
 

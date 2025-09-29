@@ -45,9 +45,6 @@ export default function Navbar() {
           <Link href="/pages/Gallerys" className="hover:underline" onClick={() => setIsOpen(false)}>
             Gallery
           </Link>
-          <Link href="/pages/About" className="hover:underline" onClick={() => setIsOpen(false)}>
-            About Us
-          </Link>
           <Link href="/pages/Contact" className="hover:underline" onClick={() => setIsOpen(false)}>
             Contact
           </Link>

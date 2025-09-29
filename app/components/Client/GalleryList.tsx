@@ -36,7 +36,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
               <p className="text-gray-200 text-sm line-clamp-2">{photo.short}</p>
               <Link
                 href={`/pages/Gallerys/gallery/${photo.slug.current}`}
-                className="mt-3 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-600"
+                className="mt-3 inline-block text-sm font-semibold text-green-400 hover:text-green-600"
                 aria-label={`More details about ${photo.name}`}
               >
                 See More →

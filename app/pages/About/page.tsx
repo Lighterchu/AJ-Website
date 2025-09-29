@@ -5,7 +5,7 @@ export default function About() {
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/1080p_photos/NmGIxQo-.jpg"
+        src="/1080p_photos/67csROuU.jpg"
         alt="Background"
         fill
         priority
@@ -41,8 +41,11 @@ export default function About() {
             engineer chaos. The good kind.
           </p>
           <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center mb-6">
-            MVMNT’s ethos is simple: No elitism. No ego. Just energy. Whether
-            it’s your first rave or your hundredth, if you&apos;re down to
+            <div className=" mb-2">
+              <p>MVMNT’s ethos is simple: No elitism. No ego. Just energy.</p>
+            </div>
+            
+            Whether it’s your first rave or your hundredth, if you&apos;re down to
             dance, you&apos;re family. We’ve hosted everyone from local legends
             to up-and-coming freaks with fire in their USBs always with an eye
             toward inclusivity, intensity, and integrity.
