@@ -5,6 +5,7 @@ import { set } from "sanity";
 import { AddIcon, ImagesIcon, CloseIcon } from "@sanity/icons";
 import type { ArrayOfObjectsInputProps } from "sanity";
 import { client } from "@/sanity/lib/client";
+import Image from "next/image";
 
 // Types
 interface ImageAsset {
@@ -372,9 +373,12 @@ function MediaBrowser({
                       </div>
                     )}
                     <Box style={{ marginBottom: "12px" }}>
-                      <img
+                      {/* import Image from "next/image"; */}
+                      <Image
                         src={`${asset.url}?w=300&h=300&fit=crop&q=85`}
                         alt={asset.originalFilename || "Image"}
+                        width={300}
+                        height={200}
                         style={{
                           width: "100%",
                           height: "200px",
@@ -382,8 +386,6 @@ function MediaBrowser({
                           borderRadius: "6px",
                           display: "block",
                         }}
-                        width={300}
-                        height={200}
                       />
                     </Box>
                     <Text
