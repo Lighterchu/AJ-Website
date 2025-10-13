@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import { MultiImageSelector } from '@/app/components/Sanity/MultiImageSelector'
 
 export const galleryType = defineType({
   name: 'gallery',
@@ -47,6 +48,10 @@ export const galleryType = defineType({
             },
           },
         ],
+        components: {
+          // Custom input component can be specified here if needed
+          input: MultiImageSelector,
+        },
       }),      
   ],
 
