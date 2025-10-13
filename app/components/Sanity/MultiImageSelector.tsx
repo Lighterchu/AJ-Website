@@ -74,7 +74,7 @@ function MediaBrowser({
         setAssets(fetchedAssets);
         setLoading(false);
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         console.error("Error fetching assets:", error);
         setLoading(false);
       });
