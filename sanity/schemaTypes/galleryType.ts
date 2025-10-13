@@ -48,7 +48,6 @@ export const galleryType = defineType({
             },
           },
         ],
-        
       }),      
   ],
 
