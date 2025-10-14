@@ -10,3 +10,16 @@ export const nextEventQuery = `*[_type == "event" && dateTime(date) > dateTime(n
   location,
   "imageUrl": imageUrl.asset->url
 }`;
+
+export const allEvents = `*[_type == "event"]
+| order(date asc) {
+  _id,
+  name,
+  slug,
+  Link,
+  date,
+  description,
+  short,
+  location,
+  "imageUrl": imageUrl.asset->url
+}`;
