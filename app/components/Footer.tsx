@@ -18,13 +18,12 @@ export default function Footer() {
             className="object-contain"
           />
         </div>
-
         {/* Navigation */}
         <nav className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-center">
           <Link href="/" className="hover:underline">Home</Link>
           <Link href="/pages/About" className="hover:underline">About Us</Link>
-          <Link href="/pages/UpComingEvents" className="hover:underline">Upcoming Events</Link>
-          <Link href="/pages/Gallary" className="hover:underline">Gallery</Link>
+          <Link href="/pages/Events" className="hover:underline">Upcoming Events</Link>
+          <Link href="/pages/Gallarys" className="hover:underline">Gallery</Link>
         </nav>
 
         {/* Contact Info */}
