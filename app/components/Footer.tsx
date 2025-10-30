@@ -23,7 +23,7 @@ export default function Footer() {
           <Link href="/" className="hover:underline">Home</Link>
           <Link href="/pages/About" className="hover:underline">About Us</Link>
           <Link href="/pages/Events" className="hover:underline">Upcoming Events</Link>
-          <Link href="/pages/Gallarys" className="hover:underline">Gallery</Link>
+          <Link href="/pages/Gallerys" className="hover:underline">Gallery</Link>
         </nav>
 
         {/* Contact Info */}
