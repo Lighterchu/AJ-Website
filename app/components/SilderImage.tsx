@@ -10,10 +10,16 @@ interface ImageEvent {
 
 interface SlindingImagesProps {
   data: ImageEvent[];
+  event: {
+    Link?: string;
+  };
 }
 
-export default function SlindingImages({ data }: SlindingImagesProps) {
+
+
+export default function SlindingImages({ data, event }: SlindingImagesProps) {
   if (!data || data.length === 0) return null;
+  console.log(event)
 
   return (
     <div className="w-full overflow-hidden">
@@ -29,6 +35,7 @@ export default function SlindingImages({ data }: SlindingImagesProps) {
             key={img._id}
             className="relative w-full"
             style={{ aspectRatio: "16/9" }} // maintain aspect ratio
+            onClick={() => window.open(event.Link || img.imageUrl, "_blank")}
           >
             <Image
               src={img.imageUrl}

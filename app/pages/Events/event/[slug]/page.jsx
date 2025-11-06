@@ -5,7 +5,7 @@ import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import DjProfiles from "../../../../components/Client/DjProfiles"; // <-- client component
+import DjProfiles from "../../../../components/Client/Djprofile"; // <-- client component
 
 const EVENT_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {

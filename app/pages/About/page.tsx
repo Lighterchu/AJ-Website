@@ -5,7 +5,7 @@ export default function About() {
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/1080p_photos/67csROuU.jpg"
+        src="/backgrounds/aboutusPage.jpeg"
         alt="Background"
         fill
         priority
@@ -26,7 +26,7 @@ export default function About() {
         </div>
 
         {/* About Text */}
-        <div className=" max-w-3xl w-full p-6 sm:p-10 md:p-12 space-y-6">
+        <div className=" max-w-3xl w-full p-6 sm:p-10 md:p-12 space-y-6 text-shadow-lg/30 scrollbar-hide overflow-scroll h-72">
           <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center">
             About MVMNT Entertainment. Born in the back alleys of Naarm/Melbourne’s underground and raised on sweat, strobe lights, and stubborn ambition. MVMNT Entertainment isn’t just a brand. It’s a resistance. A rhythm. A response to a city that’s too often forgotten what it means to truly move.
           </p>
