@@ -5,6 +5,7 @@ import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import DjProfiles from "../../../../components/Client/DjProfiles"; // <-- client component
 
 const EVENT_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
@@ -24,7 +25,7 @@ export default async function EventPage({ params }) {
     params: { slug: params.slug },
   });
   const eventData = event?.data ?? event;
-  console.log(eventData.djs)
+  console.log(eventData.djs);
   const eventLink = eventData?.Link || null;
 
   if (!eventData) return notFound();
@@ -47,7 +48,7 @@ export default async function EventPage({ params }) {
         </div>
       )}
 
-      <p className="text-lg text-gray-700 mb-6">
+      <p className="text-lg text-white mb-6">
         {eventData.description || "No description available."}
       </p>
 
@@ -57,11 +58,10 @@ export default async function EventPage({ params }) {
             The Line Up
           </h1>
           {eventData.djs && eventData.djs.length > 0 ? (
-            <div className="space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
               {eventData.djs.map((dj, index) => (
-                <div>
-                    <p key={index} className="text-xl font-semibold">{dj.name}</p>
-                    <p>{dj.time}</p>
+                <div key={index}>
+                 <DjProfiles djsprofile={dj} />
                 </div>
               ))}
             </div>
