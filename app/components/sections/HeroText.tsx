@@ -1,6 +1,6 @@
 export default function HeroText() {
     return (
-      <div className="text-center px-4 py-8">
+      <div className="text-center px-4 py-2">
         <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
           MVMNT Entertainment
         </p>
