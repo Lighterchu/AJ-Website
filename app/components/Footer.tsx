@@ -6,14 +6,14 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-black text-white font-medium text-base w-full py-8">
-      <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+    <footer className="bg-black text-white font-medium text-base w-full ">
+      <div className="max-w-6xl mx-auto px-2 grid grid-cols-1 md:grid-cols-3 gap-8 items-center ">
         {/* Logo */}
         <div className="flex justify-center md:justify-start">
           <Image
             src="/logos/MVMNT.png"
             width={200}
-            height={100}
+            height={50}
             alt="MVMNT Entertainment Logo"
             className="object-contain w-[200px] h-auto"
             loading="lazy"
@@ -21,7 +21,7 @@ function Footer() {
         </div>
 
         {/* Navigation */}
-        <nav className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-center">
+        <nav className="flex  flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-center">
           {[
             { href: "/", label: "Home" },
             { href: "/pages/About", label: "About Us" },
