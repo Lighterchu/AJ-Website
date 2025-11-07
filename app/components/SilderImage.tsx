@@ -58,7 +58,7 @@ const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
               src={img.imageUrl}
               alt={`Slide ${currentIndex + 1}`}
               fill
-              className="object-fill"
+              className="object-fill cursor-pointer"
               sizes="(max-width: 640px) 100vw, 100vw"
               priority={currentIndex === 0}
               loading={currentIndex === 0 ? "eager" : "lazy"}
