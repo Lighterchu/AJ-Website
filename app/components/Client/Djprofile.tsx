@@ -17,7 +17,7 @@ interface DjProfileProps {
 export default function DjProfiles({ djsprofile }: DjProfileProps) {
   const hasImage = !!djsprofile?.image?.asset?._ref;
   const imageUrl = hasImage
-    ? urlFor(djsprofile.image).width(600).height(700).url()
+    ? urlFor(djsprofile.image).width(2000).height(3500).url()
     : null;
 
   return (
@@ -29,7 +29,7 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
               src={imageUrl}
               alt={djsprofile.name || "DJ profile image"}
               fill
-              className="object-contain"
+              className="object-fill"
             />
           </div>
 
@@ -37,11 +37,11 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
 
           {/* DJ Name */}
-          <div className="absolute bottom-3 left-3 text-white">
+          {/* <div className="absolute bottom-3 left-3 text-white">
             <p className="text-lg font-semibold tracking-wide">
               {djsprofile.name || "Unnamed DJ"}
             </p>
-          </div>
+          </div> */}
 
           {/* TIME Badge */}
           <div className="absolute bottom-3 right-3 md:top-3 md:bottom-auto bg-black/60 text-white px-2 py-1 rounded-md text-sm opacity-80 transition-all duration-300">
