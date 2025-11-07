@@ -1,4 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata as NextMetadata } from "next";
+
+interface Metadata extends NextMetadata {
+  verification?: NextMetadata["verification"] & {
+    probely?: string;
+  };
+}
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
