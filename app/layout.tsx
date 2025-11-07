@@ -32,7 +32,7 @@ export default function RootLayout({
   <body
     className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
   >
-    <Navbar /> {/* ⬅️ Move Navbar to the top */}
+    <Navbar />
     <main className="flex-grow">{children}</main>
     <SanityLive />
     <Footer />

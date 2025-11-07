@@ -3,25 +3,31 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState("");
+interface FormFields {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
 
-  // Validation errors
-  const [errors, setErrors] = useState({
+interface FormErrors {
+  [key: string]: string;
+}
+
+export default function Contact() {
+  const [form, setForm] = useState<FormFields>({
     name: "",
     email: "",
     phone: "",
     subject: "",
     message: "",
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [status, setStatus] = useState("");
 
-  // Validate individual fields
-  const validateField = (field: string, value: string) => {
+  // Validate a single field
+  const validateField = (field: keyof FormFields, value: string) => {
     switch (field) {
       case "name":
         return value.trim().length < 2 ? "Name must be at least 2 characters" : "";
@@ -38,54 +44,23 @@ export default function Contact() {
     }
   };
 
-  // Check if field has value
-  const fieldHasValue = (field: string) => {
-    switch (field) {
-      case "name": return name.trim() !== "";
-      case "email": return email.trim() !== "";
-      case "phone": return phone.trim() !== "";
-      case "subject": return subject.trim() !== "";
-      case "message": return message.trim() !== "";
-      default: return false;
-    }
-  };
-
-  // Get dynamic border class
-  const getBorderClass = (field: string) =>
-    errors[field]
-      ? "border-red-500 shadow-[0_0_10px_#f87171,0_0_20px_#f87171]"
-      : fieldHasValue(field)
-      ? "border-green-400 shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80]"
-      : "border-white";
-
-  // Handle input changes
-  const handleChange = (field: string, value: string) => {
-    switch (field) {
-      case "name": setName(value); break;
-      case "email": setEmail(value); break;
-      case "phone": setPhone(value); break;
-      case "subject": setSubject(value); break;
-      case "message": setMessage(value); break;
-    }
+  const handleChange = (field: keyof FormFields, value: string) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: validateField(field, value) }));
   };
 
   const isFormValid = () =>
     Object.values(errors).every((e) => e === "") &&
-    name && email && phone && subject && message;
+    Object.values(form).every((v) => v.trim() !== "");
 
-  // Handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Final validation
-    const newErrors = {
-      name: validateField("name", name),
-      email: validateField("email", email),
-      phone: validateField("phone", phone),
-      subject: validateField("subject", subject),
-      message: validateField("message", message),
-    };
+    const newErrors: FormErrors = {} as FormErrors;
+    (Object.keys(form) as (keyof FormFields)[]).forEach((field) => {
+      newErrors[field] = validateField(field, form[field]);
+    });
     setErrors(newErrors);
 
     if (!Object.values(newErrors).every((e) => e === "")) {
@@ -99,14 +74,14 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, subject, message }),
+        body: JSON.stringify(form),
       });
 
       const data = await res.json();
 
       if (data.success) {
         setStatus("Message sent successfully!");
-        setName(""); setEmail(""); setPhone(""); setSubject(""); setMessage("");
+        setForm({ name: "", email: "", phone: "", subject: "", message: "" });
       } else {
         setStatus("Failed to send message.");
       }
@@ -114,6 +89,41 @@ export default function Contact() {
       console.error(err);
       setStatus("Error sending message.");
     }
+  };
+
+  const renderInput = (field: keyof FormFields, type = "text") => {
+    const isTextarea = field === "message" || field === "subject";
+    const value = form[field];
+    const error = errors[field];
+    const borderClass = error
+      ? "border-red-500 shadow-[0_0_10px_#f87171,0_0_20px_#f87171]"
+      : value
+      ? "border-green-400 shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80]"
+      : "border-white";
+
+    return (
+      <div key={field}>
+        <label className="block text-green-400 mb-1 capitalize">{field}</label>
+        {isTextarea ? (
+          <textarea
+            rows={field === "message" ? 5 : 1}
+            placeholder={`Enter ${field}`}
+            value={value}
+            onChange={(e) => handleChange(field, e.target.value)}
+            className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${borderClass}`}
+          />
+        ) : (
+          <input
+            type={type}
+            placeholder={`Enter ${field}`}
+            value={value}
+            onChange={(e) => handleChange(field, e.target.value)}
+            className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${borderClass}`}
+          />
+        )}
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      </div>
+    );
   };
 
   return (
@@ -126,6 +136,7 @@ export default function Contact() {
           width={300}
           height={200}
           className="object-contain rotate-90"
+          priority
         />
       </div>
 
@@ -138,29 +149,9 @@ export default function Contact() {
       <div className="bg-black border rounded-xl max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
         {/* Contact Form */}
         <form className="space-y-4" onSubmit={handleSubmit}>
-          {["name", "phone", "email", "subject", "message"].map((field) => (
-            <div key={field}>
-              <label className="block text-green-400 mb-1 capitalize">{field}</label>
-              {(field === "message" || field === "subject") ? (
-                <textarea
-                  rows={field === "message" ? 5 : 1}
-                  placeholder={`Enter ${field}`}
-                  value={eval(field)}
-                  onChange={(e) => handleChange(field, e.target.value)}
-                  className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${getBorderClass(field)}`}
-                />
-              ) : (
-                <input
-                  type={field === "email" ? "email" : "text"}
-                  placeholder={`Enter ${field}`}
-                  value={eval(field)}
-                  onChange={(e) => handleChange(field, e.target.value)}
-                  className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${getBorderClass(field)}`}
-                />
-              )}
-              {errors[field] && <p className="text-red-500 text-sm mt-1">{errors[field]}</p>}
-            </div>
-          ))}
+          {["name", "phone", "email", "subject", "message"].map((field) =>
+            renderInput(field as keyof FormFields, field === "email" ? "email" : "text")
+          )}
 
           <button
             type="submit"
@@ -194,4 +185,3 @@ export default function Contact() {
     </div>
   );
 }
-  
