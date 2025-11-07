@@ -8,14 +8,12 @@ interface ImageEvent {
   imageUrl: string;
 }
 
-interface SlindingImagesProps {
+interface SliderSectionProps {
   data: ImageEvent[];
-  event: {
-    Link?: string;
-  };
+  event: { Link?: string };
 }
 
-const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
+export default function SliderSection({ data, event }: SliderSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleClick = useCallback((url: string) => {
@@ -24,7 +22,6 @@ const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
     }
   }, []);
 
-  // Slide change every 4s
   useEffect(() => {
     if (!data?.length) return;
     const interval = setInterval(() => {
@@ -33,11 +30,10 @@ const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
     return () => clearInterval(interval);
   }, [data]);
 
-  // Memoize slides to avoid re-renders
   const slides = useMemo(() => {
     if (!data?.length) return [];
     const prevIndex = (currentIndex - 1 + data.length) % data.length;
-    return [data[prevIndex], data[currentIndex]]; // only keep 2 slides in DOM
+    return [data[prevIndex], data[currentIndex]];
   }, [currentIndex, data]);
 
   if (!data?.length) return null;
@@ -45,10 +41,10 @@ const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
   return (
     <div className="w-full relative overflow-hidden aspect-[16/9]">
       {slides.map((img, idx) => {
-        const isActive = idx === 1; // current slide
+        const isActive = idx === 1;
         return (
           <div
-            key={`${img._id}-${idx}`} // append index to make key unique
+            key={`${img._id}-${idx}`}
             className={`absolute top-0 left-0 w-full h-full transition-opacity duration-700 ${
               isActive ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
@@ -68,6 +64,4 @@ const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
       })}
     </div>
   );
-};
-
-export default React.memo(SlindingImages);
+}
