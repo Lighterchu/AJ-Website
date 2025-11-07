@@ -17,21 +17,21 @@ interface DjProfileProps {
 export default function DjProfiles({ djsprofile }: DjProfileProps) {
   const hasImage = !!djsprofile?.image?.asset?._ref;
   const imageUrl = hasImage
-    ? urlFor(djsprofile.image).width(600).height(600).url()
+    ? urlFor(djsprofile.image).width(600).height(700).url()
     : null;
 
   return (
-    <div className="group relative w-full sm:w-64 h-64 overflow-hidden rounded-2xl shadow-md transition-transform duration-300 hover:scale-105 mx-auto sm:mx-2 md:mx-4 lg:mx-6">
+    <div className="group relative  w-full sm:w-64 h-full overflow-hidden rounded-2xl shadow-md transition-transform duration-300 hover:scale-105 mx-auto sm:mx-2 md:mx-4 lg:mx-6 ">
       {imageUrl ? (
         <>
-          <Image
-            src={imageUrl}
-            alt={djsprofile.name || "DJ profile image"}
-            fill
-            className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-300"
-            sizes="(max-width: 768px) 100vw, 33vw"
-            priority
-          />
+          <div className="relative w-64 aspect-[5/5]  rounded-2xl ">
+            <Image
+              src={imageUrl}
+              alt={djsprofile.name || "DJ profile image"}
+              fill
+              className="object-contain"
+            />
+          </div>
 
           {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />

@@ -25,66 +25,70 @@ export default async function EventPage({ params }) {
     params: { slug: params.slug },
   });
   const eventData = event?.data ?? event;
-  console.log(eventData.djs);
   const eventLink = eventData?.Link || null;
 
   if (!eventData) return notFound();
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold mb-4">{eventData.name}</h1>
-      <time className="block text-sm text-gray-500 mb-6">
-        {new Date(eventData.date).toLocaleDateString()}
-      </time>
+    <main className="max-w-5xl mx-auto px-6 py-12 space-y-12">
+      {/* Event Header */}
+      <header className="space-y-2 text-center">
+        <h1 className="text-5xl font-extrabold text-white">{eventData.name}</h1>
+        <time className="block text-gray-400 text-sm">
+          {new Date(eventData.date).toLocaleDateString(undefined, {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+      </header>
 
+      {/* Event Image */}
       {eventData.imageUrl && (
-        <div className="relative w-full h-64 mb-6">
+        <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-lg">
           <Image
             src={eventData.imageUrl}
             alt={eventData.name}
             fill
-            className="object-cover rounded"
+            className="object-cover"
+            priority
           />
         </div>
       )}
 
-      <p className="text-lg text-white mb-6">
-        {eventData.description || "No description available."}
-      </p>
+      {/* Description */}
+      {eventData.description && (
+        <p className="text-lg text-gray-200 leading-relaxed">{eventData.description}</p>
+      )}
 
-      <div className=" ">
-        <div className="text-center py-8">
-          <h1 className="text-4xl font-bold mb-6 tracking-wide uppercase">
-            The Line Up
-          </h1>
-          {eventData.djs && eventData.djs.length > 0 ? (
-            <div className="space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-              {eventData.djs.map((dj, index) => (
-                <div key={index}>
-                 <DjProfiles djsprofile={dj} />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-500">No DJs available.</p>
-          )}
-        </div>
+      {/* Lineup */}
+      <section className="space-y-6 ">
+        <h2 className="text-3xl font-bold text-white text-center">The Lineup</h2>
+        {eventData.djs && eventData.djs.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {eventData.djs.map((dj) => (
+              <DjProfiles key={dj._id || dj.name} djsprofile={dj} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-400 text-center">No DJs available.</p>
+        )}
+      </section>
 
-        <div className=" flex justify-center">
-          {eventLink && (
-            <p>
-              <Link
-                href={eventLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-green-400 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-teal-300 transition-colors"
-              >
-                Get your tickets here
-              </Link>
-            </p>
-          )}
+      {/* Ticket Button */}
+      {eventLink && (
+        <div className="flex justify-center">
+          <Link
+            href={eventLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-green-500 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-green-400 transition-colors"
+          >
+            Get Tickets
+          </Link>
         </div>
-      </div>
+      )}
     </main>
   );
 }
