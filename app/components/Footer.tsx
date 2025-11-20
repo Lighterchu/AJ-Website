@@ -40,7 +40,7 @@ function Footer() {
             href="mailto:info@mvmntentertainment.com"
             className="hover:underline"
           >
-            mvmnt.entertainment.melb@gmail.com
+                        Enquiries@mvmntentertainment.com
           </a>
           <a href="tel:+1234567890" className="hover:underline">
             0431383674
