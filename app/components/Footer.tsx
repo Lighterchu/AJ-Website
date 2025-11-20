@@ -37,7 +37,7 @@ function Footer() {
         {/* Contact Info */}
         <div className="flex flex-col items-center md:items-end text-sm space-y-1">
           <a
-            href="mailto:info@mvmntentertainment.com"
+            href="mailto:Enquiries@mvmntentertainment.com"
             className="hover:underline"
           >
                         Enquiries@mvmntentertainment.com
