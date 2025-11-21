@@ -168,8 +168,8 @@ export default function Contact() {
         <div className="flex flex-col justify-center space-y-6 text-white">
           <div>
             <h2 className="text-white text-xl font-semibold mb-2">Email</h2>
-            <a href="mailto:info@mvmntentertainment.com" className="hover:underline">
-              mvmnt.entertainment.melb@gmail.com
+            <a href="mailto:Enquiries@mvmntentertainment.com" className="hover:underline">
+              Enquiries@mvmntentertainment.com
             </a>
           </div>
           <div>
