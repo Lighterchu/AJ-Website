@@ -174,7 +174,7 @@ export default function Contact() {
           </div>
           <div>
             <h2 className="text-white text-xl font-semibold mb-2">Phone</h2>
-            <a href="tel:+1234567890" className="hover:underline">0431383674</a>
+            <a href="tel:+0431383674" className="hover:underline">0431383674</a>
           </div>
           <div>
             <h2 className="text-white text-xl font-semibold mb-2">Location</h2>
