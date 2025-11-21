@@ -1,4 +1,5 @@
 import type { Metadata as NextMetadata } from "next";
+import Script from "next/script";
 
 interface Metadata extends NextMetadata {
   verification?: NextMetadata["verification"] & {
@@ -38,6 +39,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-NW6HZJMBWN"
+        strategy="afterInteractive"
+      />
+       <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NW6HZJMBWN');
+        `}
+      </Script>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
@@ -47,5 +60,6 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
+    
   );
 }
