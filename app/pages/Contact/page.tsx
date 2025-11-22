@@ -180,6 +180,10 @@ export default function Contact() {
             <h2 className="text-white text-xl font-semibold mb-2">Location</h2>
             <p>Naarm / Melbourne, Australia</p>
           </div>
+          <div>
+            <h2 className="text-white text-xl font-semibold mb-2">Complaints</h2>
+            <p>complaints@mvmntentertainment.com</p>
+          </div>
         </div>
       </div>
     </div>

@@ -51,6 +51,21 @@ export const eventType = defineType({
               type: 'url',
             }),
             defineField({
+              name: 'Instagram',
+              title: 'Instagram',
+              type: 'url',
+            }),
+            defineField({
+              name: 'Facebook',
+              title: 'Facebook',
+              type: 'url',
+            }),
+            defineField({
+              name: 'Tiktok',
+              title: 'Tiktok',
+              type: 'url',
+            }),
+            defineField({
               name: 'time',
               title: 'Set Time',
               type: 'string',

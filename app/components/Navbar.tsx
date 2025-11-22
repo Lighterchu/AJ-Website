@@ -21,7 +21,7 @@ export default function Navbar() {
         <Link href="/pages/About">About Us</Link>
         <Link href="/pages/Events">Events</Link>
         <Link href="/pages/Gallerys">Gallery</Link>
-        <Link href="/pages/Contact">Contact</Link>
+        <Link href="/pages/Contact">Contact Us</Link>
       </div>
 
       {/* Mobile Menu Button */}
