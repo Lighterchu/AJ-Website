@@ -10,9 +10,23 @@ export default function EventList({ events }: { events: any[] }) {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
+  const now = new Date();
+  const newEvents = sortedEvents.filter((event) => new Date(event.date) > now);
+  
+  if (newEvents.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-gray-500 text-xl font-medium">
+          No upcoming events.
+        </p>
+      </div>
+    );
+  }
+
+
   return (
     <div className="grid gap-8 md:grid-cols-3 ">
-      {sortedEvents.map((event) => (
+      {newEvents.map((event) => (
         <article
           key={event._id}
           className="flex flex-col rounded-lg  overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
