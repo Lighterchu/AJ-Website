@@ -66,9 +66,8 @@ export const eventType = defineType({
               type: 'url',
             }),
             defineField({
-              name: 'time',
-              title: 'Set Time',
-              type: 'string',
+              name: 'duration',
+              type: 'duration',
             }),
           ],
           preview: {

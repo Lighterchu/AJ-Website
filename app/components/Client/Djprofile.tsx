@@ -6,6 +6,10 @@ import { urlFor } from "../../../sanity/lib/image";
 interface DjProfileProps {
   djsprofile: {
     name?: string;
+    duration?: {
+      start?: string;
+      end?: string;
+    };
     image?: {
       asset?: {
         _ref?: string;
@@ -16,6 +20,8 @@ interface DjProfileProps {
 
 export default function DjProfiles({ djsprofile }: DjProfileProps) {
   const hasImage = !!djsprofile?.image?.asset?._ref;
+  const start = djsprofile?.duration?.start || "9:00 PM";
+  const end = djsprofile?.duration?.end || "11:00 PM";
   const imageUrl = hasImage
     ? urlFor(djsprofile.image).width(2000).height(3500).url()
     : null;
@@ -45,13 +51,13 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
 
           {/* TIME Badge */}
           <div className="absolute bottom-3 right-3 md:top-3 md:bottom-auto bg-black/60 text-white px-2 py-1 rounded-md text-sm opacity-80 transition-all duration-300">
-            <p className="">TIME: 9PM - 11PM</p>
+            <p>
+              {start || "Start"} - {end || "End"}
+            </p>
           </div>
         </>
       ) : (
-        <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-500 text-sm rounded-2xl">
-          No image available
-        </div>
+        <></>
       )}
     </div>
   );

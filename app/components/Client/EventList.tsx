@@ -9,7 +9,14 @@ export default function EventList({
   events,
   showNewEvents = true, // 👈 default value so undefined doesn't break logic
 }: {
-  events: any[];
+  events: {
+    _id: string;
+    name: string;
+    date: string;
+    imageUrl: string;
+    short: string;
+    slug: { current: string };
+  }[];
   showNewEvents?: boolean;
 }) {
   const sortedEvents = [...events].sort(
