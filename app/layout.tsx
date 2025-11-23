@@ -22,6 +22,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export const metadata: Metadata = {
   title: "MVMNT",
   description: `MVMNT Entertainment — Bringing chaos to order, bass to basements,
