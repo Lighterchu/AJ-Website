@@ -1,19 +1,27 @@
-/**
- * This route is responsible for the built-in authoring environment using Sanity Studio.
- * All routes under your studio path is handled by this file using Next.js' catch-all routes:
- * https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes
- *
- * You can learn more about the next-sanity package here:
- * https://github.com/sanity-io/next-sanity
- */
-
 import { NextStudio } from 'next-sanity/studio'
 import config from '../../../sanity.config'
 
 export const dynamic = 'force-static'
-
 export { metadata, viewport } from 'next-sanity/studio'
 
 export default function StudioPage() {
-  return <NextStudio config={config} />
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+
+
+  const isDev = dataset === "dev";
+  const isProd = dataset === "production";
+
+  const label = isDev ? "Development" : isProd ? "Production!!! LIVE SERVER" : "Unknown";
+  const color = isDev ? "bg-green-800" : isProd ? "bg-red-800" : "bg-gray-800";
+  
+
+  return (
+    <>
+      <div className={`flex justify-center items-center p-4 text-white ${color}`}>
+        <h1>{label} Branch</h1>
+      </div>
+
+      <NextStudio config={config} />
+    </>
+  )
 }
