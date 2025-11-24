@@ -29,7 +29,10 @@ const EVENTS_QUERY = defineQuery(`
     "imageUrl": imageUrl.asset->url
   }
 `);
-export const revalidate = 0; // Disable ISR for real-time data fetching
+
+export const revalidate = 60;
+export const dynamic = "force-dynamic";
+
 
 
 
