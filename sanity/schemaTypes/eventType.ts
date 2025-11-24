@@ -29,51 +29,10 @@ export const eventType = defineType({
       title: 'Lineup',
       type: 'array',
       of: [
-        defineField({
-          type: 'object',
-          name: 'dj',
-          title: 'DJ',
-          fields: [
-            defineField({
-              name: 'name',
-              title: 'Name',
-              type: 'string',
-            }),
-            defineField({
-              name: 'image',
-              title: 'Image',
-              type: 'image',
-              options: { hotspot: true },
-            }),
-            defineField({
-              name: 'soundcloud',
-              title: 'SoundCloud',
-              type: 'url',
-            }),
-            defineField({
-              name: 'Instagram',
-              title: 'Instagram',
-              type: 'url',
-            }),
-            defineField({
-              name: 'Facebook',
-              title: 'Facebook',
-              type: 'url',
-            }),
-            defineField({
-              name: 'Tiktok',
-              title: 'Tiktok',
-              type: 'url',
-            }),
-            defineField({
-              name: 'duration',
-              type: 'duration',
-            }),
-          ],
-          preview: {
-            select: { title: 'name', media: 'image' },
-          },
-        }),
+        {
+          type: 'reference',
+          to: [{ type: 'dj' }]
+        }
       ],
     }),
     defineField({

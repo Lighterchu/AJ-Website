@@ -26,6 +26,8 @@ export default async function EventPage({ params }) {
   });
   const eventData = event?.data ?? event;
   const eventLink = eventData?.Link || null;
+  console.log("Event Data:", eventData);
+  
 
   if (!eventData) return notFound();
 
