@@ -4,14 +4,16 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+
+export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 const EVENT_QUERY = groq`
   *[_type == "gallery" && slug.current == $slug][0] {
     _id,
     name,
     description,
-    date,
+    eventDate,
     images[] {
       "url": asset->url,
       alt
@@ -31,7 +33,7 @@ export default async function EventPage({ params }) {
     <main className="max-w-5xl mx-auto px-6 py-12">
       <h1 className="text-4xl font-bold mb-4">{eventData.name}</h1>
       <time className="block text-sm text-gray-500 mb-6">
-        {new Date(eventData.date).toLocaleDateString()}
+        {new Date(eventData.eventDate).toLocaleDateString()}
       </time>
 
       {/* Image Grid */}
