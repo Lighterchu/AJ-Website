@@ -29,6 +29,8 @@ const EVENTS_QUERY = defineQuery(`
     "imageUrl": imageUrl.asset->url
   }
 `);
+export const revalidate = 0; // Disable ISR for real-time data fetching
+
 
 
 export default async function Events() {
@@ -37,6 +39,7 @@ export default async function Events() {
    const eventsRes = await sanityFetch({ query: EVENTS_QUERY });
    const events = res.data; // ✅ <- important
    const eventsResData = eventsRes.data;
+   
   
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
