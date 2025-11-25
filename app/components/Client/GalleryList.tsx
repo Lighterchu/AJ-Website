@@ -33,7 +33,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
             >
               <h2 className="text-white text-xl font-semibold">{photo.name}</h2>
               {/* <time className="text-gray-300 text-sm mb-2">{date}</time> */}
-              <p className="text-gray-200 text-sm line-clamp-2">{photo.short}</p>
+              {/* <p className="text-gray-200 text-sm line-clamp-2">{photo.short}</p> */}
               <Link
                 href={`/pages/Gallerys/gallery/${photo.slug.current}`}
                 className="mt-3 inline-block text-sm font-semibold text-green-400 hover:text-green-600"
