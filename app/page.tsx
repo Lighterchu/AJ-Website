@@ -16,8 +16,8 @@ export default async function Home() {
         poster="/images/video-poster.jpg"
         aspectRatio="16/9"
       />
-      <SliderSection data={imageEvent} event={event} />
       <HeroText />
+      <SliderSection data={imageEvent} event={event} />
     </div>
   );
 }
