@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import DjProfiles from "../../../../components/Client/Djprofile"; // <-- client component
+import { urlFor } from "@/sanity/lib/image";
+
 
 const EVENT_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
@@ -49,7 +51,7 @@ export default async function EventPage({ params }) {
         <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-lg">
           <Image
           unoptimized
-            src={eventData.imageUrl}
+            src={urlFor(eventData.imageUrl).url()}
             alt={eventData.name}
             fill
             className="object-cover"

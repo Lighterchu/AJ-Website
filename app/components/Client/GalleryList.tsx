@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
+
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Gallery({ photos }: { photos: any[] }) {
@@ -15,7 +18,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
           >
             <div className="relative h-64 w-full">
               <Image
-                src={photo.image}
+                src={urlFor(photo.image).url()}
                 alt={"something"}
                 fill
                 unoptimized // <-- THIS DISABLES VERCEL IMAGE OPTIMIZATION

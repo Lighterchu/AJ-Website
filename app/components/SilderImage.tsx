@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+
 
 interface ImageEvent {
   _id: string;
@@ -55,7 +57,7 @@ const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
             onClick={() => handleClick(event.Link || img.imageUrl)}
           >
             <Image
-              src={img.imageUrl}
+              src={urlFor(img.imageUrl).url()}
               alt={`Slide ${currentIndex + 1}`}
               fill
               unoptimized

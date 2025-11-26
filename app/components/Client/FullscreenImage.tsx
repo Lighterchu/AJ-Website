@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 export default function FullscreenImage({ src, alt }) {
   const [open, setOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function FullscreenImage({ src, alt }) {
       <div onClick={() => setOpen(true)} className="cursor-pointer">
         <Image
           unoptimized
-          src={src}
+          src={urlFor(src).url()}
           alt={alt}
           fill
           className="object-cover rounded"
@@ -28,7 +29,7 @@ export default function FullscreenImage({ src, alt }) {
           <div className="relative w-[90vw] h-[90vh]">
             <Image
               unoptimized
-              src={src}
+              src={urlFor(src).url()}
               alt={alt}
               fill
               className="object-contain rounded"

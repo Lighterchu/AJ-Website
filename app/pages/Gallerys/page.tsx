@@ -3,6 +3,7 @@ import EventList from "@/app/components/Client/EventList"; // <-- client compone
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 
+
 const GALLERY_QUERY = defineQuery(`
 *[_type == "gallery"] {
     _id,

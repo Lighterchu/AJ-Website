@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+
 
 interface ImageEvent {
   _id: string;
@@ -51,7 +53,7 @@ export default function SliderSection({ data, event }: SliderSectionProps) {
             onClick={() => handleClick(event.Link || img.imageUrl)}
           >
             <Image
-              src={img.imageUrl}
+              src={urlFor(img.imageUrl).url()}
               unoptimized
               alt={`Slide ${currentIndex + 1}`}
               fill

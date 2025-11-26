@@ -3,6 +3,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function EventList({
@@ -49,7 +51,7 @@ export default function EventList({
         >
           <div className="relative h-48 w-full">
             <Image
-              src={event.imageUrl}
+              src={urlFor(event.imageUrl).url()}
               unoptimized
               alt={event.name || "Event Image"}
               fill
