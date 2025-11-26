@@ -18,7 +18,7 @@ export default async function About() {
     <div className="relative min-h-screen w-full overflow-hidden bg-black">
       {/* Background */}
       <Image
-        src="/backgrounds/aboutusPage.jpeg"
+        src="/backgrounds/testingbackground.jpg"
         alt="Background"
         fill
         priority
@@ -40,32 +40,40 @@ export default async function About() {
         </div>
 
         {/* Mission Section */}
-        {aboutus.mission && (
-          <section className="prose prose-lg md:prose-xl text-white text-center">
-            <PortableText value={aboutus.mission} />
-          </section>
-        )}
+        <div className="mb-12 lg:w-1/2 md:w-3/4 w-full">
+          {aboutus.mission && (
+            <section className="">
+              <PortableText value={aboutus.mission} />
+            </section>
+          )}
+        </div>
 
-        {/* Goals Section */}
-        {aboutus.goals && (
-          <section className="prose prose-lg md:prose-xl text-white">
-            <PortableText value={aboutus.goals} />
-          </section>
-        )}
+        <div className="mb-12 lg:w-1/2 md:w-3/4 w-full">
+          {/* Goals Section */}
+          {aboutus.goals && (
+            <section className="">
+              <PortableText value={aboutus.goals} />
+            </section>
+          )}
+        </div>
 
-        {/* Founder Story */}
-        {aboutus.founderStory && (
-          <section className="prose prose-lg md:prose-xl text-white">
-            <PortableText value={aboutus.founderStory} />
-          </section>
-        )}
+        <div className="mb-12 lg:w-1/2 md:w-3/4 w-full">
+          {/* Founder Story */}
+          {aboutus.founderStory && (
+            <section className="">
+              <PortableText value={aboutus.founderStory} />
+            </section>
+          )}
+        </div>
 
-        {/* Why We Exist */}
-        {aboutus.whyWeExist && (
-          <section className="prose prose-lg md:prose-xl text-white">
-            <PortableText value={aboutus.whyWeExist} />
-          </section>
-        )}
+        <div className="mb-12 w-full lg:w-1/2 md:w-3/4">
+          {/* Why We Exist */}
+          {aboutus.whyWeExist && (
+            <section className="">
+              <PortableText value={aboutus.whyWeExist} />
+            </section>
+          )}
+        </div>
       </div>
     </div>
   );
