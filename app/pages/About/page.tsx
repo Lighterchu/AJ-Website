@@ -1,21 +1,34 @@
 import Image from "next/image";
+import { groq } from "next-sanity";
+import { sanityFetch } from "@/sanity/lib/live";
+import { PortableText } from "@portabletext/react";
 
-export default function About() {
+const ABOUTUS = groq`*[_type == "aboutUs"][0]{
+  mission,
+  goals,
+  founderStory,
+  whyWeExist
+}`;
+
+export default async function About() {
+  const res = await sanityFetch({ query: ABOUTUS });
+  const aboutus = res.data; // important
+
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Background Image */}
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
+      {/* Background */}
       <Image
         src="/backgrounds/aboutusPage.jpeg"
         alt="Background"
         fill
         priority
-        className="object-cover rotate"
+        className="object-cover opacity-40"
       />
 
       {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 py-12 md:py-20">
+      <div className="relative z-10 flex flex-col items-center justify-start px-6 py-16 md:py-24 max-w-6xl mx-auto space-y-16">
         {/* Logo */}
-        <div className="mb-6 max-w-[250px] md:max-w-[430px]">
+        <div className="mb-6 max-w-[250px] md:max-w-[400px]">
           <Image
             unoptimized
             src="/images/logo1.png"
@@ -26,27 +39,33 @@ export default function About() {
           />
         </div>
 
-        {/* About Text */}
-        <div className=" max-w-3xl w-full p-6 sm:p-10 md:p-12 space-y-6 text-shadow-lg/30 scrollbar-hide overflow-scroll h-72">
-          <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center">
-            About MVMNT Entertainment. Born in the back alleys of Naarm/Melbourne’s underground and raised on sweat, strobe lights, and stubborn ambition. MVMNT Entertainment isn’t just a brand. It’s a resistance. A rhythm. A response to a city that’s too often forgotten what it means to truly move.
-          </p>
+        {/* Mission Section */}
+        {aboutus.mission && (
+          <section className="prose prose-lg md:prose-xl text-white text-center">
+            <PortableText value={aboutus.mission} />
+          </section>
+        )}
 
-          <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center">
-            We throw events that hit harder than your ex’s closure speech. Blending hard techno, psytrance, DnB, and whatever other sonic weaponry we’ve got on hand we don’t just curate lineups; we engineer chaos. The good kind.
-          </p>
+        {/* Goals Section */}
+        {aboutus.goals && (
+          <section className="prose prose-lg md:prose-xl text-white">
+            <PortableText value={aboutus.goals} />
+          </section>
+        )}
 
-          <div className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center space-y-2">
-            <p>MVMNT’s ethos is simple: No elitism. No ego. Just energy.</p>
-            <p>
-              Whether it’s your first rave or your hundredth, if you&apos;re down to dance, you&apos;re family. We’ve hosted everyone from local legends to up-and-coming freaks with fire in their USBs, always with an eye toward inclusivity, intensity, and integrity.
-            </p>
-          </div>
+        {/* Founder Story */}
+        {aboutus.founderStory && (
+          <section className="prose prose-lg md:prose-xl text-white">
+            <PortableText value={aboutus.founderStory} />
+          </section>
+        )}
 
-          <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center">
-            And through it all, we’ve kept one thing front and center: this scene survives when we build it together. So come dance with us and let loose, because this isn’t just a phase. It’s a MVMNT.
-          </p>
-        </div>
+        {/* Why We Exist */}
+        {aboutus.whyWeExist && (
+          <section className="prose prose-lg md:prose-xl text-white">
+            <PortableText value={aboutus.whyWeExist} />
+          </section>
+        )}
       </div>
     </div>
   );
