@@ -35,6 +35,7 @@ export default async function EventPage({ params }) {
         <div className="relative w-full h-64 mb-6">
           <Image
             src={eventData.imageUrl}
+            unoptimized
             alt={eventData.name}
             fill
             className="object-cover rounded"

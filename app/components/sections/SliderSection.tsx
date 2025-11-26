@@ -52,6 +52,7 @@ export default function SliderSection({ data, event }: SliderSectionProps) {
           >
             <Image
               src={img.imageUrl}
+              unoptimized
               alt={`Slide ${currentIndex + 1}`}
               fill
               className="object-fill  cursor-pointer"

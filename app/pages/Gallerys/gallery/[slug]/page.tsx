@@ -3,7 +3,6 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import FullscreenImage from "@/app/components/Client/FullscreenImage";
 
 export const revalidate = 60;

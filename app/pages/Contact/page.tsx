@@ -131,6 +131,7 @@ export default function Contact() {
       {/* Logo */}
       <div className="mb-6">
         <Image
+        unoptimized
           src="/images/logo1.png"
           alt="MVMNT Logo"
           width={300}

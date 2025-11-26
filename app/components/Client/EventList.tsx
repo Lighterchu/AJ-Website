@@ -50,6 +50,7 @@ export default function EventList({
           <div className="relative h-48 w-full">
             <Image
               src={event.imageUrl}
+              unoptimized
               alt={event.name || "Event Image"}
               fill
               className="object-cover"

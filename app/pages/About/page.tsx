@@ -17,6 +17,7 @@ export default function About() {
         {/* Logo */}
         <div className="mb-6 max-w-[250px] md:max-w-[430px]">
           <Image
+            unoptimized
             src="/images/logo1.png"
             alt="Logo"
             width={150}

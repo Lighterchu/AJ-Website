@@ -12,6 +12,7 @@ function Footer() {
         <div className="flex justify-center md:justify-start">
           <Image
             src="/logos/MVMNT.png"
+            unoptimized
             width={200}
             height={50}
             alt="MVMNT Entertainment Logo"

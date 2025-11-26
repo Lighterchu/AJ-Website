@@ -33,6 +33,7 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
           <div className="relative w-64 aspect-[5/5]  rounded-2xl ">
             <Image
               src={imageUrl}
+              unoptimized
               alt={djsprofile.name || "DJ profile image"}
               fill
               className="object-fill"

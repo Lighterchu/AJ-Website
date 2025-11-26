@@ -375,6 +375,7 @@ function MediaBrowser({
                     <Box style={{ marginBottom: "12px" }}>
                       {/* import Image from "next/image"; */}
                       <Image
+                      unoptimized
                         src={`${asset.url}?w=300&h=300&fit=crop&q=85`}
                         alt={asset.originalFilename || "Image"}
                         width={300}

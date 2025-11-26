@@ -11,6 +11,7 @@ export default function FullscreenImage({ src, alt }) {
       {/* Thumbnail */}
       <div onClick={() => setOpen(true)} className="cursor-pointer">
         <Image
+          unoptimized
           src={src}
           alt={alt}
           fill
@@ -26,6 +27,7 @@ export default function FullscreenImage({ src, alt }) {
         >
           <div className="relative w-[90vw] h-[90vh]">
             <Image
+              unoptimized
               src={src}
               alt={alt}
               fill

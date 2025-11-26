@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +10,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {photos.map((photo) => (
           <div
-            key={photo.id  || photo.slug.current}
+            key={photo.id || photo.slug.current}
             className="group relative rounded-xl overflow-hidden shadow-lg cursor-default sm:cursor-pointer hover:shadow-2xl transition-shadow duration-300"
           >
             <div className="relative h-64 w-full">
@@ -18,10 +18,11 @@ export default function Gallery({ photos }: { photos: any[] }) {
                 src={photo.image}
                 alt={"something"}
                 fill
+                unoptimized // <-- THIS DISABLES VERCEL IMAGE OPTIMIZATION
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw,
-                       (max-width: 1200px) 50vw,
-                       33vw"
+         (max-width: 1200px) 50vw,
+         33vw"
               />
             </div>
 
