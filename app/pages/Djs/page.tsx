@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const DJ_QUERY = groq`
-  *[_type == "dj" && slug.current == $slug][0] {
+  *[_type == "dj"]  {
     _id,
     name,
     slug,
@@ -21,10 +21,9 @@ const DJ_QUERY = groq`
   }
 `;
 
-export default async function DjPage({ params }) {
+export default async function DjPage() {
   const dj = await sanityFetch({
     query: DJ_QUERY,
-    params: { slug: params.slug },
   });
 
   if (!dj.data) return notFound();

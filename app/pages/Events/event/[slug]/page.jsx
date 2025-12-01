@@ -14,7 +14,13 @@ const EVENT_QUERY = groq`
     description,
     date,
     "imageUrl": image.asset->url,
-    djs,
+    djs[]->{
+      _id,
+      slug,
+      name,
+      "imageUrl": image.asset->url,
+      bio
+    },
     Link
   }
 `;
