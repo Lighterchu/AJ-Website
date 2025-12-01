@@ -36,7 +36,7 @@ export default async function DjPage({ params }) {
   console.log("DJ Data:", djData);
 
   const socialLinks = [
-    { name: "SoundCloud", url: djData.soundcloud, color: "text-blue-500" },
+    { name: "SoundCloud", url: djData.soundcloud, color: "text-orange-500" },
     { name: "Instagram", url: djData.instagram, color: "text-pink-500" },
     { name: "Facebook", url: djData.facebook, color: "text-blue-700" },
     { name: "TikTok", url: djData.tiktok, color: "text-green-500" },
