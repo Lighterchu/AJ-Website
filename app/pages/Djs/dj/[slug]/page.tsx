@@ -12,6 +12,9 @@ const DJ_QUERY = groq`
     name,
     slug,
     image,
+    djsImages[]{
+      "url": asset->url
+    },
     soundcloud,
     instagram,
     facebook,
@@ -30,6 +33,7 @@ export default async function DjPage({ params }) {
   if (!dj.data) return notFound();
 
   const djData = dj.data;
+  console.log("DJ Data:", djData);
 
   const socialLinks = [
     { name: "SoundCloud", url: djData.soundcloud, color: "text-blue-500" },
@@ -42,23 +46,29 @@ export default async function DjPage({ params }) {
     <main className="max-w-5xl mx-auto px-6 py-12 space-y-8">
       {/* Header */}
       <div>
-        back to <Link href="/pages/Djs">DJs</Link>
+        <Link href="/pages/Djs">← Back to DJs</Link>
       </div>
       <header className="text-center space-y-4">
         <h1 className="text-4xl font-bold">{djData.name}</h1>
         {djData.bio && <p className="text-white">{djData.bio}</p>}
       </header>
-      
 
       {/* DJ Image */}
-      {djData.image?.asset?.url && (
-        <div className="w-full h-96 relative rounded-lg overflow-hidden shadow-lg">
-          <Image
-            src={djData.image.asset.url}
-            alt={djData.name}
-            fill
-            className="object-cover"
-          />
+      {djData.djsImages?.length > 0 && (
+        <div className="grid grid-cols-3 gap-6">
+          {djData.djsImages.map((img, index) => (
+            <div
+              key={index}
+              className="relative w-full h-80 rounded-lg overflow-hidden shadow-lg"
+            >
+              <Image
+                src={img.url}
+                alt={`${djData.name} image ${index + 1}`}
+                fill
+                className="object-contain"
+              />
+            </div>
+          ))}
         </div>
       )}
 

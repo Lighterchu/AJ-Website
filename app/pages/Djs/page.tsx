@@ -2,77 +2,69 @@
 
 import { sanityFetch } from "@/sanity/lib/live";
 import { groq } from "next-sanity";
-import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 const DJ_QUERY = groq`
-  *[_type == "dj"]  {
+  *[_type == "dj"] {
     _id,
     name,
     slug,
-    image,
-    soundcloud,
-    instagram,
-    facebook,
-    tiktok,
+    "imageUrl": image.asset->url,
     bio,
     duration
   }
 `;
 
 export default async function DjPage() {
-  const dj = await sanityFetch({
-    query: DJ_QUERY,
-  });
+  const response = await sanityFetch({ query: DJ_QUERY });
 
-  if (!dj.data) return notFound();
-
-  const djData = dj.data;
-
-  const socialLinks = [
-    { name: "SoundCloud", url: djData.soundcloud, color: "text-blue-500" },
-    { name: "Instagram", url: djData.instagram, color: "text-pink-500" },
-    { name: "Facebook", url: djData.facebook, color: "text-blue-700" },
-    { name: "TikTok", url: djData.tiktok, color: "text-green-500" },
-  ];
+  const djs = response?.data || [];
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-12 space-y-8">
-      {/* Header */}
-      <header className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">{djData.name}</h1>
-        {djData.bio && <p className="text-white">{djData.bio}</p>}
-      </header>
+    <main className="max-w-6xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold text-center mb-10">Our DJs</h1>
 
-      {/* DJ Image */}
-      {djData.image?.asset?.url && (
-        <div className="w-full h-96 relative rounded-lg overflow-hidden shadow-lg">
-          <Image
-            src={djData.image.asset.url}
-            alt={djData.name}
-            fill
-            className="object-cover"
-          />
-        </div>
-      )}
+      {/* DJ Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {djs.map((dj) => (
+          <div
+            key={dj._id}
+            className="bg-zinc-900 rounded-2xl p-4 shadow-md hover:shadow-lg transition"
+          >
+            {/* Image */}
+            {dj.imageUrl && (
+              <div className="relative w-full aspect-square rounded-xl overflow-hidden">
+                <Image
+                  src={dj.imageUrl}
+                  alt={dj.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
 
-      {/* Social Links */}
-      <div className="flex justify-center space-x-6">
-        {socialLinks.map(
-          (link) =>
-            link.url && (
-              <Link
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`font-medium hover:underline ${link.color}`}
-              >
-                {link.name}
-              </Link>
-            )
-        )}
+            {/* Name */}
+            <h2 className="text-xl font-semibold mt-4 text-white">
+              {dj.name}
+            </h2>
+
+            {/* Bio preview */}
+            {dj.bio && (
+              <p className="text-sm text-white/70 mt-2 line-clamp-3">
+                {dj.bio}
+              </p>
+            )}
+
+            {/* View Profile Button */}
+            <Link
+              href={`/pages/Djs/dj/${dj.slug?.current}`}
+              className="mt-4 inline-block bg-white/10 border border-white/20 backdrop-blur-sm px-4 py-2 rounded-lg text-sm text-white hover:bg-white/20 transition"
+            >
+              View Artist
+            </Link>
+          </div>
+        ))}
       </div>
     </main>
   );

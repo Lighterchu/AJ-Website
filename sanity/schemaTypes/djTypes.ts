@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { MultiImageSelector } from '@/app/components/Sanity/MultiImageSelector'
 
 export const djType = defineType({
   name: 'dj',
@@ -23,6 +24,23 @@ export const djType = defineType({
       type: "image",
       options: { hotspot: true }
     }),
+    defineField({
+            name: 'djsImages',
+            title: 'Djs Images',
+            type: 'array',
+            of: [
+              {
+                type: 'image',
+                options: {
+                  hotspot: true,
+                },
+              },
+            ],
+            components: {
+              // Custom input component can be specified here if needed
+              input: MultiImageSelector,
+            },
+          }),
     defineField({
       name: "soundcloud",
       type: "url",
