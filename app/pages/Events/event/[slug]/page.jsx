@@ -16,7 +16,13 @@ const EVENT_QUERY = groq`
     description,
     date,
     "imageUrl": image.asset->url,
-    djs,
+    djs[]->{
+      _id,
+      slug,
+      name,
+      "imageUrl": image.asset->url,
+      bio
+    },
     Link
   }
 `;
@@ -28,6 +34,8 @@ export default async function EventPage({ params }) {
   });
   const eventData = event?.data ?? event;
   const eventLink = eventData?.Link || null;
+  console.log("Event Data:", eventData);
+  
 
   if (!eventData) return notFound();
 
