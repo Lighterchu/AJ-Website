@@ -40,7 +40,7 @@ export default async function About() {
         </div>
 
         {/* Mission Section */}
-        <div className="mb-12 lg:w-1/2 md:w-3/4 w-full">
+        <div className=" text-center w-1/2">
           {aboutus.mission && (
             <section className="">
               <PortableText value={aboutus.mission} />
@@ -48,8 +48,7 @@ export default async function About() {
           )}
         </div>
 
-        <div className="mb-12 lg:w-1/2 md:w-3/4 w-full">
-          {/* Goals Section */}
+        <div className="text-center w-1/2">
           {aboutus.goals && (
             <section className="">
               <PortableText value={aboutus.goals} />
@@ -57,8 +56,7 @@ export default async function About() {
           )}
         </div>
 
-        <div className="mb-12 lg:w-1/2 md:w-3/4 w-full">
-          {/* Founder Story */}
+        <div className="text-center w-1/2">
           {aboutus.founderStory && (
             <section className="">
               <PortableText value={aboutus.founderStory} />
@@ -66,8 +64,7 @@ export default async function About() {
           )}
         </div>
 
-        <div className="mb-12 w-full lg:w-1/2 md:w-3/4">
-          {/* Why We Exist */}
+        <div className="text-center w-1/2">
           {aboutus.whyWeExist && (
             <section className="">
               <PortableText value={aboutus.whyWeExist} />
