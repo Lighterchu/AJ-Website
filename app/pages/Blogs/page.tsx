@@ -1,6 +1,9 @@
 // pages/blog/page.tsx
 import Image from "next/image";
 
+//TODO: need to hook up to real data source later
+//TODO: need to implement pagination later
+
 export default function BlogPage() {
   const posts = [
     {
