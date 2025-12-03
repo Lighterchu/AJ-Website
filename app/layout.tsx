@@ -1,5 +1,6 @@
 import type { Metadata as NextMetadata } from "next";
 import Script from "next/script";
+import SoundCloudEmbed from "./components/Client/SoundcloudEmbed";
 
 interface Metadata extends NextMetadata {
   verification?: NextMetadata["verification"] & {
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <SanityLive />
+        <SoundCloudEmbed />
         <Footer />
       </body>
     </html>
