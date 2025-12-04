@@ -72,6 +72,9 @@ export default function BlogPage({ params }) {
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 space-y-10 text-white">
+    <Link href="/pages/Blogs" className="text-indigo-500 hover:underline">
+          ← Back to Blog
+        </Link>
       {/* Title */}
       <h1 className="text-5xl font-extrabold tracking-tight">{post.title}</h1>
 

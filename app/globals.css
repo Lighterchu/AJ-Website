@@ -62,3 +62,15 @@ body {
   animation: fadeSlow 2.5s ease-in-out;
 }
 
+@layer components {
+  .rdp-day--paid {
+    @apply bg-purple-600 text-white rounded-md;
+  }
+
+  .rdp-day--underground {
+    @apply bg-yellow-500 text-black rounded-md;
+  }
+}
+
+
+

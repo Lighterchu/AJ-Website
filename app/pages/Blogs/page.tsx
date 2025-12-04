@@ -1,8 +1,43 @@
 // pages/blog/page.tsx
 import Image from "next/image";
+import SimpleCalendar from "@/app/components/Client/Calendar";
 
 //TODO: need to hook up to real data source later
 //TODO: need to implement pagination later
+
+const fakeEvents = [
+  {
+    name: "Bass Drop Event",
+    date: "2025-12-05",
+    paided: true,
+    description: "Lock in and shut up",
+  },
+  {
+    name: "Stump Nation",
+    date: "2025-12-05",
+    paided: false,
+    description: "Underground event at secret location.",
+  },
+  {
+    name: "wild Goats",
+    date: "2025-12-05",
+    paided: true,
+    description: "We are the new Wild Horses :P ",
+  },
+  {
+    name: "Sent TO the ER",
+    date: "2025-12-05",
+    paided: false,
+    description: "Bass Rape",
+  },
+  {
+    name: "Night Crawlers",
+    date: "2025-12-14",
+    description: "Deep bass and late-night vibes.",
+    paided: true,
+  }
+];
+
 
 export default function BlogPage() {
   const posts = [
@@ -45,7 +80,7 @@ export default function BlogPage() {
       
       {/* Title */}
       <h1 className="text-5xl font-extrabold tracking-tight mb-14">
-        MVMNT Blog
+        MVMNT News  
       </h1>
 
       {/* FEATURED */}
@@ -110,6 +145,9 @@ export default function BlogPage() {
             </div>
           </a>
         ))}
+      </div>
+      <div className=" mt-32">
+        <SimpleCalendar events={fakeEvents} />
       </div>
     </div>
   );
