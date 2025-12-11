@@ -5,8 +5,15 @@ import {testType} from './testType'
 import {timeValueType} from './timeValueType'
 import {durationType} from './durationType'
 import {djType} from './djTypes'
+import {blogType} from './blogTypes'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [eventType,galleryType, testType, timeValueType, durationType, djType],
+  types: [eventType,
+    galleryType, 
+    testType, 
+    timeValueType, 
+    durationType, 
+    djType, 
+    blogType],
 }
