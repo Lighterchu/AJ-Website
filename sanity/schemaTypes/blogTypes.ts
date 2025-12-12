@@ -6,7 +6,7 @@ export const blogType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
+      name: 'title',
       type: 'string',
     }),
     defineField({
@@ -15,7 +15,7 @@ export const blogType = defineType({
           title: 'Blog Slug',
           description: 'A unique identifier for the Blog, used in URLs. It should be URL-friendly and unique across all Blogs.',
           options: {
-              source: 'name',
+              source: 'title',
               maxLength: 96,
               slugify: input => input
                   .toLowerCase()
@@ -27,7 +27,7 @@ export const blogType = defineType({
     defineField({
       name: 'imageUrl',
       type: 'image',
-      title: 'Event Image',
+      title: 'blog Image',
       description: 'An image representing the event, such as a banner or promotional graphic.',
       options: {
         hotspot: true
