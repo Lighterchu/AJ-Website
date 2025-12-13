@@ -1,6 +1,9 @@
 import type { Metadata as NextMetadata } from "next";
 import Script from "next/script";
 import SoundCloudEmbed from "./components/Client/SoundcloudEmbed";
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 
 interface Metadata extends NextMetadata {
   verification?: NextMetadata["verification"] & {
@@ -41,6 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-NW6HZJMBWN"
@@ -64,6 +68,6 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-    
+    </ClerkProvider>
   );
 }
