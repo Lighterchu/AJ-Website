@@ -49,8 +49,14 @@ export const blogType = defineType({
         name: 'description',
         title: 'Description',
         type: 'text',
-        description: 'Add as muhch detail as you want about the blog post',
-    }),           
+        description: 'Add as much detail as you want about the blog post',
+    }),    
+    defineField({
+      name: 'authorId',
+      title: 'Author ID',
+      type: 'text',
+      description: 'User ID',
+  }),       
   ],
 
 })
