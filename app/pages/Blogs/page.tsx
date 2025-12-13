@@ -6,11 +6,13 @@ import BlogCard from "@/app/components/Client/BlogCard";
 
 const BLOGS_QUERY = defineQuery(`
  *[_type == "blog"] |  order(date desc) {
-title,
-slug,
-blogDate,
-shortDescription,
-description
+_id,
+  title,
+  slug,
+  "imageUrl": imageUrl.asset->url,
+  blogDate,
+  shortDescription,
+  description
 }`);
 
 const fakeEvents = [

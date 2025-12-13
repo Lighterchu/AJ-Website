@@ -1,33 +1,39 @@
 // app/blog/[slug]/page.tsx
-import Image from "next/image";
-import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
 import { groq } from "next-sanity";
+import Image from "next/image";
+import Link from "next/link";
 
 const BLOG_QUERY = groq`
   *[_type == "blog" && slug.current == $slug][0] {
     _id,
     title,
+    "slug": slug.current,
+    blogDate,
+    shortDescription,
     description,
-    date,
-    "imageUrl": image.asset->url,
-    body
+    "imageUrl": image.asset->url
   }
 `;
 
-export default async function BlogPage({ params }) {
+export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
+  const slugID = (await params).slug;
+
   const blog = await sanityFetch({
     query: BLOG_QUERY,
-    params: { slug: params.slug },
+    params: { slug: slugID },
   });
 
   const blogData = blog?.data;
 
   if (!blogData) {
     return (
-      <main className="max-w-4xl mx-auto px-6 py-16 text-white">
-        <h1 className="text-4xl font-bold mb-6">Post not found</h1>
-        <Link href="/pages/Blogs" className="text-indigo-500 hover:underline">
+      <main className="max-w-4xl mx-auto px-6 py-16 text-center">
+        <h1 className="text-4xl font-bold mb-6 text-white">Post not found</h1>
+        <Link
+          href="/pages/Blogs"
+          className="text-indigo-400 hover:text-indigo-600 font-semibold transition"
+        >
           ← Back to Blog
         </Link>
       </main>
@@ -35,34 +41,37 @@ export default async function BlogPage({ params }) {
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 space-y-10 text-white">
-      <Link href="/pages/Blogs" className="text-indigo-500 hover:underline">
+    <main className="max-w-4xl mx-auto px-6 py-16 text-white space-y-12">
+      {/* Back Link */}
+      <Link
+        href="/pages/Blogs"
+        className="text-indigo-400 hover:text-indigo-600 font-semibold transition"
+      >
         ← Back to Blog
       </Link>
 
       {/* Title */}
-      <h1 className="text-5xl font-extrabold tracking-tight">
-        {blogData.title}
-      </h1>
+      <h1 className="text-5xl font-extrabold leading-tight">{blogData.title}</h1>
 
       {/* Date */}
-      <p className="text-gray-400">
-        {new Date(blogData.date).toDateString()}
-      </p>
+      <p className="text-gray-400">{new Date(blogData.blogDate).toLocaleDateString()}</p>
 
       {/* Image */}
-      <div className="relative w-full h-80 rounded-2xl overflow-hidden shadow-lg">
-        <Image
-          src={blogData.imageUrl}
-          alt={blogData.title}
-          fill
-          className="object-cover"
-        />
-      </div>
+      {blogData.imageUrl && (
+        <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+          <Image
+            src={blogData.imageUrl}
+            alt={blogData.title}
+            fill
+            className="object-cover transition-transform duration-700 hover:scale-105"
+          />
+        </div>
+      )}
+
 
       {/* Body */}
-      <div className="prose prose-lg text-white mt-6">
-        {blogData.body?.split("\n\n").map((para, idx) => (
+      <div className="prose prose-lg prose-invert mt-6 max-w-full">
+        {blogData.description.split("\n\n").map((para: string, idx: number) => (
           <p key={idx}>{para}</p>
         ))}
       </div>

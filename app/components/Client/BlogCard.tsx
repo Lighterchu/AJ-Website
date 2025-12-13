@@ -1,25 +1,16 @@
 import Image from "next/image";
 
 type BlogPost = {
-    title: string;
-    image: string;
-    blogDate: string;
-    shortDescription: string;
-    description: string;
-    slug: { current: string };
-  };    
+  title: string;
+  imageUrl: string;
+  blogDate: string;
+  shortDescription: string;
+  description: string;
+  slug: { current: string };
+};
 
-export default function BlogCard({post}: {post: BlogPost}) {
-//   const post = {
-//     id: 1,
-//     title: "How Our Events Work Behind The Scenes",
-//     excerpt: "A quick breakdown of how we plan, manage and run events...",
-//     image: "/logos/MVMNT.png",
-//     date: "2025-02-01",
-//     slug: "behind-the-scenes",
-//   };
-console.log(post);
-
+export default function BlogCard({ post }: { post: BlogPost }) {
+    console.log(post)
   return (
     <div className="max-w-3xl mx-auto px-6 py-24 text-white">
       <a
@@ -29,7 +20,7 @@ console.log(post);
         {/* Image Section */}
         <div className="relative h-60 w-full overflow-hidden rounded-xl">
           <Image
-            src={post.image}
+            src={post.imageUrl}
             fill
             className="object-cover group-hover:scale-110 transition-transform duration-700"
             alt={post.title}
@@ -47,7 +38,9 @@ console.log(post);
             {post.title}
           </h3>
 
-          <p className="opacity-80 mt-3 line-clamp-3">{post.shortDescription}</p>
+          <p className="opacity-80 mt-3 line-clamp-3">
+            {post.shortDescription}
+          </p>
 
           <span className="inline-block mt-5 text-indigo-400 font-semibold group-hover:underline">
             Read More →
