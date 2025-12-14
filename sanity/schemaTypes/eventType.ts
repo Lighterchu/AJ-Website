@@ -10,6 +10,27 @@ export const eventType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'genre',
+      type: 'string',
+      title: 'Genre',
+      description: 'The genre of the event, such as music style or theme.',
+      options: {
+        list: [
+          { title: 'RnB/Hip', value: 'rnb' },
+          { title: 'Hop House', value: 'house' },
+          { title: 'Tech House', value: 'tech house' },
+          { title: 'Trance Techno', value: 'trance tech' },
+          { title: 'Hard dance/groove', value: 'hard dance - groove' },
+          { title: 'Hard Techno', value: 'hard tech' },
+          { title: 'DnB', value: 'dnb' },
+          { title: 'Psy', value: 'psy' },
+          { title: 'Hardstyle', value: 'hardstyle' },
+          { title: 'Bass', value: 'bass' },
+          { title: 'Minimal', value: 'minimal' },
+        ],
+      },
+    }),
+    defineField({
       name: 'slug',
         type: 'slug',
         title: 'Event Slug',

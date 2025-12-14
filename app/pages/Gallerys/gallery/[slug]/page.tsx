@@ -23,10 +23,11 @@ const EVENT_QUERY = groq`
   }
 `;
 
-export default async function EventPage({ params }) {
+export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
+  const slugParams = (await params).slug; 
   const event = await sanityFetch({
     query: EVENT_QUERY,
-    params: { slug: params.slug },
+    params: { slug: slugParams },
   });
   const eventData = event?.data ?? event;
 

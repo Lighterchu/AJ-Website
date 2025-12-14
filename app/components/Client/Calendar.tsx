@@ -72,7 +72,11 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
             }}
           />
         </div>
+        <div>
+          <h1>this is willl have the option to change the genre </h1>
+        </div>
 
+        {/* // Events List */}
         <div className="flex-1 bg-gray-800 p-4 rounded-xl min-h-[200px]">
           <h2 className="text-lg font-semibold mb-3">
             {selectedDate
