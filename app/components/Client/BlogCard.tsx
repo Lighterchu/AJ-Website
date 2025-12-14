@@ -3,9 +3,11 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useUser } from "@clerk/nextjs"
+import { toast } from 'sonner'
 
 type BlogPost = {
   title: string
+  _id: string
   imageUrl: string
   blogDate: string
   shortDescription: string
@@ -15,11 +17,30 @@ type BlogPost = {
 
 export default function BlogCard({ post }: { post: BlogPost }) {
   const { user, isLoaded } = useUser()
+  console.log(post._id)
 
   if (!isLoaded) return null
 
   const role = user?.publicMetadata?.role
   const isAdmin = role === 'admin'
+
+  const handleDelete = async () => {
+    const confirmed = confirm('Are you sure you want to delete this blog?')
+  
+    if (!confirmed) return
+  
+    const res = await fetch(`/api/blog/delete/${post.slug.current}`, {
+      method: 'DELETE',
+    })
+  
+    if (!res.ok) {
+      toast.error('Failed to delete blog')
+      return
+    }
+  
+    toast.success('Blog deleted')
+  }
+  
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-24 text-white">
@@ -69,14 +90,12 @@ export default function BlogCard({ post }: { post: BlogPost }) {
             <button
               type="button"
               className="mt-3 block rounded-md bg-red-600/80 px-3 py-1 text-sm font-medium text-white hover:bg-red-600 transition"
+              onClick={handleDelete}
             >
               Delete blog
             </button>
           )}
-
           </div>
-
-          
         </div>
       </div>
     </div>
