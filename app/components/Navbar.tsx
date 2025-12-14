@@ -26,6 +26,7 @@ export default function Navbar() {
         <Link href="/pages/About">About Us</Link>
         <Link href="/pages/Events">Events</Link>
         <Link href="/pages/Gallerys">Gallery</Link>
+        <Link href="/pages/Blogs">Blogs</Link>
         <Link href="/pages/Contact">Contact Us</Link>
       </div>
       <div className=" flex justify-center items-center space-x-4"> 

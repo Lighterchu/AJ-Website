@@ -12,9 +12,12 @@ export async function POST(req: Request) {
   const user = await currentUser();
   const role = user?.publicMetadata?.role;
 
-  if (role !== 'blogger') {
-    return NextResponse.json({ error: 'Not approved' }, { status: 403 });
+  const allowedRoles = ['admin', 'blogger']
+
+  if (!allowedRoles.includes(role as string)) {
+    return NextResponse.json({ error: 'Not approved' }, { status: 403 })
   }
+
 
   const body = await req.json();
 

@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'sonner'
 
 export default function CreateBlogPage() {
   const [loading, setLoading] = useState(false);
@@ -25,9 +26,9 @@ export default function CreateBlogPage() {
     });
 
     if (!res.ok) {
-      alert('Not approved or error');
+      toast.error('Not approved or error')
     } else {
-      alert('Blog created 🎉');
+      toast.success('Blog created 🎉')
       form.reset();
     }
 
