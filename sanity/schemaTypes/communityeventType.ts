@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const eventCrewType = defineType({
-  name: 'event',
-  title: 'Event crew',
+export const eventcommunityType = defineType({
+  name: 'communityevent',
+  title: 'Event community',
   type: 'document',
   fields: [
     defineField({
@@ -29,32 +29,6 @@ export const eventCrewType = defineType({
           { title: 'Minimal', value: 'minimal' }
         ],
       },
-    }),
-    defineField({
-      name: 'slug',
-        type: 'slug',
-        title: 'Event Slug',
-        description: 'A unique identifier for the event, used in URLs. It should be URL-friendly and unique across all events.',
-        options: {
-            source: 'name',
-            maxLength: 96,
-            slugify: input => input
-                .toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with dashes
-                .replace(/[^\w-]+/g, '') // Remove non-word characters
-                .slice(0, 96), // Limit to 96 characters
-            },  
-    }),
-    defineField({
-      name: 'djs',
-      title: 'Lineup',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{ type: 'dj' }]
-        }
-      ],
     }),
     defineField({
       name: 'Link',
@@ -86,15 +60,6 @@ export const eventCrewType = defineType({
       title: 'Event Location',
       description: 'The physical or virtual location where the event will be held.',
     }),
-    defineField({
-      name: 'imageUrl',
-      type: 'image',
-      title: 'Event Image',
-      description: 'An image representing the event, such as a banner or promotional graphic.',
-      options: {
-        hotspot: true
-      }
-    }),            
   ],
 
 })

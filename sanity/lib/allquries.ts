@@ -16,6 +16,7 @@ export const allEvents = `*[_type == "event"]
   _id,
   name,
   slug,
+  genre,
   Link,
   date,
   description,
