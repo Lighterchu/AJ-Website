@@ -3,6 +3,15 @@ import { NextResponse } from 'next/server';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { client } from '@/sanity/lib/client';
 
+function generateSlug(title: string) {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // remove special chars
+    .replace(/\s+/g, '-')     // replace spaces with dashes
+    .replace(/--+/g, '-')     // replace multiple dashes with single dash
+}
+
 export async function POST(req: Request) {
   const authObject = await auth()
   if (!authObject.userId) {
@@ -20,6 +29,7 @@ export async function POST(req: Request) {
 
 
   const body = await req.json();
+  const slug = generateSlug(body.title);
 
   const doc = {
     _type: 'blog',
@@ -29,7 +39,7 @@ export async function POST(req: Request) {
     blogDate: new Date().toISOString(),
     slug: {
       _type: 'slug',
-      current: body.slug,
+      current: slug,
     },
     authorId: authObject.userId,
   };

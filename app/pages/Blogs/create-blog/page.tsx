@@ -1,6 +1,5 @@
 // app/blog/create/page.tsx
 'use client';
-
 import { useState } from 'react';
 import { toast } from 'sonner'
 
@@ -10,11 +9,12 @@ export default function CreateBlogPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
+    
 
     const form = e.currentTarget;
+   
     const data = {
       title: form.title.value,
-      slug: form.slug.value,
       shortDescription: form.shortDescription.value,
       description: form.description.value,
     };
@@ -41,10 +41,14 @@ export default function CreateBlogPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <input name="title" placeholder="Title" className="w-full p-3 rounded bg-black/40 border" required />
-        <input name="slug" placeholder="Slug (start-of-mvmnt)" className="w-full p-3 rounded bg-black/40 border" required />
         <textarea name="shortDescription" placeholder="Short description" className="w-full p-3 rounded bg-black/40 border" />
         <textarea name="description" placeholder="Full content" rows={8} className="w-full p-3 rounded bg-black/40 border" />
-
+        {/* <input
+          type="file"
+          name="image"
+          accept="image/*"
+          className="w-full p-3 rounded bg-black/40 border"
+        /> */}
         <button disabled={loading} className="bg-indigo-600 px-6 py-3 rounded font-semibold">
           {loading ? 'Publishing...' : 'Publish'}
         </button>

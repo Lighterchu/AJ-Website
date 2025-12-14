@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useUser } from "@clerk/nextjs"
 import { toast } from 'sonner'
+import { urlFor } from "@/sanity/lib/image";
 
 type BlogPost = {
   title: string
@@ -55,14 +56,14 @@ export default function BlogCard({ post }: { post: BlogPost }) {
         {/* Image */}
         <div className="relative h-60 w-full overflow-hidden rounded-xl">
           <Image
-            src={post.imageUrl}
+            src={urlFor(post.imageUrl).url()}
+            unoptimized
             fill
             className="object-cover group-hover:scale-110 transition-transform duration-700"
             alt={post.title}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
-
         {/* Content */}
         <div className="mt-5">
           <p className="text-sm opacity-60">

@@ -36,14 +36,14 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
       {finalImage && (
         <div className="relative w-full aspect-[4/5]">
           <Image
-            src={finalImage}
+            src={urlFor(finalImage).url()}
+            unoptimized
             alt={name ?? "DJ profile image"}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
       )}
-
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
