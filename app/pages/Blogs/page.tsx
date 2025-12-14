@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 import BlogCard from "@/app/components/Client/BlogCard";
 import Link from "next/link";
+import { allEvents } from "@/sanity/lib/allquries";
 
 
 const BLOGS_QUERY = defineQuery(`
@@ -52,6 +53,7 @@ const fakeEvents = [
 
 export default async function BlogPage() {
   const res = await sanityFetch({ query: BLOGS_QUERY });
+  const ALLevents = await sanityFetch({ query: allEvents });
   const blogPosts = res.data; // ✅ <- important
   
  
@@ -83,7 +85,7 @@ export default async function BlogPage() {
         ))}
       </div>
       <div className=" mt-32">
-        <SimpleCalendar events={fakeEvents} />
+        <SimpleCalendar events={ALLevents.data} />
       </div>
     </div>
   );
