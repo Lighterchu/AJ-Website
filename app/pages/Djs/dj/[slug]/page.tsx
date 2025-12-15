@@ -24,10 +24,11 @@ const DJ_QUERY = groq`
   }
 `;
 
-export default async function DjPage({ params }) {
+export default async function DjPage({ params }: { params: Promise<{ slug: string }> }) {
+  const slugID = (await params).slug;
   const dj = await sanityFetch({
     query: DJ_QUERY,
-    params: { slug: params.slug },
+    params: { slug: slugID },
   });
 
   if (!dj.data) return notFound();

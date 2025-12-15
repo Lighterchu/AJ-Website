@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/pages/Events/event/[slug]/page.jsx",
+    "app/pages/Events/event/[slug]/[slug].jsx",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
