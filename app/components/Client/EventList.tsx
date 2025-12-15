@@ -14,7 +14,7 @@ export default function EventList({
   events: {
     _id: string;
     name: string;
-    date: string;
+    startDate: string;
     imageUrl: string;
     short: string;
     slug: { current: string };
@@ -22,15 +22,15 @@ export default function EventList({
   showNewEvents?: boolean;
 }) {
   const sortedEvents = [...events].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
   );
 
   const now = new Date();
 
   // Clear & predictable logic
   const filteredEvents = showNewEvents
-    ? sortedEvents.filter((event) => new Date(event.date) > now)
-    : sortedEvents.filter((event) => new Date(event.date) < now);
+    ? sortedEvents.filter((event) => new Date(event.startDate) > now)
+    : sortedEvents.filter((event) => new Date(event.startDate) < now);
 
   if (filteredEvents.length === 0) {
     return (
@@ -62,10 +62,10 @@ export default function EventList({
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">{event.name}</h2>
             <time
-              dateTime={new Date(event.date).toISOString()}
+              dateTime={new Date(event.startDate).toISOString()}
               className="block mb-4 text-sm text-gray-500"
             >
-              {new Date(event.date).toLocaleDateString()}
+              {new Date(event.startDate).toLocaleDateString()}
             </time>
             <p className="text-gray-700">{event.short}</p>
           </div>

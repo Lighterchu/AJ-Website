@@ -36,7 +36,7 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
       {finalImage && (
         <div className="relative w-full aspect-[4/5]">
           <Image
-            src={urlFor(finalImage).url()}
+            src={(finalImage)}
             unoptimized
             alt={name ?? "DJ profile image"}
             fill

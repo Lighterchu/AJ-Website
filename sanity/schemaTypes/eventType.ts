@@ -63,10 +63,16 @@ export const eventCrewType = defineType({
         description: 'Place the link to the event here.',   
     }),
     defineField({
-      name: 'date',
+      name: 'startDate',
+      type: 'datetime', 
+      title: 'Event Start Date',
+        description: 'The date and time when the event will take place.',   
+    }),
+    defineField({
+      name: 'endtDate',
       type: 'datetime', 
       title: 'Event Date',
-        description: 'The date and time when the event will take place.',   
+        description: 'this is only if the event spans multiple days.',   
     }),
     defineField({
       name: 'description',

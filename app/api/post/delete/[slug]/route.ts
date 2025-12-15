@@ -17,7 +17,7 @@ export async function DELETE(
 
   // Get the _id from the slug
   const blog = await client.fetch(
-    `*[_type=="blog" && slug.current==$slug][0]{_id}`,
+    `*[_type=="post" && slug.current==$slug][0]{_id}`,
     { slug: slugParams}
   )
 

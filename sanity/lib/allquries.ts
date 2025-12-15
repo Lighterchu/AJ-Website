@@ -15,10 +15,26 @@ export const allEvents = `*[_type == "event"]
 | order(date asc) {
   _id,
   name,
+  _type,
   slug,
   genre,
   Link,
   date,
+  description,
+  short,
+  location,
+  "imageUrl": imageUrl.asset->url
+}`;
+
+export const allCommunityEvents = `*[_type == "communityevent"]
+| order(date asc) {
+  _id,
+  name,
+  startDate,
+  _type,   
+  slug,
+  genre,
+  Link,
   description,
   short,
   location,

@@ -17,11 +17,12 @@ export default function StudioPage() {
 
   return (
     <>
-      <div className={`flex justify-center items-center p-4 text-white ${color}`}>
-        <h1>{label} Branch</h1>
-      </div>
+      <div className={` p-4 text-white ${color}`}>
+        <h1 className=' pl-20'>{label} Branch</h1>
+      
 
       <NextStudio config={config} />
+      </div>
     </>
   )
 }

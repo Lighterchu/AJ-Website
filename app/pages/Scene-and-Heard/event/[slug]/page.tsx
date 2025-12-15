@@ -4,13 +4,13 @@ import { groq } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 
-const POST_QUERY = groq`
-  *[_type == "posts" && slug.current == $slug][0] {
+const EVENTCOMMUNITY_QUERY = groq`
+  *[_type == "communityevent" && slug.current == $slug][0] {
     _id,
     title,
-    date,
     "slug": slug.current,
     postDate,
+    startDate,
     shortDescription,
     description,
     "imageUrl": image.asset->url
@@ -21,7 +21,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
   const slugID = (await params).slug;
 
   const blog = await sanityFetch({
-    query: POST_QUERY,
+    query: EVENTCOMMUNITY_QUERY,
     params: { slug: slugID },
   });
 

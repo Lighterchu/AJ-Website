@@ -32,11 +32,11 @@ export async function POST(req: Request) {
   const slug = generateSlug(body.title);
 
   const doc = {
-    _type: 'blog',
+    _type: 'posts',
     title: body.title,
     shortDescription: body.shortDescription,
     description: body.description,
-    blogDate: new Date().toISOString(),
+    postDate: new Date().toISOString(),
     slug: {
       _type: 'slug',
       current: slug,

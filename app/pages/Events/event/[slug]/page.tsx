@@ -14,7 +14,7 @@ const EVENT_QUERY = groq`
     _id,
     name,
     description,
-    date,
+    startDate,
     "imageUrl": image.asset->url,
     djs[]->{
       _id,
@@ -46,7 +46,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       <header className="space-y-2 text-center">
         <h1 className="text-5xl font-extrabold text-white">{eventData.name}</h1>
         <time className="block text-gray-400 text-sm">
-          {new Date(eventData.date).toLocaleDateString(undefined, {
+          {new Date(eventData.startDate).toLocaleDateString(undefined, {
             weekday: "long",
             year: "numeric",
             month: "long",

@@ -10,6 +10,21 @@ export const eventcommunityType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'slug',
+        type: 'slug',
+        title: 'Event Slug',
+        description: 'A unique identifier for the event, used in URLs. It should be URL-friendly and unique across all events.',
+        options: {
+            source: 'name',
+            maxLength: 96,
+            slugify: input => input
+                .toLowerCase()
+                .replace(/\s+/g, '-') // Replace spaces with dashes
+                .replace(/[^\w-]+/g, '') // Remove non-word characters
+                .slice(0, 96), // Limit to 96 characters
+            },  
+    }),
+    defineField({
       name: 'genre',
       type: 'string',
       title: 'Genre',
@@ -37,10 +52,16 @@ export const eventcommunityType = defineType({
         description: 'Place the link to the event here.',   
     }),
     defineField({
-      name: 'date',
+      name: 'startDate',
       type: 'datetime', 
-      title: 'Event Date',
+      title: 'Event Start Date',
         description: 'The date and time when the event will take place.',   
+    }),
+    defineField({
+      name: 'endDate',
+      type: 'datetime', 
+      title: 'Event End Date',
+        description: 'Dont need to add Event Date, if its one day event. The date and time when the event will end.',   
     }),
     defineField({
       name: 'description',
