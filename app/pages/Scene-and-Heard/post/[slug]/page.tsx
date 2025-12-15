@@ -31,7 +31,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       <main className="max-w-4xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl font-bold mb-6 text-white">Post not found</h1>
         <Link
-          href="/pages/Blogs"
+          href="/pages/Scene-and-Heard"
           className="text-indigo-400 hover:text-indigo-600 font-semibold transition"
         >
           ← Back to Blog
@@ -44,7 +44,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
     <main className="max-w-4xl mx-auto px-6 py-16 text-white space-y-12">
       {/* Back Link */}
       <Link
-        href="/pages/Blogs"
+        href="/pages/Scene-and-Heard"
         className="text-indigo-400 hover:text-indigo-600 font-semibold transition"
       >
         ← Back to Blog

@@ -19,7 +19,7 @@ export default function CreateBlogPage() {
       description: form.description.value,
     };
 
-    const res = await fetch('/api/blog/create', {
+    const res = await fetch('/api/post/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -37,7 +37,7 @@ export default function CreateBlogPage() {
 
   return (
     <main className="max-w-2xl mx-auto px-6 py-16 text-white">
-      <h1 className="text-4xl font-bold mb-8">Create Blog</h1>
+      <h1 className="text-4xl font-bold mb-8">Create Post</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <input name="title" placeholder="Title" className="w-full p-3 rounded bg-black/40 border" required />

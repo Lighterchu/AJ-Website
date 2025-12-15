@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const blogType = defineType({
-  name: 'blog',
-  title: 'Blog',
+export const postType = defineType({
+  name: 'posts',
+  title: 'Posts',
   type: 'document',
   fields: [
     defineField({
@@ -12,8 +12,8 @@ export const blogType = defineType({
     defineField({
         name: 'slug',
           type: 'slug',
-          title: 'Blog Slug',
-          description: 'A unique identifier for the Blog, used in URLs. It should be URL-friendly and unique across all Blogs.',
+          title: 'Post Slug',
+          description: 'A unique identifier for the Post, used in URLs. It should be URL-friendly and unique across all Posts.',
           options: {
               source: 'title',
               maxLength: 96,
@@ -27,29 +27,29 @@ export const blogType = defineType({
     defineField({
       name: 'imageUrl',
       type: 'image',
-      title: 'blog Image',
+      title: 'Post Image',
       description: 'An image representing the event, such as a banner or promotional graphic.',
       options: {
         hotspot: true
       }
     }), 
     defineField({
-        name: 'blogDate',
+        name: 'PostDate',
         type: 'date',
-        title: 'blog Date',
-        description: 'The date when the blog was made',
+        title: 'Post Date',
+        description: 'The date when the Post was made',
     }),
     defineField({
         name: 'shortDescription',
         title: 'Short Description',
         type: 'text',
-        description: 'A brief summary of the Blog, suitable for listings or previews.',
+        description: 'A brief summary of the Post, suitable for listings or previews.',
     }),  
     defineField({
         name: 'description',
         title: 'Description',
         type: 'text',
-        description: 'Add as much detail as you want about the blog post',
+        description: 'Add as much detail as you want about the Post post',
     }),    
     defineField({
       name: 'authorId',

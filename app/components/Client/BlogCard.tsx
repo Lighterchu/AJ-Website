@@ -30,7 +30,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
 
     if (!confirmed) return;
 
-    const res = await fetch(`/api/blog/delete/${post.slug.current}`, {
+    const res = await fetch(`/api/post/delete/${post.slug.current}`, {
       method: "DELETE",
     });
 
@@ -82,7 +82,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
 
           <div className="flex flex-col">
             <Link
-              href={`/pages/Blogs/blog/${post.slug.current}`}
+              href={`/pages/Scene-and-Heard/post/${post.slug.current}`}
               className="inline-flex items-center mt-5 text-indigo-400 font-semibold hover:underline"
             >
               Read more →

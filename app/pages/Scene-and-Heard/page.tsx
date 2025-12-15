@@ -65,7 +65,7 @@ export default async function BlogPage() {
         MVMNT News
       </h1>
       <Link
-        href="/pages/Blogs/create-blog"
+        href="/pages/Scene-and-Heard/create-post"
         className="
         inline-flex items-center gap-2
         rounded-md
@@ -77,7 +77,7 @@ export default async function BlogPage() {
         transition
         "
       >
-        Create blog
+        Create Post
       </Link>
       <div className=" grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {blogPosts.map((item) => (
