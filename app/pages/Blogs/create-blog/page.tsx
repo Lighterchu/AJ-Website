@@ -14,7 +14,7 @@ export default function CreateBlogPage() {
     const form = e.currentTarget;
    
     const data = {
-      title: form.title.value,
+      title: (form.elements.namedItem('title') as HTMLInputElement).value,
       shortDescription: form.shortDescription.value,
       description: form.description.value,
     };
