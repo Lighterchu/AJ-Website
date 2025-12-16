@@ -63,12 +63,12 @@ body {
 }
 
 @layer components {
-  .rdp-day--paid {
-    @apply bg-purple-600 text-white rounded-md;
+  .rdp-day--offical {
+    @apply bg-green-500 text-white rounded-md;
   }
 
-  .rdp-day--underground {
-    @apply bg-yellow-500 text-black rounded-md;
+  .rdp-day--community {
+    @apply bg-gray-500 text-black rounded-md;
   }
 }
 

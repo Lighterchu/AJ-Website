@@ -9,7 +9,7 @@ interface Event {
   date: string | Date;
   paided: boolean;
   genre?: string;
-  type?: string;
+  type: "official" | "community";
   description?: string;
 }
 
@@ -31,6 +31,8 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
     date: normalizeDate(ev.date),
   }));
 
+  
+
   // Collect genres dynamically
   const genres = Array.from(
     new Set(
@@ -46,12 +48,14 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
     : normalizedEvents.filter(ev => ev.genre === selectedGenre);
 
   // Calendar modifiers
-  const paidDays = eventsForCalendar
-    .filter(ev => ev.paided)
+  const officialDays = eventsForCalendar
+    .filter(ev => ev.type === "official")
     .map(ev => ev.date as Date);
 
-  const undergroundDays = eventsForCalendar
-    .filter(ev => !ev.paided)
+  console.log(officialDays)
+
+  const communityDays = eventsForCalendar
+    .filter(ev => ev.type === "community")
     .map(ev => ev.date as Date);
 
   // Events for selected date AND genre
@@ -82,12 +86,12 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
               setSelectedGenre("all");
             }}
             modifiers={{
-              paid: paidDays,
-              underground: undergroundDays,
+              official: officialDays,
+              community: communityDays,
             }}
             modifiersClassNames={{
-              paid: "rdp-day--paid",
-              underground: "rdp-day--underground",
+              official: "rdp-day--offical",
+              community: "rdp-day--community",
             }}
           />
         </div>
@@ -126,10 +130,8 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
               <li
                 key={idx}
                 className={`p-2 rounded ${
-                  ev.paided
-                    ? "bg-purple-600"
-                    : ev.type === "underground"
-                    ? "bg-yellow-600"
+                  ev.type === "official"
+                    ? "bg-green-500"
                     : "bg-gray-600"
                 }`}
               >

@@ -9,6 +9,7 @@ import {
   allCommunityEvents
 } from "@/sanity/lib/allquries";
 import CreateDropdown from "@/app/components/Client/CreateDropdown";
+import { normalize } from "path";
 
 
 const POSTS_QUERY = defineQuery(`
@@ -23,6 +24,15 @@ const POSTS_QUERY = defineQuery(`
   description
 }`);
 
+interface Event {
+  name: string;
+  date: string | Date;
+  startDate?: string | Date;
+  paided: boolean;
+  genre?: string;
+  _type?: string;
+  description?: string;
+}
 
 
 export default async function BlogPage() {
@@ -31,6 +41,32 @@ export default async function BlogPage() {
   const AllCommunityEvents = await sanityFetch({ query: allCommunityEvents });
   const blogPosts = res.data; // ✅ <- important
   const allCommunityEventsData = AllCommunityEvents.data;
+
+  const normalizeAllOurEvents = ALLevents.data.map((event: Event) => ({
+    title: event.name,
+    date: new Date(event.date),
+    genre: event.genre,
+    type: "official",
+    description: event.description,
+  }));
+  
+
+  const normalizeAllCommunity = AllCommunityEvents.data.map((event: Event) => ({
+    title: event.name,
+    date: new Date(event.startDate),
+    genre: event.genre,
+    type: "community",
+    description: event.description,
+  }));
+
+  const calendarEvents = [
+    ...normalizeAllOurEvents,
+    ...normalizeAllCommunity,
+  ];
+
+  calendarEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+ 
   
  
 
@@ -48,7 +84,7 @@ export default async function BlogPage() {
         ))}
       </div>
       <div className=" mt-32">
-        <SimpleCalendar events={ALLevents.data} />
+        <SimpleCalendar events={calendarEvents} />
       </div>
       <h1 className="text-5xl font-extrabold tracking-tight mt-10">
         Community Events
