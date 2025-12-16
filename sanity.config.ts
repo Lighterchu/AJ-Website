@@ -15,7 +15,7 @@ import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
 
 
-console.log("this does get called")
+
 
 export default defineConfig({
   basePath: '/studio',
@@ -27,7 +27,7 @@ export default defineConfig({
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
-    // visionTool({defaultApiVersion: apiVersion}),
-    // media()
+    visionTool({defaultApiVersion: apiVersion}),
+    media()
   ],
 })
