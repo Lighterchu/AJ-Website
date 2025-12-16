@@ -15,7 +15,6 @@
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^4.2.0",
     "isomorphic-dompurify": "2.33.0",  
-    "jsdom": "^16.7.0",                
     "next": "^16.0.7",
     "next-sanity": "^11.4.2",
     "nodemailer": "^7.0.5",
