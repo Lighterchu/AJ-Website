@@ -13,6 +13,8 @@ import { media } from 'sanity-plugin-media'
 import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
+console.log("Studio loaded", process.env.SANITY_PROJECT_ID);
+
 
 export default defineConfig({
   basePath: '/studio',
