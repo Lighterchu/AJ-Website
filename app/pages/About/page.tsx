@@ -13,6 +13,14 @@ const ABOUTUS = groq`*[_type == "aboutUs"][0]{
 export default async function About() {
   const res = await sanityFetch({ query: ABOUTUS });
   const aboutus = res.data; // important
+  
+  if (!aboutus) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <p>No About Us content found.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black">

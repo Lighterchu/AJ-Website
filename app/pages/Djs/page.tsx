@@ -21,6 +21,15 @@ export default async function DjPage() {
 
   const djs = response?.data || [];
 
+  if (!djs) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <p>No DJS content found.</p>
+      </div>
+    );
+  }
+  
+
   return (
     <main className="max-w-6xl mx-auto px-6 py-12">
       <h1 className="text-4xl font-bold text-center mb-10">Our DJs</h1>

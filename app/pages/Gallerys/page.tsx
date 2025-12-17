@@ -2,6 +2,7 @@ import Gallery from "@/app/components/Client/GalleryList";
 import EventList from "@/app/components/Client/EventList"; // <-- client component
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
+import { notFound } from "next/navigation";
 
 
 const GALLERY_QUERY = defineQuery(`
@@ -43,6 +44,9 @@ export default async function Events() {
    const eventsRes = await sanityFetch({ query: EVENTS_QUERY });
    const events = res.data; // ✅ <- important
    const eventsResData = eventsRes.data;
+  if (!eventsResData) return notFound();
+
+   
    
   
   return (
@@ -58,3 +62,4 @@ export default async function Events() {
     </main>
   );
 }
+

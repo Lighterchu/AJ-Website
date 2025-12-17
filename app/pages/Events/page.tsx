@@ -2,6 +2,7 @@
 import EventList from "../../components/Client/EventList"; // <-- client component
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
+import { notFound } from "next/navigation";
 
 const EVENTS_QUERY = defineQuery(`
   *[_type == "event"] | order(startDate desc) {
@@ -17,6 +18,8 @@ const EVENTS_QUERY = defineQuery(`
 export default async function EventsPage() {
   const res = await sanityFetch({ query: EVENTS_QUERY });
   const events = res.data; // ✅ <- important
+
+  if (!events) return notFound();
   console.log("Events Data:", events);
 
   

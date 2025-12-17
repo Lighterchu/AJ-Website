@@ -9,7 +9,8 @@ import {
   allCommunityEvents
 } from "@/sanity/lib/allquries";
 import CreateDropdown from "@/app/components/Client/CreateDropdown";
-import { normalize } from "path";
+
+import { notFound } from "next/navigation";
 
 
 const POSTS_QUERY = defineQuery(`
@@ -40,6 +41,10 @@ export default async function BlogPage() {
   const ALLevents = await sanityFetch({ query: allEvents });
   const AllCommunityEvents = await sanityFetch({ query: allCommunityEvents });
   const blogPosts = res.data; // ✅ <- important
+  if(!blogPosts){
+    return notFound()
+  }
+
   const allCommunityEventsData = AllCommunityEvents.data;
 
   const normalizeAllOurEvents = ALLevents.data.map((event: Event) => ({
