@@ -1,8 +1,21 @@
 import { type SchemaTypeDefinition } from 'sanity'
-import {eventType} from './eventType'
+import {eventCrewType} from './eventType'
 import {galleryType} from './galleryType'
 import {testType} from './testType'
+import {timeValueType} from './timeValueType'
+import {durationType} from './durationType'
+import {djType} from './djTypes'
+import {postType} from './postTypes'
+import {eventcommunityType} from './communityeventType'
+
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [eventType,galleryType, testType],
+  types: [eventCrewType,
+    galleryType, 
+    testType, 
+    timeValueType, 
+    durationType, 
+    djType, 
+    postType,
+    eventcommunityType],
 }

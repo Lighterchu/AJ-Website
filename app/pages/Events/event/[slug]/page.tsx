@@ -6,26 +6,37 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import DjProfiles from "../../../../components/Client/Djprofile"; // <-- client component
+import { urlFor } from "@/sanity/lib/image";
+
 
 const EVENT_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
     _id,
     name,
     description,
-    date,
+    startDate,
     "imageUrl": image.asset->url,
-    djs,
+    djs[]->{
+      _id,
+      slug,
+      name,
+      "imageUrl": image.asset->url,
+      bio
+    },
     Link
   }
 `;
 
-export default async function EventPage({ params }) {
+export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
+  const slugParams = (await params).slug;
   const event = await sanityFetch({
     query: EVENT_QUERY,
-    params: { slug: params.slug },
+    params: { slug: slugParams },
   });
   const eventData = event?.data ?? event;
   const eventLink = eventData?.Link || null;
+  console.log("Event Data:", eventData);
+  
 
   if (!eventData) return notFound();
 
@@ -35,7 +46,7 @@ export default async function EventPage({ params }) {
       <header className="space-y-2 text-center">
         <h1 className="text-5xl font-extrabold text-white">{eventData.name}</h1>
         <time className="block text-gray-400 text-sm">
-          {new Date(eventData.date).toLocaleDateString(undefined, {
+          {new Date(eventData.startDate).toLocaleDateString(undefined, {
             weekday: "long",
             year: "numeric",
             month: "long",
@@ -48,7 +59,8 @@ export default async function EventPage({ params }) {
       {eventData.imageUrl && (
         <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-lg">
           <Image
-            src={eventData.imageUrl}
+          unoptimized
+            src={urlFor(eventData.imageUrl).url()}
             alt={eventData.name}
             fill
             className="object-cover"

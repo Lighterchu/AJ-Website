@@ -4,11 +4,11 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 
 const EVENTS_QUERY = defineQuery(`
-  *[_type == "event"] | order(date desc) {
+  *[_type == "event"] | order(startDate desc) {
     _id,
     name,
     short,  
-    date,
+    startDate,
     slug, 
     "imageUrl": imageUrl.asset->url
   }
@@ -17,13 +17,14 @@ const EVENTS_QUERY = defineQuery(`
 export default async function EventsPage() {
   const res = await sanityFetch({ query: EVENTS_QUERY });
   const events = res.data; // ✅ <- important
+  console.log("Events Data:", events);
 
   
 
   return (
     <main className="w-full mx-2  px-6 py-12">
       <h1 className="text-4xl font-bold mb-8 text-center">Events</h1>
-      <EventList events={events} />
+      <EventList events={events} showNewEvents={true} />
     </main>
   );
 }

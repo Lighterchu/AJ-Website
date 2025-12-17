@@ -1,5 +1,11 @@
 import type { Metadata as NextMetadata } from "next";
 import Script from "next/script";
+import SoundCloudEmbed from "./components/Client/SoundcloudEmbed";
+import { Toaster } from 'sonner'
+
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 
 interface Metadata extends NextMetadata {
   verification?: NextMetadata["verification"] & {
@@ -22,6 +28,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export const metadata: Metadata = {
   title: "MVMNT",
   description: `MVMNT Entertainment — Bringing chaos to order, bass to basements,
@@ -38,6 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-NW6HZJMBWN"
@@ -57,9 +66,11 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <SanityLive />
+        <SoundCloudEmbed />
         <Footer />
+        <Toaster richColors position="top-right" />
       </body>
     </html>
-    
+    </ClerkProvider>
   );
 }

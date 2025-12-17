@@ -3,9 +3,8 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["cdn.sanity.io"],
+    unoptimized: true, // <-- THIS STOPS ALL VERCEL IMAGE OPTIMIZATION
   },
-  
 };
 
 // Enable bundle analyzer only when ANALYZE=true

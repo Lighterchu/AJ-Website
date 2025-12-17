@@ -37,6 +37,12 @@ export const galleryType = defineType({
       title: 'front cover image',
     }),
     defineField({
+      name: 'eventDate',
+      type: 'date',
+      title: 'Event Date',
+      description: 'The date when the event took place.',
+    }),
+    defineField({
         name: 'images',
         title: 'Gallery Images',
         type: 'array',

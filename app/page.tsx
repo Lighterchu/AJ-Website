@@ -6,7 +6,7 @@ import { nextEventQuery } from "../sanity/lib/allquries";
 import { ImagesFromEvent } from "@/sanity/lib/imagesFromEventImage";
 
 export default async function Home() {
-
+  console.log("Rendering Home Page");
   const event = await client.fetch(nextEventQuery);
   const imageEvent = await client.fetch(ImagesFromEvent);
   return (
@@ -16,8 +16,8 @@ export default async function Home() {
         poster="/images/video-poster.jpg"
         aspectRatio="16/9"
       />
-      <SliderSection data={imageEvent} event={event} />
       <HeroText />
+      <SliderSection data={imageEvent} event={event} />
     </div>
   );
 }

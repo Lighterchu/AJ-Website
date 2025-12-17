@@ -131,6 +131,7 @@ export default function Contact() {
       {/* Logo */}
       <div className="mb-6">
         <Image
+        unoptimized
           src="/images/logo1.png"
           alt="MVMNT Logo"
           width={300}
@@ -179,6 +180,10 @@ export default function Contact() {
           <div>
             <h2 className="text-white text-xl font-semibold mb-2">Location</h2>
             <p>Naarm / Melbourne, Australia</p>
+          </div>
+          <div>
+            <h2 className="text-white text-xl font-semibold mb-2">Complaints</h2>
+            <p>complaints@mvmntentertainment.com</p>
           </div>
         </div>
       </div>

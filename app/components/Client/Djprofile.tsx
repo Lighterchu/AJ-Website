@@ -1,58 +1,74 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { urlFor } from "../../../sanity/lib/image";
 
 interface DjProfileProps {
   djsprofile: {
+    _id?: string;
     name?: string;
-    image?: {
-      asset?: {
-        _ref?: string;
-      };
+    slug?: {
+      current?: string;
     };
+    bio?: string;
+    duration?: {
+      start?: string;
+      end?: string;
+    };
+    imageUrl?: string;
   };
 }
 
 export default function DjProfiles({ djsprofile }: DjProfileProps) {
-  const hasImage = !!djsprofile?.image?.asset?._ref;
-  const imageUrl = hasImage
-    ? urlFor(djsprofile.image).width(2000).height(3500).url()
+  const { name, slug, duration, imageUrl } = djsprofile;
+
+  const start = duration?.start ?? "9:00 PM";
+  const end = duration?.end ?? "11:00 PM";
+
+  const finalImage = imageUrl
+    ? urlFor(imageUrl).width(2000).height(2500).url()
     : null;
 
   return (
-    <div className="group relative  w-full sm:w-64 h-full overflow-hidden rounded-2xl shadow-md transition-transform duration-300 hover:scale-105 mx-auto sm:mx-2 md:mx-4 lg:mx-6 ">
-      {imageUrl ? (
-        <>
-          <div className="relative w-64 aspect-[5/5]  rounded-2xl ">
-            <Image
-              src={imageUrl}
-              alt={djsprofile.name || "DJ profile image"}
-              fill
-              className="object-fill"
-            />
-          </div>
-
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
-
-          {/* DJ Name */}
-          {/* <div className="absolute bottom-3 left-3 text-white">
-            <p className="text-lg font-semibold tracking-wide">
-              {djsprofile.name || "Unnamed DJ"}
-            </p>
-          </div> */}
-
-          {/* TIME Badge */}
-          <div className="absolute bottom-3 right-3 md:top-3 md:bottom-auto bg-black/60 text-white px-2 py-1 rounded-md text-sm opacity-80 transition-all duration-300">
-            <p className="">TIME: 9PM - 11PM</p>
-          </div>
-        </>
-      ) : (
-        <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-500 text-sm rounded-2xl">
-          No image available
+    <div className="group relative w-full sm:w-64 bg-zinc-900 rounded-2xl overflow-hidden shadow-lg transition hover:scale-[1.03] mx-auto">
+      {/* Image */}
+      {finalImage && (
+        <div className="relative w-full aspect-[4/5]">
+          <Image
+            src={(finalImage)}
+            unoptimized
+            alt={name ?? "DJ profile image"}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
         </div>
       )}
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+      {/* Text content */}
+      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+        {/* Name */}
+        <div>
+          <h3 className="text-white text-lg font-semibold drop-shadow">
+            {name ?? "Unnamed DJ"}
+          </h3>
+          <p className="text-white/80 text-sm">
+            {start} – {end}
+          </p>
+        </div>
+
+        {/* View Profile Link */}
+        {slug?.current && (
+          <Link
+            href={`/pages/Djs/dj/${slug.current}`}
+            className="text-sm text-white bg-white/10 backdrop-blur-sm px-3 py-1 rounded-lg border border-white/20 hover:bg-white/20 transition"
+          >
+            View Artist
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

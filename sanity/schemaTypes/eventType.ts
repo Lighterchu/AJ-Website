@@ -1,13 +1,34 @@
 import {defineField, defineType} from 'sanity'
 
-export const eventType = defineType({
+export const eventCrewType = defineType({
   name: 'event',
-  title: 'Event',
+  title: 'Event crew',
   type: 'document',
   fields: [
     defineField({
       name: 'name',
       type: 'string',
+    }),
+    defineField({
+      name: 'genre',
+      type: 'string',
+      title: 'Genre',
+      description: 'The genre of the event, such as music style or theme.',
+      options: {
+        list: [
+          { title: 'RnB/Hip', value: 'rnb' },
+          { title: 'Hop House', value: 'house' },
+          { title: 'Tech House', value: 'tech house' },
+          { title: 'Trance Techno', value: 'trance tech' },
+          { title: 'Hard dance/groove', value: 'hard dance - groove' },
+          { title: 'Hard Techno', value: 'hard tech' },
+          { title: 'DnB', value: 'dnb' },
+          { title: 'Psy', value: 'psy' },
+          { title: 'Hardstyle', value: 'hardstyle' },
+          { title: 'Bass', value: 'bass' },
+          { title: 'Minimal', value: 'minimal' }
+        ],
+      },
     }),
     defineField({
       name: 'slug',
@@ -29,37 +50,10 @@ export const eventType = defineType({
       title: 'Lineup',
       type: 'array',
       of: [
-        defineField({
-          type: 'object',
-          name: 'dj',
-          title: 'DJ',
-          fields: [
-            defineField({
-              name: 'name',
-              title: 'Name',
-              type: 'string',
-            }),
-            defineField({
-              name: 'image',
-              title: 'Image',
-              type: 'image',
-              options: { hotspot: true },
-            }),
-            defineField({
-              name: 'soundcloud',
-              title: 'SoundCloud',
-              type: 'url',
-            }),
-            defineField({
-              name: 'time',
-              title: 'Set Time',
-              type: 'string',
-            }),
-          ],
-          preview: {
-            select: { title: 'name', media: 'image' },
-          },
-        }),
+        {
+          type: 'reference',
+          to: [{ type: 'dj' }]
+        }
       ],
     }),
     defineField({
@@ -69,10 +63,16 @@ export const eventType = defineType({
         description: 'Place the link to the event here.',   
     }),
     defineField({
-      name: 'date',
+      name: 'startDate',
+      type: 'datetime', 
+      title: 'Event Start Date',
+        description: 'The date and time when the event will take place.',   
+    }),
+    defineField({
+      name: 'endtDate',
       type: 'datetime', 
       title: 'Event Date',
-        description: 'The date and time when the event will take place.',   
+        description: 'this is only if the event spans multiple days.',   
     }),
     defineField({
       name: 'description',
