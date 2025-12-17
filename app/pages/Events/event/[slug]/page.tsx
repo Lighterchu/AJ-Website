@@ -8,7 +8,6 @@ import Link from "next/link";
 import DjProfiles from "../../../../components/Client/Djprofile"; // <-- client component
 import { urlFor } from "@/sanity/lib/image";
 
-
 const EVENT_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
     _id,
@@ -27,7 +26,11 @@ const EVENT_QUERY = groq`
   }
 `;
 
-export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function EventPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const slugParams = (await params).slug;
   const event = await sanityFetch({
     query: EVENT_QUERY,
@@ -35,13 +38,20 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   });
   const eventData = event?.data ?? event;
   const eventLink = eventData?.Link || null;
-  console.log("Event Data:", eventData);
-  
 
   if (!eventData) return notFound();
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-12 space-y-12">
+      <div>
+        <Link
+          href="/pages/Events"
+          className="inline-flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 text-lg font-semibold text-black shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-lg"
+        >
+          ← Back to events
+        </Link>
+      </div>
+
       {/* Event Header */}
       <header className="space-y-2 text-center">
         <h1 className="text-5xl font-extrabold text-white">{eventData.name}</h1>
@@ -59,7 +69,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {eventData.imageUrl && (
         <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden shadow-lg">
           <Image
-          unoptimized
+            unoptimized
             src={urlFor(eventData.imageUrl).url()}
             alt={eventData.name}
             fill
@@ -71,12 +81,16 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
       {/* Description */}
       {eventData.description && (
-        <p className="text-lg text-gray-200 leading-relaxed">{eventData.description}</p>
+        <p className="text-lg text-gray-200 leading-relaxed">
+          {eventData.description}
+        </p>
       )}
 
       {/* Lineup */}
       <section className="space-y-6 ">
-        <h2 className="text-3xl font-bold text-white text-center">The Lineup</h2>
+        <h2 className="text-3xl font-bold text-white text-center">
+          The Lineup
+        </h2>
         {eventData.djs && eventData.djs.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {eventData.djs.map((dj) => (

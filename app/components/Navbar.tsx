@@ -25,7 +25,7 @@ export default function Navbar() {
       <div className="hidden md:flex space-x-4 sm:space-x-8 text-sm sm:text-lg">
         <Link href="/pages/About">About Us</Link>
         <Link href="/pages/Events">Events</Link>
-        <Link href="/pages/Gallerys">Gallery</Link>
+        <Link href="/pages/Gallerys">Galleries</Link>
         <Link href="/pages/Scene-and-Heard">Scene and Heard</Link>
         <Link href="/pages/Contact">Contact Us</Link>
       </div>
@@ -80,6 +80,13 @@ export default function Navbar() {
             onClick={() => setIsOpen(false)}
           >
             Contact Us
+          </Link>
+          <Link
+            href="/pages/Scene-and-Heard"
+            className="hover:underline"
+            onClick={() => setIsOpen(false)}
+          >
+            Scene And Heard
           </Link>
         </div>
       )}
