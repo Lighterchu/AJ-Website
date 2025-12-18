@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 
 
 const GALLERY_QUERY = defineQuery(`
-*[_type == "gallery"]  | order(eventDate asc) {
+*[_type == "gallery"]  | order(eventDate desc) {
     _id,
     name,
     eventDate,
