@@ -3,9 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
-
-
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Gallery({ photos }: { photos: any[] }) {
   return (

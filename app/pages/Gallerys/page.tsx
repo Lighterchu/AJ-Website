@@ -6,9 +6,10 @@ import { notFound } from "next/navigation";
 
 
 const GALLERY_QUERY = defineQuery(`
-*[_type == "gallery"] {
+*[_type == "gallery"]  | order(eventDate asc) {
     _id,
     name,
+    eventDate,
     slug,
     "image": image.asset->url,
     short,
@@ -45,10 +46,6 @@ export default async function Events() {
    const events = res.data; // ✅ <- important
    const eventsResData = eventsRes.data;
   if (!eventsResData) return notFound();
-
-   
-   
-  
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-extrabold mb-12 text-center text-gray-900 dark:text-gray-100">
@@ -58,7 +55,7 @@ export default async function Events() {
       <h1 className="text-4xl font-extrabold my-12 text-center text-gray-900 dark:text-gray-100">
         Past Events
       </h1>
-      <EventList events={eventsResData} showNewEvents={false} />
+      <EventList events={eventsResData} showNewEvents={false} EventType="gallery" />
     </main>
   );
 }

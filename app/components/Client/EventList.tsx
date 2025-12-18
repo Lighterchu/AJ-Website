@@ -5,11 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function EventList({
   events,
-  showNewEvents = true, // 👈 default value so undefined doesn't break logic
+  showNewEvents = true,
+  EventType = "event",
 }: {
   events: {
     _id: string;
@@ -20,14 +19,25 @@ export default function EventList({
     slug: { current: string };
   }[];
   showNewEvents?: boolean;
+  EventType?: "event" | "gallery";
 }) {
-  const sortedEvents = [...events].sort(
-    (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-  );
-
   const now = new Date();
 
-  // Clear & predictable logic
+  // ✅ Sort once, based on EventType
+  const sortedEvents = [...events].sort((a, b) => {
+    const dateA = new Date(a.startDate).getTime();
+    const dateB = new Date(b.startDate).getTime();
+
+    if (EventType === "gallery") {
+      // Oldest → Newest
+      return dateA - dateB;
+    }
+
+    // Events: Newest → Oldest
+    return dateB - dateA;
+  });
+
+  // ✅ Filter after sorting
   const filteredEvents = showNewEvents
     ? sortedEvents.filter((event) => new Date(event.startDate) > now)
     : sortedEvents.filter((event) => new Date(event.startDate) < now);
@@ -53,7 +63,7 @@ export default function EventList({
             <Image
               src={urlFor(event.imageUrl).url()}
               unoptimized
-              alt={event.name || "Event Image"}
+              alt={event.name}
               fill
               className="object-cover"
             />
@@ -69,13 +79,16 @@ export default function EventList({
             </time>
             <p className="text-gray-700">{event.short}</p>
           </div>
+
           {showNewEvents && (
             <Link
-            href={`/pages/Events/event/${event.slug.current}`}
-            className="block p-6 bg-gray-100/30 text-center mt-auto hover:bg-gray-200/40 transition-colors rounded-lg"
-          >
-            <div className="text-white font-medium">Check Out Line Up →</div>
-          </Link>
+              href={`/pages/Events/event/${event.slug.current}`}
+              className="block p-6 bg-gray-100/30 text-center mt-auto hover:bg-gray-200/40 transition-colors rounded-lg"
+            >
+              <div className="text-white font-medium">
+                Check Out Line Up →
+              </div>
+            </Link>
           )}
         </article>
       ))}
