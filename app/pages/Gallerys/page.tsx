@@ -58,7 +58,7 @@ export default async function Events() {
       <h1 className="text-4xl font-extrabold my-12 text-center text-gray-900 dark:text-gray-100">
         Past Events
       </h1>
-      <EventList events={sortedEvents} showNewEvents={false} />
+      <EventList events={sortedEvents} showNewEvents={false} EventType="gallery" />
     </main>
   );
 }
