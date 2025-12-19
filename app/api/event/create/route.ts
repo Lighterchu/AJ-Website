@@ -11,9 +11,15 @@ function generateSlug(title: string) {
     .replace(/\s+/g, '-')     // replace spaces with dashes
     .replace(/--+/g, '-')     // replace multiple dashes with single dash
 }
+const isValidDate = (value: string | number | Date | null | undefined) => {
+  if (!value) return false;
+  const date = new Date(value);
+  return !isNaN(date.getTime());
+};
 
 export async function POST(req: Request) {
-  const authObject = await auth()
+  const authObject = await auth();
+
   if (!authObject.userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -21,32 +27,57 @@ export async function POST(req: Request) {
   const user = await currentUser();
   const role = user?.publicMetadata?.role;
 
-  const allowedRoles = ['admin', 'Poster']
-
-  if (!allowedRoles.includes(role as string)) {
-    return NextResponse.json({ error: 'Not approved' }, { status: 403 })
+  if (!['admin', 'Poster'].includes(role as string)) {
+    return NextResponse.json({ error: 'Not approved' }, { status: 403 });
   }
-
 
   const body = await req.json();
   const slug = generateSlug(body.title);
 
-  const doc = {
+  if (!isValidDate(body.startDate)) {
+    return NextResponse.json({ error: 'Invalid start date' }, { status: 400 });
+  }
+
+  interface CommunityEvent {
+    _id: string;
+    _type: string;
+    name: string;
+    genre: string;
+    Link: string;
+    short: string;
+    description: string;
+    startDate: string;
+    location: string;
+    approved: boolean;
+    slug: {
+      _type: string;
+      current: string;
+    };
+    authorId: string;
+    endDate?: string;
+  }
+
+  const doc: CommunityEvent = {
+    _id: `drafts.${crypto.randomUUID()}`,
     _type: 'communityevent',
     name: body.title,
     genre: body.genre,
     Link: body.Link,
     short: body.shortDescription,
     description: body.description,
-    startDate: body.startDate,
-    endDate: body.endDate,
+    startDate: new Date(body.startDate).toISOString(),
     location: body.location,
+    approved: false,
     slug: {
       _type: 'slug',
       current: slug,
     },
     authorId: authObject.userId,
   };
+
+  if (isValidDate(body.endDate)) {
+    doc.endDate = new Date(body.endDate).toISOString();
+  }
 
   const created = await client.create(doc);
 

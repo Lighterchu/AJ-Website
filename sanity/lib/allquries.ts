@@ -26,7 +26,9 @@ export const allEvents = `*[_type == "event"]
   "imageUrl": imageUrl.asset->url
 }`;
 
-export const allCommunityEvents = `*[_type == "communityevent"]
+export const allCommunityEvents = `*[_type == "communityevent" 
+&& approved == true &&
+  !(_id in path("drafts.**"))]
 | order(date asc) {
   _id,
   name,

@@ -81,6 +81,12 @@ export const eventcommunityType = defineType({
       title: 'Event Location',
       description: 'The physical or virtual location where the event will be held.',
     }),
+    defineField({
+      name: 'approved',
+      type: 'boolean',
+      title: 'Approved',
+      description: 'This field indicates whether the event has been approved by an admin.',
+    }),
   ],
 
 })
