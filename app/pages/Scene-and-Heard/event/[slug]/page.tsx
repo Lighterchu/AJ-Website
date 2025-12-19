@@ -7,9 +7,8 @@ import Link from "next/link";
 const EVENTCOMMUNITY_QUERY = groq`
   *[_type == "communityevent" && slug.current == $slug][0] {
     _id,
-    title,
+    name,
     "slug": slug.current,
-    postDate,
     startDate,
     shortDescription,
     description,
@@ -17,17 +16,17 @@ const EVENTCOMMUNITY_QUERY = groq`
   }
 `;
 
-export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CommunityPage({ params }: { params: Promise<{ slug: string }> }) {
   const slugID = (await params).slug;
 
-  const blog = await sanityFetch({
+  const community = await sanityFetch({
     query: EVENTCOMMUNITY_QUERY,
     params: { slug: slugID },
   });
 
-  const blogData = blog?.data;
+  const coomunityEventData = community?.data;
 
-  if (!blogData) {
+  if (!coomunityEventData) {
     return (
       <main className="max-w-4xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl font-bold mb-6 text-white">Post not found</h1>
@@ -43,6 +42,11 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-white space-y-12">
+      <div>
+        <h1>
+          Community Event: {coomunityEventData.name}
+        </h1>
+      </div>
       {/* Back Link */}
       <Link
         href="/pages/Scene-and-Heard"
@@ -52,17 +56,17 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       </Link>
 
       {/* Title */}
-      <h1 className="text-5xl font-extrabold leading-tight">{blogData.title}</h1>
+      <h1 className="text-5xl font-extrabold leading-tight">{coomunityEventData.title}</h1>
 
       {/* Date */}
-      <p className="text-gray-400">{new Date(blogData.blogDate).toLocaleDateString()}</p>
+      <p className="text-gray-400">{new Date(coomunityEventData.startDate).toLocaleDateString()}</p>
 
       {/* Image */}
-      {blogData.imageUrl && (
+      {coomunityEventData.imageUrl && (
         <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
           <Image
-            src={blogData.imageUrl}
-            alt={blogData.title}
+            src={coomunityEventData.imageUrl}
+            alt={coomunityEventData.name}
             fill
             className="object-cover transition-transform duration-700 hover:scale-105"
           />
@@ -72,7 +76,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
       {/* Body */}
       <div className="prose prose-lg prose-invert mt-6 max-w-full">
-        {blogData.description.split("\n\n").map((para: string, idx: number) => (
+        {coomunityEventData.description.split("\n\n").map((para: string, idx: number) => (
           <p key={idx}>{para}</p>
         ))}
       </div>

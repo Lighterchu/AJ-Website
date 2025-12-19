@@ -35,6 +35,8 @@ interface Event {
   description?: string;
 }
 
+export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
   const res = await sanityFetch({ query: POSTS_QUERY });
