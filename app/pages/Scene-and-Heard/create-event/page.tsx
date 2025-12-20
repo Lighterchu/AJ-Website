@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
-
+import { client } from "@/sanity/lib/client"; // your Sanity client
 
 interface EventForm {
   title: string;
@@ -14,7 +14,7 @@ interface EventForm {
   location: string;
   ticketUrl: string;
   genre: string;
-  image: string;
+  image: string; // URL after upload
 }
 
 interface FormErrors {
@@ -39,6 +39,7 @@ export default function CreateEventPage() {
   const { user } = useUser();
   const role = user?.publicMetadata?.role;
   const isAdmin = role === "admin";
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [form, setForm] = useState<EventForm>({
     title: "",
@@ -51,7 +52,6 @@ export default function CreateEventPage() {
     genre: "",
     image: "",
   });
-
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
 
@@ -90,20 +90,35 @@ export default function CreateEventPage() {
 
     setLoading(true);
 
+    // Upload image if exists
+    let imageRef = null;
+    if (imageFile) {
+      try {
+        const uploaded = await client.assets.upload("image", imageFile, {
+          contentType: imageFile.type,
+          filename: imageFile.name,
+        });
+        imageRef = uploaded; // Proper Sanity URL
+      } catch (err) {
+        toast.error("Image upload failed");
+        setLoading(false);
+        return;
+      }
+    }
+
+    // Update form.image with uploaded URL
+    const eventData = { ...form, image: imageRef };
+
     const res = await fetch("/api/event/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(eventData),
     });
 
     if (!res.ok) {
       toast.error("Error creating event");
     } else {
-      if (isAdmin) {
-        toast.success("Post published 🎉");
-      } else {
-        toast.success("Post submitted for approval ✅");
-      }
+      toast.success(isAdmin ? "Event published 🎉" : "Event submitted for approval ✅");
       setForm({
         title: "",
         shortDescription: "",
@@ -115,6 +130,7 @@ export default function CreateEventPage() {
         genre: "",
         image: "",
       });
+      setImageFile(null);
     }
 
     setLoading(false);
@@ -123,12 +139,11 @@ export default function CreateEventPage() {
   const getBorderClass = (field: keyof EventForm) => {
     const value = form[field];
     const error = errors[field];
-
     return error
       ? "border-red-500 shadow-[0_0_10px_#f87171,0_0_20px_#f87171]"
       : value
-        ? "border-green-400 shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80]"
-        : "border-white";
+      ? "border-green-400 shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80]"
+      : "border-white";
   };
 
   return (
@@ -142,7 +157,6 @@ export default function CreateEventPage() {
       </p>
 
       <div className="bg-black border rounded-xl max-w-2xl w-full p-8">
-        {/* ✅ Non-admin approval notice */}
         {!isAdmin && (
           <div className="mb-6 rounded-lg border border-yellow-400 bg-yellow-400/10 p-4 text-yellow-300">
             <p className="font-semibold">Approval Required</p>
@@ -151,6 +165,7 @@ export default function CreateEventPage() {
             </p>
           </div>
         )}
+
         <form className="space-y-4" onSubmit={handleSubmit}>
           {/* Title */}
           <div>
@@ -162,12 +177,9 @@ export default function CreateEventPage() {
                 "title"
               )}`}
             />
-            {errors.title && (
-              <p className="text-red-500 text-sm mt-1">{errors.title}</p>
-            )}
           </div>
 
-          {/* Genre Select */}
+          {/* Genre */}
           <div>
             <label className="block text-green-400 mb-1">Genre</label>
             <select
@@ -184,16 +196,23 @@ export default function CreateEventPage() {
                 </option>
               ))}
             </select>
-            {errors.genre && (
-              <p className="text-red-500 text-sm mt-1">{errors.genre}</p>
-            )}
           </div>
 
-          {/* Descriptions */}
+          {/* Image Upload */}
           <div>
-            <label className="block text-green-400 mb-1">
-              Short Description
-            </label>
+            <label className="block text-green-400 mb-1">Event Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+              className="w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2"
+            />
+            {imageFile && <p className="mt-1 text-sm text-white">{imageFile.name}</p>}
+          </div>
+
+          {/* Short Description */}
+          <div>
+            <label className="block text-green-400 mb-1">Short Description</label>
             <textarea
               rows={2}
               value={form.shortDescription}
@@ -204,10 +223,9 @@ export default function CreateEventPage() {
             />
           </div>
 
+          {/* Full Description */}
           <div>
-            <label className="block text-green-400 mb-1">
-              Full Description
-            </label>
+            <label className="block text-green-400 mb-1">Full Description</label>
             <textarea
               rows={4}
               value={form.description}
@@ -216,12 +234,9 @@ export default function CreateEventPage() {
                 "description"
               )}`}
             />
-            {errors.description && (
-              <p className="text-red-500 text-sm mt-1">{errors.description}</p>
-            )}
           </div>
 
-          {/* Dates */}
+          {/* Start & End Dates */}
           <div>
             <label className="block text-green-400 mb-1">Start Date</label>
             <input
@@ -232,9 +247,6 @@ export default function CreateEventPage() {
                 "startDate"
               )}`}
             />
-            {errors.startDate && (
-              <p className="text-red-500 text-sm mt-1">{errors.startDate}</p>
-            )}
           </div>
 
           <div>
@@ -259,10 +271,8 @@ export default function CreateEventPage() {
                 "location"
               )}`}
             />
-            {errors.location && (
-              <p className="text-red-500 text-sm mt-1">{errors.location}</p>
-            )}
           </div>
+
           <div>
             <label className="block text-green-400 mb-1">Ticket Link</label>
             <input

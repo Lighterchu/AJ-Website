@@ -42,15 +42,10 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-white space-y-12">
-      <div>
-        <h1>
-          Community Event: {coomunityEventData.name}
-        </h1>
-      </div>
       {/* Back Link */}
       <Link
         href="/pages/Scene-and-Heard"
-        className="text-indigo-400 hover:text-indigo-600 font-semibold transition"
+        className="inline-flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 text-lg font-semibold text-black shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-lg"
       >
         ← Back to Scene and Heard
       </Link>

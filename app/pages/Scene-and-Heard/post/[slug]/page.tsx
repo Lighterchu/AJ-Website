@@ -46,7 +46,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       {/* Back Link */}
       <Link
         href="/pages/Scene-and-Heard"
-        className="text-indigo-400 hover:text-indigo-600 font-semibold transition"
+        className="inline-flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 text-lg font-semibold text-black shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-lg"
       >
         ← Back to Scene and Heard
       </Link>

@@ -25,6 +25,15 @@ export const eventcommunityType = defineType({
             },  
     }),
     defineField({
+      name: 'image',
+      type: 'image',
+      title: 'Event Image',
+      description: 'An image representing the event, such as a banner or promotional graphic.',
+      options: {
+        hotspot: true
+      }
+    }),
+    defineField({
       name: 'genre',
       type: 'string',
       title: 'Genre',

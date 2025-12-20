@@ -40,5 +40,5 @@ export const allCommunityEvents = `*[_type == "communityevent"
   description,
   short,
   location,
-  "imageUrl": imageUrl.asset->url
+  "image": image.asset->url,
 }`;

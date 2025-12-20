@@ -54,6 +54,13 @@ export async function POST(req: Request) {
       _type: string;
       current: string;
     };
+    image?: {
+      _type: string;
+      asset: {
+        _type: string;
+        _ref: string;
+      };
+    };
     authorId: string;
     endDate?: string;
   }
@@ -76,6 +83,17 @@ export async function POST(req: Request) {
     },
     authorId: authObject.userId,
   };
+
+  if (body.image) {
+    // body.image should be a Sanity image reference object
+    doc.image = {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: body.image._id, // the ID returned from Sanity upload
+      },
+    };
+  }
 
   if (!['admin'].includes(role as string)) {
     doc._id =`drafts.${crypto.randomUUID()}`

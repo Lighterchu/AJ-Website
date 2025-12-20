@@ -11,7 +11,7 @@ type ContentItem = {
   title: string;
   name?: string;
   short?: string;
-  imageUrl?: string;
+  image?: string;
   genre?: string;
   date?: string; 
   startDate?: string;
@@ -23,6 +23,8 @@ type ContentItem = {
 
 export default function BlogCard({ item }: { item: ContentItem }) {
   const { user, isLoaded } = useUser();
+
+  console.log(item)
 
   if (!isLoaded) return null;
 
@@ -72,14 +74,14 @@ export default function BlogCard({ item }: { item: ContentItem }) {
           <h1>{item.genre}</h1>
         </div>
         {/* Image */}
-        {item.imageUrl && (
+        {item.image && (
           <div className="relative h-60 w-full overflow-hidden rounded-xl flex-shrink-0">
             <Image
-              src={urlFor(item.imageUrl).url()}
+              src={urlFor(item.image).url()}
               unoptimized
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-700"
-              alt={item.title}
+              alt={item.title || item.name || "Image"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           </div>

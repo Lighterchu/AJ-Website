@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
+import { client } from "@/sanity/lib/client"; // your Sanity client
 
 interface BlogForm {
   title: string;
   shortDescription: string;
   description: string;
-  image: string;
+  image: File | null;
 }
 
 interface FormErrors {
@@ -25,24 +25,23 @@ export default function CreateBlogPage() {
     title: "",
     shortDescription: "",
     description: "",
-    image: "",
+    image: null,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
 
-  const validateField = (field: keyof BlogForm, value: string) => {
-    switch (field) {
-      case "title":
-        return value.trim().length < 3 ? "Title is too short" : "";
-      case "description":
-        return value.trim().length < 10 ? "Content is too short" : "";
-      default:
-        return "";
+  const validateField = (field: keyof BlogForm, value: string | File | null) => {
+    if (field === "title" && typeof value === "string") {
+      return value.trim().length < 3 ? "Title is too short" : "";
     }
+    if (field === "description" && typeof value === "string") {
+      return value.trim().length < 10 ? "Content is too short" : "";
+    }
+    return "";
   };
 
-  const handleChange = (field: keyof BlogForm, value: string) => {
+  const handleChange = (field: keyof BlogForm, value: string | File | null) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: validateField(field, value) }));
   };
@@ -58,22 +57,36 @@ export default function CreateBlogPage() {
 
     setLoading(true);
 
+    let imageRef = null;
+    if (form.image) {
+      try {
+        const uploaded = await client.assets.upload('image', form.image, {
+          contentType: form.image.type,
+          filename: form.image.name,
+        });
+        imageRef = uploaded; // contains _id, url, etc.
+      } catch (err) {
+        toast.error("Image upload failed");
+        setLoading(false);
+        return;
+      }
+    }
+
     const res = await fetch("/api/post/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, image: imageRef }),
     });
 
     if (!res.ok) {
       toast.error("You are not approved to post");
     } else {
-      if (isAdmin) {
-        toast.success("Post published 🎉");
-      } else {
-        toast.success("Post submitted for approval ✅");
-      }
-
-      setForm({ title: "", shortDescription: "", description: "", image: "" });
+      toast.success(
+        isAdmin
+          ? "Post published 🎉"
+          : "Post submitted for admin approval ✅"
+      );
+      setForm({ title: "", shortDescription: "", description: "", image: null });
     }
 
     setLoading(false);
@@ -86,32 +99,44 @@ export default function CreateBlogPage() {
   ) => {
     const value = form[field];
     const error = errors[field];
-
     const borderClass = error
       ? "border-red-500 shadow-[0_0_10px_#f87171,0_0_20px_#f87171]"
       : value
       ? "border-green-400 shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80]"
       : "border-white";
 
+    if (field === "image") {
+      return (
+        <div>
+          <label className="block text-green-400 mb-1">{label}</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleChange(field, e.target.files?.[0] || null)}
+            className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${borderClass}`}
+          />
+          {value && <p className="mt-1 text-sm text-white">{(value as File).name}</p>}
+        </div>
+      );
+    }
+
     return (
       <div>
         <label className="block text-green-400 mb-1">{label}</label>
-
         {textarea ? (
           <textarea
             rows={6}
-            value={value}
+            value={value as string}
             onChange={(e) => handleChange(field, e.target.value)}
             className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${borderClass}`}
           />
         ) : (
           <input
-            value={value}
+            value={value as string}
             onChange={(e) => handleChange(field, e.target.value)}
             className={`w-full px-4 py-2 rounded bg-black text-white border focus:outline-none focus:ring-2 ${borderClass}`}
           />
         )}
-
         {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
       </div>
     );
@@ -127,10 +152,7 @@ export default function CreateBlogPage() {
         Share news, updates, or stories with the community.
       </p>
 
-      {/* Blog Card */}
       <div className="bg-black border rounded-xl max-w-2xl w-full p-8">
-
-        {/* ✅ Non-admin approval notice */}
         {!isAdmin && (
           <div className="mb-6 rounded-lg border border-yellow-400 bg-yellow-400/10 p-4 text-yellow-300">
             <p className="font-semibold">Approval Required</p>
@@ -144,8 +166,7 @@ export default function CreateBlogPage() {
           {renderInput("title", "Post Title")}
           {renderInput("shortDescription", "Short Description")}
           {renderInput("description", "Post Content", true)}
-          
-
+          {renderInput("image", "Upload Image")}
           <button
             type="submit"
             disabled={!isFormValid || loading}

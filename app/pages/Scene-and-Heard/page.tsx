@@ -16,10 +16,10 @@ import { notFound } from "next/navigation";
 const POSTS_QUERY = defineQuery(`
  *[_type == "posts"] |  order(date desc) {
   _id,
-  _type,        
+  _type,
   title,
   slug,
-  "imageUrl": imageUrl.asset->url,
+  "image": image.asset->url,
   blogDate,
   shortDescription,
   description
