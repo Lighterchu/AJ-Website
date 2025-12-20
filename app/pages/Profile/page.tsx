@@ -9,7 +9,8 @@ export default async function ProfilePage() {
   }
 
   const role = user.publicMetadata?.role as string | undefined;
-  const isAdmin = role === "admin";
+  const isAdmin = role === "admi";
+  const tags = user.publicMetadata?.tags as string[] | undefined;
 
   return (
     <div className="min-h-screen bg-black text-white px-4 py-16">
@@ -31,6 +32,18 @@ export default async function ProfilePage() {
 
           <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-400">
             {isAdmin ? "Admin" : "Community Poster"}
+          </span>
+          {isAdmin && (
+            
+            <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-red-500/20 text-red-400">  
+              Super Admin
+              </span>
+            )}
+          <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
+            {isAdmin ? "Admin" : "Venu Owner"}
+          </span>
+          <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-blue-500/20 text-blue-400">
+            {isAdmin ? "Admin" : "DJ"}
           </span>
         </div>
 

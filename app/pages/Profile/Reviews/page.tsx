@@ -7,7 +7,7 @@ export default async function ReviewsPage() {
   if (!user) redirect("/sign-in");
 
   const role = user.publicMetadata?.role as string | undefined;
-  const isAdmin = role === "admi";
+  const isAdmin = role === "admin";
 
   return (
     <div className="min-h-screen bg-black text-white px-4 py-16">
