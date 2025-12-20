@@ -9,6 +9,7 @@ interface BlogForm {
   title: string;
   shortDescription: string;
   description: string;
+  image: string;
 }
 
 interface FormErrors {
@@ -24,6 +25,7 @@ export default function CreateBlogPage() {
     title: "",
     shortDescription: "",
     description: "",
+    image: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -71,7 +73,7 @@ export default function CreateBlogPage() {
         toast.success("Post submitted for approval ✅");
       }
 
-      setForm({ title: "", shortDescription: "", description: "" });
+      setForm({ title: "", shortDescription: "", description: "", image: "" });
     }
 
     setLoading(false);
@@ -142,6 +144,7 @@ export default function CreateBlogPage() {
           {renderInput("title", "Post Title")}
           {renderInput("shortDescription", "Short Description")}
           {renderInput("description", "Post Content", true)}
+          
 
           <button
             type="submit"

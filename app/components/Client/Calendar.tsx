@@ -79,11 +79,12 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
         {/* Calendar */}
         <div className="flex-1">
           <DayPicker
+            captionLayout="dropdown"
+            animate
             mode="single"
             selected={selectedDate}
             onSelect={date => {
               setSelectedDate(date);
-              setSelectedGenre("all");
             }}
             modifiers={{
               official: officialDays,

@@ -25,7 +25,7 @@ export const postType = defineType({
               },  
       }),
     defineField({
-      name: 'imageUrl',
+      name: 'image',
       type: 'image',
       title: 'Post Image',
       description: 'An image representing the event, such as a banner or promotional graphic.',

@@ -39,7 +39,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
     <main className="max-w-5xl mx-auto px-6 py-12">
       <div>
         <Link
-          href="/pages/Events"
+          href="/pages/Gallerys"
           className="inline-flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 text-lg font-semibold text-black shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-400 hover:shadow-lg"
         >
           ← Back to Galleries

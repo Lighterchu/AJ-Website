@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
 
+
 interface EventForm {
   title: string;
   shortDescription: string;
@@ -13,6 +14,7 @@ interface EventForm {
   location: string;
   ticketUrl: string;
   genre: string;
+  image: string;
 }
 
 interface FormErrors {
@@ -36,7 +38,8 @@ const GENRE_OPTIONS = [
 export default function CreateEventPage() {
   const { user } = useUser();
   const role = user?.publicMetadata?.role;
-  const isAdmin = role === "admi";
+  const isAdmin = role === "admin";
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [form, setForm] = useState<EventForm>({
     title: "",
     shortDescription: "",
@@ -46,6 +49,7 @@ export default function CreateEventPage() {
     location: "",
     ticketUrl: "",
     genre: "",
+    image: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -109,6 +113,7 @@ export default function CreateEventPage() {
         location: "",
         ticketUrl: "",
         genre: "",
+        image: "",
       });
     }
 
@@ -258,7 +263,6 @@ export default function CreateEventPage() {
               <p className="text-red-500 text-sm mt-1">{errors.location}</p>
             )}
           </div>
-
           <div>
             <label className="block text-green-400 mb-1">Ticket Link</label>
             <input

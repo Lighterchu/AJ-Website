@@ -58,7 +58,7 @@ export default function BlogCard({ item }: { item: ContentItem }) {
       : `/pages/Scene-and-Heard/event/${item.slug.current}`;
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12 text-white">
+    <div className="max-w-3xl mx-auto w-full px-6 py-12 text-white">
       <div
         className="
           group bg-white/5 backdrop-blur-xl rounded-2xl

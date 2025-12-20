@@ -1,5 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function ProfilePage() {
   const user = await currentUser();
@@ -9,7 +10,7 @@ export default async function ProfilePage() {
   }
 
   const role = user.publicMetadata?.role as string | undefined;
-  const isAdmin = role === "admi";
+  const isAdmin = role === "admin";
   const tags = user.publicMetadata?.tags as string[] | undefined;
 
   return (
@@ -28,17 +29,18 @@ export default async function ProfilePage() {
           <p className="text-lg font-semibold">
             {user.firstName} {user.lastName}
           </p>
-          <p className="text-gray-400 text-sm">{user.emailAddresses[0]?.emailAddress}</p>
+          <p className="text-gray-400 text-sm">
+            {user.emailAddresses[0]?.emailAddress}
+          </p>
 
           <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-green-500/20 text-green-400">
             {isAdmin ? "Admin" : "Community Poster"}
           </span>
           {isAdmin && (
-            
-            <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-red-500/20 text-red-400">  
+            <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-red-500/20 text-red-400">
               Super Admin
-              </span>
-            )}
+            </span>
+          )}
           <span className="inline-block mt-3 text-xs px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
             {isAdmin ? "Admin" : "Venu Owner"}
           </span>
@@ -54,7 +56,8 @@ export default async function ProfilePage() {
               Post Approval Required
             </h2>
             <p className="text-gray-300 mt-2">
-              Any post you submit will be reviewed by an admin before being published.
+              Any post you submit will be reviewed by an admin before being
+              published.
             </p>
           </div>
         )}
@@ -77,13 +80,15 @@ export default async function ProfilePage() {
             </h2>
 
             <div className="border border-green-500/20 rounded-xl p-6 bg-green-500/5">
-              <p className="text-gray-300">
+              <p className="text-gray-300 mb-10">
                 Review and approve community submissions.
               </p>
-
-              <button className="mt-4 px-4 py-2 bg-green-500 text-black rounded font-semibold hover:bg-green-400">
+              <Link
+                href={`/pages/Profile/Reviews`}
+                className=" px-4 py-2 bg-green-500 text-black rounded font-semibold hover:bg-green-400"
+              >
                 View Pending Posts
-              </button>
+              </Link>
             </div>
           </section>
         )}
