@@ -34,6 +34,7 @@ export async function POST(req: Request) {
   const body = await req.json();
   const slug = generateSlug(body.title);
 
+
   if (!isValidDate(body.startDate)) {
     return NextResponse.json({ error: 'Invalid start date' }, { status: 400 });
   }
@@ -56,9 +57,10 @@ export async function POST(req: Request) {
     authorId: string;
     endDate?: string;
   }
-
+  
+ 
   const doc: CommunityEvent = {
-    _id: `drafts.${crypto.randomUUID()}`,
+    _id: crypto.randomUUID(),
     _type: 'communityevent',
     name: body.title,
     genre: body.genre,
@@ -67,13 +69,19 @@ export async function POST(req: Request) {
     description: body.description,
     startDate: new Date(body.startDate).toISOString(),
     location: body.location,
-    approved: false,
+    approved: true,
     slug: {
       _type: 'slug',
       current: slug,
     },
     authorId: authObject.userId,
   };
+
+  if (!['admin'].includes(role as string)) {
+    doc._id =`drafts.${crypto.randomUUID()}`
+    doc.approved = false;
+  }
+
 
   if (isValidDate(body.endDate)) {
     doc.endDate = new Date(body.endDate).toISOString();

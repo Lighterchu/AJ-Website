@@ -56,7 +56,13 @@ export const postType = defineType({
       title: 'Author ID',
       type: 'text',
       description: 'User ID',
-  }),       
+  }), 
+  defineField({
+    name: 'approved',
+    type: 'boolean',
+    title: 'Approved',
+    description: 'This field indicates whether the event has been approved by an admin.',
+  })      
   ],
 
 })

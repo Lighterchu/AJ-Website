@@ -32,17 +32,24 @@ export async function POST(req: Request) {
   const slug = generateSlug(body.title);
 
   const doc = {
+    _id: crypto.randomUUID(),
     _type: 'posts',
     title: body.title,
     shortDescription: body.shortDescription,
     description: body.description,
     postDate: new Date().toISOString(),
+    approved: true,
     slug: {
       _type: 'slug',
       current: slug,
     },
     authorId: authObject.userId,
   };
+
+  if (!['admin'].includes(role as string)) {
+    doc._id =`drafts.${crypto.randomUUID()}`
+    doc.approved = false;
+  }
 
   const created = await client.create(doc);
 

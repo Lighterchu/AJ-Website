@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
+import { useUser } from "@clerk/nextjs";
 
 interface BlogForm {
   title: string;
@@ -15,6 +16,10 @@ interface FormErrors {
 }
 
 export default function CreateBlogPage() {
+  const { user } = useUser();
+  const role = user?.publicMetadata?.role;
+  const isAdmin = role === "admin";
+
   const [form, setForm] = useState<BlogForm>({
     title: "",
     shortDescription: "",
@@ -58,9 +63,14 @@ export default function CreateBlogPage() {
     });
 
     if (!res.ok) {
-      toast.error("Not approved or error");
+      toast.error("You are not approved to post");
     } else {
-      toast.success("Post created 🎉");
+      if (isAdmin) {
+        toast.success("Post published 🎉");
+      } else {
+        toast.success("Post submitted for approval ✅");
+      }
+
       setForm({ title: "", shortDescription: "", description: "" });
     }
 
@@ -74,6 +84,7 @@ export default function CreateBlogPage() {
   ) => {
     const value = form[field];
     const error = errors[field];
+
     const borderClass = error
       ? "border-red-500 shadow-[0_0_10px_#f87171,0_0_20px_#f87171]"
       : value
@@ -116,6 +127,17 @@ export default function CreateBlogPage() {
 
       {/* Blog Card */}
       <div className="bg-black border rounded-xl max-w-2xl w-full p-8">
+
+        {/* ✅ Non-admin approval notice */}
+        {!isAdmin && (
+          <div className="mb-6 rounded-lg border border-yellow-400 bg-yellow-400/10 p-4 text-yellow-300">
+            <p className="font-semibold">Approval Required</p>
+            <p className="text-sm mt-1">
+              This post will be reviewed by an admin before it is published.
+            </p>
+          </div>
+        )}
+
         <form className="space-y-4" onSubmit={handleSubmit}>
           {renderInput("title", "Post Title")}
           {renderInput("shortDescription", "Short Description")}

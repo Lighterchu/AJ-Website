@@ -55,7 +55,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       <h1 className="text-5xl font-extrabold leading-tight">{blogData.title}</h1>
 
       {/* Date */}
-      <p className="text-gray-400">{new Date(blogData.blogDate).toLocaleDateString()}</p>
+      <p className="text-gray-400">{new Date(blogData.postDate).toLocaleDateString()}</p>
 
       {/* Image */}
       {blogData.imageUrl && (
