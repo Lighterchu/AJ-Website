@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import {
-  ClerkProvider,
   SignInButton,
   SignUpButton,
   SignedIn,
@@ -13,37 +12,39 @@ import {
 } from "@clerk/nextjs";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false); // 🔹 Add state for mobile menu
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav
-      className={`${"absolute"} top-0 z-20 w-full px-6 py-4 flex justify-between items-center text-white font-semibold text-lg bg-transparent`}
-    >
-      <Link href="/">Home</Link>
+    <nav className="absolute top-0 z-20 w-full px-6 py-4 flex items-center justify-between text-white font-semibold bg-transparent">
+      
+      {/* LEFT — Logo / Home */}
+      <Link href="/" className="text-lg">
+        Home
+      </Link>
 
-      {/* Desktop Links */}
-      <div className="hidden md:flex space-x-4 sm:space-x-8 text-sm sm:text-lg">
+      {/* CENTER — Desktop Links */}
+      <div className="hidden md:flex space-x-8 text-sm lg:text-base">
         <Link href="/pages/About">About Us</Link>
         <Link href="/pages/Events">Events</Link>
         <Link href="/pages/Gallerys">Galleries</Link>
         <Link href="/pages/Scene-and-Heard">Scene and Heard</Link>
         <Link href="/pages/Contact">Contact Us</Link>
       </div>
-      <div className=" flex justify-center items-center space-x-4"> 
-      <SignedOut>
-        <SignInButton />
-        <SignUpButton>
-        </SignUpButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+
+      {/* RIGHT — Auth (Desktop) */}
+      <div className="hidden md:flex items-center space-x-4">
+        <SignedOut>
+          <SignInButton />
+          <SignUpButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
-  
 
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden text-white focus:outline-none"
+        className="md:hidden text-white"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -52,41 +53,31 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-black/90 text-white flex flex-col items-center py-4 space-y-4 md:hidden">
-          <Link
-            href="/pages/About"
-            className="hover:underline"
-            onClick={() => setIsOpen(false)}
-          >
+        <div className="absolute top-full left-0 w-full bg-black/90 flex flex-col items-center py-6 space-y-4 md:hidden">
+          
+          {/* Auth (Mobile) */}
+          <SignedOut>
+            <SignInButton />
+            <SignUpButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+
+          <Link href="/pages/About" onClick={() => setIsOpen(false)}>
             About Us
           </Link>
-          <Link
-            href="/pages/Events"
-            className="hover:underline"
-            onClick={() => setIsOpen(false)}
-          >
+          <Link href="/pages/Events" onClick={() => setIsOpen(false)}>
             Events
           </Link>
-          <Link
-            href="/pages/Gallerys"
-            className="hover:underline"
-            onClick={() => setIsOpen(false)}
-          >
+          <Link href="/pages/Gallerys" onClick={() => setIsOpen(false)}>
             Galleries
           </Link>
-          <Link
-            href="/pages/Contact"
-            className="hover:underline"
-            onClick={() => setIsOpen(false)}
-          >
-            Contact Us
+          <Link href="/pages/Scene-and-Heard" onClick={() => setIsOpen(false)}>
+            Scene and Heard
           </Link>
-          <Link
-            href="/pages/Scene-and-Heard"
-            className="hover:underline"
-            onClick={() => setIsOpen(false)}
-          >
-            Scene And Heard
+          <Link href="/pages/Contact" onClick={() => setIsOpen(false)}>
+            Contact Us
           </Link>
         </div>
       )}
