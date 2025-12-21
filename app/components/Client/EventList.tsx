@@ -13,7 +13,7 @@ export default function EventList({
   events: {
     _id: string;
     name: string;
-    startDate: string;
+    date: string;
     imageUrl: string;
     short: string;
     slug: { current: string };
@@ -22,11 +22,12 @@ export default function EventList({
   EventType?: "event" | "gallery";
 }) {
   const now = new Date();
+  
 
   // ✅ Sort once, based on EventType
   const sortedEvents = [...events].sort((a, b) => {
-    const dateA = new Date(a.startDate).getTime();
-    const dateB = new Date(b.startDate).getTime();
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
 
     if (EventType === "gallery") {
       // Oldest → Newest
@@ -39,8 +40,8 @@ export default function EventList({
 
   // ✅ Filter after sorting
   const filteredEvents = showNewEvents
-    ? sortedEvents.filter((event) => new Date(event.startDate) > now)
-    : sortedEvents.filter((event) => new Date(event.startDate) < now);
+    ? sortedEvents.filter((event) => new Date(event.date) > now)
+    : sortedEvents.filter((event) => new Date(event.date) < now);
 
   if (filteredEvents.length === 0) {
     return (
@@ -72,12 +73,12 @@ export default function EventList({
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">{event.name}</h2>
             <time
-              dateTime={new Date(event.startDate).toISOString()}
+              dateTime={new Date(event.date).toISOString()}
               className="block mb-4 text-sm text-gray-500"
             >
-              {new Date(event.startDate).toLocaleDateString()}
+              {new Date(event.date).toLocaleDateString()}
             </time>
-            <p className="text-gray-700">{event.short}</p>
+            <p className="text-white">{event.short}</p>
           </div>
 
           {showNewEvents && (
