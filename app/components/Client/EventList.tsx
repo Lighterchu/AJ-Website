@@ -8,7 +8,7 @@ import { urlFor } from "@/sanity/lib/image";
 export default function EventList({
   events,
   showNewEvents = true,
-  EventType = "event",
+
 }: {
   events: {
     _id: string;
@@ -19,31 +19,9 @@ export default function EventList({
     slug: { current: string };
   }[];
   showNewEvents?: boolean;
-  EventType?: "event" | "gallery";
 }) {
-  const now = new Date();
   
-
-  // ✅ Sort once, based on EventType
-  const sortedEvents = [...events].sort((a, b) => {
-    const dateA = new Date(a.date).getTime();
-    const dateB = new Date(b.date).getTime();
-
-    if (EventType === "gallery") {
-      // Oldest → Newest
-      return dateA - dateB;
-    }
-
-    // Events: Newest → Oldest
-    return dateB - dateA;
-  });
-
-  // ✅ Filter after sorting
-  const filteredEvents = showNewEvents
-    ? sortedEvents.filter((event) => new Date(event.date) > now)
-    : sortedEvents.filter((event) => new Date(event.date) < now);
-
-  if (filteredEvents.length === 0) {
+  if (events.length === 0) {
     return (
       <div className="flex justify-center items-center h-64">
         <p className="text-gray-500 text-xl font-medium">
@@ -55,7 +33,7 @@ export default function EventList({
 
   return (
     <div className="grid gap-8 md:grid-cols-3">
-      {filteredEvents.map((event) => (
+      {events.map((event) => (
         <article
           key={event._id}
           className="flex flex-col rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"

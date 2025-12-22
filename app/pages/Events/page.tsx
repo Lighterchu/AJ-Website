@@ -1,5 +1,5 @@
 // app/events/page.tsx
-import EventList from "../../components/Client/EventList"; // <-- client component
+import MainEventList from "../../components/Client/MainEvents"; // <-- client component
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 import { notFound } from "next/navigation";
@@ -27,7 +27,7 @@ export default async function EventsPage() {
   return (
     <main className="w-full mx-2  px-6 py-12">
       <h1 className="text-4xl font-bold mb-8 text-center">Events</h1>
-      <EventList events={events} showNewEvents={true}  />
+      <MainEventList events={events}/>
     </main>
   );
 }
