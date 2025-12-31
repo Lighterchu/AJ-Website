@@ -18,21 +18,21 @@ export default function Navbar() {
     <nav className="absolute top-0 z-20 w-full px-6 py-4 flex items-center justify-between text-white font-semibold bg-transparent">
       
       {/* LEFT — Logo / Home */}
-      <Link href="/" className="text-lg">
+      <Link href="/" className="text-lg text-gray-900 dark:text-gray-100">
         Home
       </Link>
 
       {/* CENTER — Desktop Links */}
       <div className="hidden md:flex space-x-8 text-sm lg:text-base">
-        <Link href="/pages/About">About Us</Link>
-        <Link href="/pages/Events">Events</Link>
-        <Link href="/pages/Gallerys">Galleries</Link>
-        <Link href="/pages/Scene-and-Heard">Scene and Heard</Link>
-        <Link href="/pages/Contact">Contact Us</Link>
+        <Link href="/pages/About" className="text-gray-900 dark:text-gray-100">About Us</Link>
+        <Link href="/pages/Events" className="text-gray-900 dark:text-gray-100">Events</Link>
+        <Link href="/pages/Gallerys" className="text-gray-900 dark:text-gray-100">Galleries</Link>
+        <Link href="/pages/Scene-and-Heard" className="text-gray-900 dark:text-gray-100">Scene and Heard</Link>
+        <Link href="/pages/Contact" className="text-gray-900 dark:text-gray-100">Contact Us</Link>
       </div>
 
       {/* RIGHT — Auth (Desktop) */}
-      <div className="hidden md:flex items-center space-x-4">
+      <div className="hidden md:flex items-center space-x-4 text-gray-900 dark:text-gray-100">
         <SignedOut>
           <SignInButton />
           <SignUpButton />
@@ -64,19 +64,19 @@ export default function Navbar() {
             <UserButton />
           </SignedIn>
 
-          <Link href="/pages/About" onClick={() => setIsOpen(false)}>
+          <Link href="/pages/About" className="text-gray-900 dark:text-gray-100"  onClick={() => setIsOpen(false)}>
             About Us
           </Link>
-          <Link href="/pages/Events" onClick={() => setIsOpen(false)}>
+          <Link href="/pages/Events" className="text-gray-900 dark:text-gray-100" onClick={() => setIsOpen(false)}>
             Events
           </Link>
-          <Link href="/pages/Gallerys" onClick={() => setIsOpen(false)}>
+          <Link href="/pages/Gallerys" className="text-gray-900 dark:text-gray-100" onClick={() => setIsOpen(false)}>
             Galleries
           </Link>
-          <Link href="/pages/Scene-and-Heard" onClick={() => setIsOpen(false)}>
+          <Link href="/pages/Scene-and-Heard" className="text-gray-900 dark:text-gray-100" onClick={() => setIsOpen(false)}>
             Scene and Heard
           </Link>
-          <Link href="/pages/Contact" onClick={() => setIsOpen(false)}>
+          <Link href="/pages/Contact" className="text-gray-900 dark:text-gray-100" onClick={() => setIsOpen(false)}>
             Contact Us
           </Link>
         </div>

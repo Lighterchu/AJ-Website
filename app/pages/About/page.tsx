@@ -16,7 +16,7 @@ export default async function About() {
 
   if (!aboutus) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
+      <div className="min-h-screen text-gray-900 dark:text-gray-100 flex items-center justify-center px-4">
         <p>No About Us content found.</p>
       </div>
     );
@@ -30,7 +30,7 @@ export default async function About() {
   ];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-black text-white">
+    <div className="relative min-h-screen w-full overflow-hidden text-gray-900 dark:text-gray-100">
       {/* Background */}
       {/* <Image
         src="/backgrounds/testingbackground.jpg"

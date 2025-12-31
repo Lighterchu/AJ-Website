@@ -30,15 +30,21 @@ export default function Contact() {
   const validateField = (field: keyof FormFields, value: string) => {
     switch (field) {
       case "name":
-        return value.trim().length < 2 ? "Name must be at least 2 characters" : "";
+        return value.trim().length < 2
+          ? "Name must be at least 2 characters"
+          : "";
       case "email":
         return /^\S+@\S+\.\S+$/.test(value) ? "" : "Invalid email address";
       case "phone":
-        return /^\d{8,15}$/.test(value.replace(/\s+/g, "")) ? "" : "Invalid phone number";
+        return /^\d{8,15}$/.test(value.replace(/\s+/g, ""))
+          ? ""
+          : "Invalid phone number";
       case "subject":
         return value.trim().length < 2 ? "Subject is too short" : "";
       case "message":
-        return value.trim().length < 10 ? "Message must be at least 10 characters" : "";
+        return value.trim().length < 10
+          ? "Message must be at least 10 characters"
+          : "";
       default:
         return "";
     }
@@ -98,8 +104,8 @@ export default function Contact() {
     const borderClass = error
       ? "border-red-500 shadow-[0_0_10px_#f87171,0_0_20px_#f87171]"
       : value
-      ? "border-green-400 shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80]"
-      : "border-white";
+        ? "border-green-400 shadow-[0_0_10px_#4ade80,0_0_20px_#4ade80]"
+        : "border-white";
 
     return (
       <div key={field}>
@@ -127,23 +133,40 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-green-400 flex flex-col items-center pt-16 px-4">
+    <div className="min-h-screen dark:bg-black text-green-400 flex flex-col items-center pt-16 px-4">
       {/* Logo */}
-      <div className="mb-6">
-        <Image
-        unoptimized
-          src="/images/logo1.png"
-          alt="MVMNT Logo"
-          width={300}
-          height={200}
-          className="object-contain rotate-90"
-          priority
-        />
+      <div className="mb-6 w-full flex justify-center">
+        <div
+          className="
+    h-48 
+    px-6 
+    flex items-center justify-center
+    bg-black dark:bg-black
+    rounded-xl
+    shadow-sm dark:shadow-none
+    transition-colors
+  "
+        >
+          <Image
+            unoptimized
+            src="/images/logo1.png"
+            alt="MVMNT Logo"
+            width={300}
+            height={200}
+            className="object-contain rotate-90"
+            priority
+          />
+        </div>
       </div>
 
-      <h1 className="text-4xl text-white md:text-5xl font-bold mb-4">Contact Us</h1>
-      <p className="text-white text-center max-w-xl mb-12">
-        Whether you&apos;re planning an event, want to collaborate, or just want to say hi, we’re here for it. Fill out the form below or reach out directly via email or phone.
+      
+      <h1 className="text-4xl text-gray-900 dark:text-gray-100  md:text-5xl font-bold mb-4">
+        Contact Us
+      </h1>
+      <p className=" text-center max-w-xl mb-12 text-gray-900 dark:text-gray-100">
+        Whether you&apos;re planning an event, want to collaborate, or just want
+        to say hi, we’re here for it. Fill out the form below or reach out
+        directly via email or phone.
       </p>
 
       {/* Contact Card */}
@@ -151,7 +174,10 @@ export default function Contact() {
         {/* Contact Form */}
         <form className="space-y-4" onSubmit={handleSubmit}>
           {["name", "phone", "email", "subject", "message"].map((field) =>
-            renderInput(field as keyof FormFields, field === "email" ? "email" : "text")
+            renderInput(
+              field as keyof FormFields,
+              field === "email" ? "email" : "text"
+            )
           )}
 
           <button
@@ -169,20 +195,27 @@ export default function Contact() {
         <div className="flex flex-col justify-center space-y-6 text-white">
           <div>
             <h2 className="text-white text-xl font-semibold mb-2">Email</h2>
-            <a href="mailto:Enquiries@mvmntentertainment.com" className="hover:underline">
+            <a
+              href="mailto:Enquiries@mvmntentertainment.com"
+              className="hover:underline"
+            >
               Enquiries@mvmntentertainment.com
             </a>
           </div>
           <div>
             <h2 className="text-white text-xl font-semibold mb-2">Phone</h2>
-            <a href="tel:+0431383674" className="hover:underline">0431383674</a>
+            <a href="tel:+0431383674" className="hover:underline">
+              0431383674
+            </a>
           </div>
           <div>
             <h2 className="text-white text-xl font-semibold mb-2">Location</h2>
             <p>Naarm / Melbourne, Australia</p>
           </div>
           <div>
-            <h2 className="text-white text-xl font-semibold mb-2">Complaints</h2>
+            <h2 className="text-white text-xl font-semibold mb-2">
+              Complaints
+            </h2>
             <p>complaints@mvmntentertainment.com</p>
           </div>
         </div>
