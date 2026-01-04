@@ -17,7 +17,6 @@ interface SlidingImagesProps {
 
 const SlidingImages: React.FC<SlidingImagesProps> = ({ data, event }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log(data)
   const handleClick = useCallback((url?: string) => {
     if (!url) return;
     window.open(url, "_blank");
