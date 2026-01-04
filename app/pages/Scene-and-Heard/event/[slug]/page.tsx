@@ -41,7 +41,7 @@ export default async function CommunityPage({ params }: { params: Promise<{ slug
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-white space-y-12">
+    <main className="max-w-4xl mx-auto px-6 py-16 text-gray-900 dark:text-gray-50 space-y-12">
       {/* Back Link */}
       <Link
         href="/pages/Scene-and-Heard"

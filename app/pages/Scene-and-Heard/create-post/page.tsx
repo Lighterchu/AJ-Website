@@ -143,12 +143,12 @@ export default function CreateBlogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-green-400 flex flex-col items-center pt-16 px-4">
-      <h1 className="text-4xl text-white md:text-5xl font-bold mb-4">
+    <div className="min-h-screen  text-green-400 flex flex-col items-center pt-16 px-4">
+      <h1 className="text-4xl text-gray-900 dark:text-gray-50 md:text-5xl font-bold mb-4">
         Create Post
       </h1>
 
-      <p className="text-white text-center max-w-xl mb-12">
+      <p className="text-gray-900 dark:text-gray-50 text-center max-w-xl mb-12">
         Share news, updates, or stories with the community.
       </p>
 
