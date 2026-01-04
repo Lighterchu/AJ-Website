@@ -30,9 +30,6 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
     params: { slug: slugParams },
   });
   const eventData = event?.data ?? event;
-
-  console.log("Event Data:", eventData);
-
   if (!eventData) return notFound();
 
   return (

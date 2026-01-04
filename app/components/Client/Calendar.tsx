@@ -52,8 +52,6 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
     .filter(ev => ev.type === "official")
     .map(ev => ev.date as Date);
 
-  console.log(officialDays)
-
   const communityDays = eventsForCalendar
     .filter(ev => ev.type === "community")
     .map(ev => ev.date as Date);

@@ -53,9 +53,6 @@ function MediaBrowser({
     if (!isOpen) return;
 
     setLoading(true);
-
-    console.log("searchQuery", searchQuery);
-
     client
       .fetch(
         `*[_type == "sanity.imageAsset" && originalFilename match $search] | order(_createdAt desc) [0...100]{

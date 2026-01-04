@@ -16,7 +16,6 @@ type Event = {
 
 export default function MainEventList({ events }: { events: Event[] }) {
   const now = new Date();
-    console.log(events)
   // ✅ Filter + sort upcoming events
   const upcomingEvents = events
     .map((event) => ({

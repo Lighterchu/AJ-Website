@@ -20,7 +20,7 @@ export default async function EventsPage() {
   const events = res.data; // ✅ <- important
 
   if (!events) return notFound();
-  console.log("Events Data:", events);
+  
 
   
 

@@ -23,9 +23,6 @@ type ContentItem = {
 
 export default function BlogCard({ item }: { item: ContentItem }) {
   const { user, isLoaded } = useUser();
-
-  console.log(item)
-
   if (!isLoaded) return null;
 
   const role = user?.publicMetadata?.role;

@@ -34,8 +34,6 @@ export default async function DjPage({ params }: { params: Promise<{ slug: strin
   if (!dj.data) return notFound();
 
   const djData = dj.data;
-  console.log("DJ Data:", djData);
-
   const socialLinks = [
     { name: "SoundCloud", url: djData.soundcloud, color: "text-orange-500" },
     { name: "Instagram", url: djData.instagram, color: "text-pink-500" },
