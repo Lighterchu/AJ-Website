@@ -33,15 +33,15 @@ export default function Navbar() {
 
       {/* CENTER — Desktop Links */}
       <div className="hidden md:flex space-x-8 text-sm lg:text-base">
-        <Link href="/pages/About" className="text-gray-900 dark:text-gray-100">About Us</Link>
-        <Link href="/pages/Events" className="text-gray-900 dark:text-gray-100">Events</Link>
-        <Link href="/pages/Gallerys" className="text-gray-900 dark:text-gray-100">Galleries</Link>
-        <Link href="/pages/Scene-and-Heard" className="text-gray-900 dark:text-gray-100">Scene and Heard</Link>
-        <Link href="/pages/Contact" className="text-gray-900 dark:text-gray-100">Contact Us</Link>
+        <Link href="/pages/About" className={`${linkClasses}`}>About Us</Link>
+        <Link href="/pages/Events" className={`${linkClasses}`}>Events</Link>
+        <Link href="/pages/Gallerys" className={`${linkClasses}`}>Galleries</Link>
+        <Link href="/pages/Scene-and-Heard" className={`${linkClasses}`}>Scene and Heard</Link>
+        <Link href="/pages/Contact" className={`${linkClasses}`}>Contact Us</Link>
       </div>
 
       {/* RIGHT — Auth (Desktop) */}
-      <div className="hidden md:flex items-center space-x-4 text-gray-900 dark:text-gray-100">
+      <div className={`hidden md:flex items-center space-x-4 ${linkClasses} `}>
         <SignedOut>
           <SignInButton />
           <SignUpButton />

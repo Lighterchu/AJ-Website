@@ -8,6 +8,7 @@ import { ImagesFromEvent } from "@/sanity/lib/imagesFromEventImage";
 export default async function Home() {
   const event = await client.fetch(nextEventQuery);
   const imageEvent = await client.fetch(ImagesFromEvent);
+  console.log(imageEvent)
   return (
     <div className="bg-black h-1/2" >
       <VideoSection

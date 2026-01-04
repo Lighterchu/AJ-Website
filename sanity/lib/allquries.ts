@@ -1,10 +1,10 @@
-export const nextEventQuery = `*[_type == "event" && dateTime(date) > dateTime(now())] 
-| order(date asc)[0] {
+export const nextEventQuery = `*[_type == "event" && dateTime(startDate) > dateTime(now())] 
+| order(startDate asc)[0] {
   _id,
   name,
   slug,
   Link,
-  date,
+  startDate,
   description,
   short,
   location,
@@ -12,14 +12,14 @@ export const nextEventQuery = `*[_type == "event" && dateTime(date) > dateTime(n
 }`;
 
 export const allEvents = `*[_type == "event"]
-| order(date asc) {
+| order(startDate asc) {
   _id,
   name,
   _type,
   slug,
   genre,
   Link,
-  date,
+  startDate,
   description,
   short,
   location,

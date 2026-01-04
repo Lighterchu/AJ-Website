@@ -71,7 +71,7 @@ export const eventCrewType = defineType({
     defineField({
       name: 'endDate',
       type: 'datetime', 
-      title: 'Event Date',
+      title: 'Event End Date',
         description: 'this is only if the event spans multiple days.',   
     }),
     defineField({

@@ -1,5 +1,5 @@
-export const ImagesFromEvent = `*[_type == "event" && dateTime(date) > dateTime(now())] 
-| order(date asc) {
+export const ImagesFromEvent = `*[_type == "event" && dateTime(startDate) > dateTime(now())] 
+| order(startDate asc) {
   _id,
   "imageUrl": imageUrl.asset->url
 }`;

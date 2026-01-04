@@ -66,7 +66,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <SanityLive />
-        <SoundCloudEmbed />
+        {/* <SoundCloudEmbed /> */}
         <Footer />
         <Toaster richColors position="top-right" />
       </body>

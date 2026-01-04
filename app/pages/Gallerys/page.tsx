@@ -23,15 +23,20 @@ const GALLERY_QUERY = defineQuery(`
 `);
 
 const EVENTS_QUERY = defineQuery(`
-  *[_type == "event"] | order(date desc) {
+  *[
+    _type == "event" &&
+    startDate < now()
+  ]
+  | order(startDate desc) {
     _id,
     name,
-    short,  
-    date,
-    slug, 
+    short,
+    startDate,
+    slug,
     "imageUrl": imageUrl.asset->url
   }
 `);
+
 
 export const revalidate = 60;
 export const dynamic = "force-dynamic";

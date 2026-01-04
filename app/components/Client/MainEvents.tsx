@@ -77,14 +77,14 @@ export default function MainEventList({ events }: { events: Event[] }) {
               })}
             </time>
 
-            <p className="text-white">{event.short}</p>
+            <p className="text-gray-900 dark:text-gray-50">{event.short}</p>
           </div>
 
           <Link
             href={`/pages/Events/event/${event.slug.current}`}
             className="block p-6 bg-gray-100/30 text-center mt-auto hover:bg-gray-200/40 transition-colors rounded-lg"
           >
-            <div className="text-white font-medium">
+            <div className="text-gray-900 dark:text-gray-50 font-medium">
               Check Out Line Up →
             </div>
           </Link>

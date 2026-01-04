@@ -48,14 +48,17 @@ export default async function BlogPage() {
   }
 
   const allCommunityEventsData = AllCommunityEvents.data;
+  
 
   const normalizeAllOurEvents = ALLevents.data.map((event: Event) => ({
     title: event.name,
-    date: new Date(event.date),
+    date: new Date(event.startDate),
     genre: event.genre,
     type: "official",
     description: event.description,
   }));
+
+ 
   
 
   const normalizeAllCommunity = AllCommunityEvents.data.map((event: Event) => ({

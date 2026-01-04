@@ -2,69 +2,73 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-
 
 interface ImageEvent {
   _id: string;
-  imageUrl: string;
+  imageUrl: string; // URL string
 }
 
-interface SlindingImagesProps {
+interface SlidingImagesProps {
   data: ImageEvent[];
   event: {
     Link?: string;
   };
 }
 
-const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
+const SlidingImages: React.FC<SlidingImagesProps> = ({ data, event }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleClick = useCallback((url: string) => {
-    if (url && typeof window !== "undefined") {
-      window.open(url, "_blank");
-    }
+  console.log(data)
+  const handleClick = useCallback((url?: string) => {
+    if (!url) return;
+    window.open(url, "_blank");
   }, []);
 
-  // Slide change every 4s
+  // Auto slide every 4s
   useEffect(() => {
     if (!data?.length) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % data.length);
     }, 4000);
+
     return () => clearInterval(interval);
   }, [data]);
 
-  // Memoize slides to avoid re-renders
+  // Only keep previous + current slide in DOM
   const slides = useMemo(() => {
     if (!data?.length) return [];
     const prevIndex = (currentIndex - 1 + data.length) % data.length;
-    return [data[prevIndex], data[currentIndex]]; // only keep 2 slides in DOM
+    return [data[prevIndex], data[currentIndex]];
   }, [currentIndex, data]);
 
   if (!data?.length) return null;
 
   return (
-    <div className="w-full relative overflow-hidden aspect-[16/9]">
+    <div className="w-full relative overflow-hidden aspect-video bg-red-700">
+      <div className="bg-red-400">
+        <h1>there should be something here </h1>
+      </div>
       {slides.map((img, idx) => {
-        const isActive = idx === 1; // current slide
+        const isActive = idx === 1;
+
         return (
           <div
-            key={`${img._id}-${idx}`} // append index to make key unique
-            className={`absolute top-0 left-0 w-full h-full transition-opacity duration-700 ${
-              isActive ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
+            key={`${img._id}-${idx}`}
+            className={`
+              absolute inset-0
+              transition-opacity duration-700
+              ${isActive ? "opacity-100 z-10" : "opacity-0 z-0"}
+            `}
             onClick={() => handleClick(event.Link || img.imageUrl)}
           >
             <Image
-              src={urlFor(img.imageUrl).url()}
-              alt={`Slide ${currentIndex + 1}`}
+              src={img.imageUrl}
+              alt="Event slide"
               fill
               unoptimized
-              className="object-fill cursor-pointer"
-              sizes="(max-width: 640px) 100vw, 100vw"
-              priority={currentIndex === 0}
-              loading={currentIndex === 0 ? "eager" : "lazy"}
+              className="object-cover cursor-pointer"
+              sizes="100vw"
+              priority={isActive && currentIndex === 0}
             />
           </div>
         );
@@ -73,4 +77,4 @@ const SlindingImages: React.FC<SlindingImagesProps> = ({ data, event }) => {
   );
 };
 
-export default React.memo(SlindingImages);
+export default React.memo(SlidingImages);

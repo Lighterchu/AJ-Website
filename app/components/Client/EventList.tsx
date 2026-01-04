@@ -13,7 +13,7 @@ export default function EventList({
   events: {
     _id: string;
     name: string;
-    date: string;
+    startDate: string;
     imageUrl: string;
     short: string;
     slug: { current: string };
@@ -51,12 +51,12 @@ export default function EventList({
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">{event.name}</h2>
             <time
-              dateTime={new Date(event.date).toISOString()}
+              dateTime={new Date(event.startDate).toISOString()}
               className="block mb-4 text-sm text-gray-500"
             >
-              {new Date(event.date).toLocaleDateString()}
+              {new Date(event.startDate).toLocaleDateString()}
             </time>
-            <p className="text-white">{event.short}</p>
+            <p className=" text-gray-900 dark:text-gray-50">{event.short}</p>
           </div>
 
           {showNewEvents && (
@@ -64,7 +64,7 @@ export default function EventList({
               href={`/pages/Events/event/${event.slug.current}`}
               className="block p-6 bg-gray-100/30 text-center mt-auto hover:bg-gray-200/40 transition-colors rounded-lg"
             >
-              <div className="text-white font-medium">
+              <div className="text-gray-900 dark:text-gray-50 font-medium">
                 Check Out Line Up →
               </div>
             </Link>
