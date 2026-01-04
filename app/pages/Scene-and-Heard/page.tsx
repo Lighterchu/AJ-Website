@@ -78,7 +78,7 @@ export default async function BlogPage() {
  
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20 text-white">
+    <div className="max-w-7xl mx-auto px-6 py-20 text-gray-900 dark:text-gray-50">
       {/* Title */}
       <h1 className="text-5xl font-extrabold tracking-tight mb-14">
       MVMNT & News
