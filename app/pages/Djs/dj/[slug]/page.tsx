@@ -5,6 +5,8 @@ import { groq } from "next-sanity";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { Icon } from "@iconify/react";
+import SocialLinks from "@/app/components/Client/SocialLinks";
 
 const DJ_QUERY = groq`
   *[_type == "dj" && slug.current == $slug][0] {
@@ -35,17 +37,38 @@ export default async function DjPage({ params }: { params: Promise<{ slug: strin
 
   const djData = dj.data;
   const socialLinks = [
-    { name: "SoundCloud", url: djData.soundcloud, color: "text-orange-500" },
-    { name: "Instagram", url: djData.instagram, color: "text-pink-500" },
-    { name: "Facebook", url: djData.facebook, color: "text-blue-700" },
-    { name: "TikTok", url: djData.tiktok, color: "text-green-500" },
+    {
+      name: "SoundCloud",
+      url: djData.soundcloud,
+      icon: "mdi:soundcloud",
+      color: "text-orange-500",
+    },
+    {
+      name: "Instagram",
+      url: djData.instagram,
+      icon: "mdi:instagram",
+      color: "text-pink-500",
+    },
+    {
+      name: "Facebook",
+      url: djData.facebook,
+      icon: "mdi:facebook",
+      color: "text-blue-700",
+    },
+    {
+      name: "TikTok",
+      url: djData.tiktok,
+      icon: "ic:baseline-tiktok",
+      color: "text-green-500",
+    },
   ];
+  
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-12 space-y-8">
       {/* Header */}
       <div>
-        <Link href="/pages/Djs">← Back to DJs</Link>
+        <Link href="/pages/Gallerys">← Back</Link>
       </div>
       <header className="text-center space-y-4">
         <h1 className="text-4xl font-bold">{djData.name}</h1>
@@ -73,20 +96,7 @@ export default async function DjPage({ params }: { params: Promise<{ slug: strin
 
       {/* Social Links */}
       <div className="flex justify-center space-x-6">
-        {socialLinks.map(
-          (link) =>
-            link.url && (
-              <Link
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`font-medium hover:underline ${link.color}`}
-              >
-                {link.name}
-              </Link>
-            )
-        )}
+      <SocialLinks links={socialLinks} />
       </div>
     </main>
   );

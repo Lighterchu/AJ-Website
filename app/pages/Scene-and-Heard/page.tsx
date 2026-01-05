@@ -14,9 +14,11 @@ import { notFound } from "next/navigation";
 
 
 const POSTS_QUERY = defineQuery(`
- *[_type == "posts"] |  order(date desc) {
+ *[_type == "posts"] |  order(PostDate desc,  _createdAt desc) {
   _id,
+  _createdAt,
   _type,
+  PostDate,
   title,
   slug,
   "image": image.asset->url,
@@ -43,6 +45,7 @@ export default async function BlogPage() {
   const ALLevents = await sanityFetch({ query: allEvents });
   const AllCommunityEvents = await sanityFetch({ query: allCommunityEvents });
   const blogPosts = res.data; // ✅ <- important
+  console.log(blogPosts);
   if(!blogPosts){
     return notFound()
   }

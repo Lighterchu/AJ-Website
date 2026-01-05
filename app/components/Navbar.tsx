@@ -38,7 +38,6 @@ export default function Navbar() {
         <Link href="/pages/Gallerys" className={`${linkClasses}`}>Galleries</Link>
         <Link href="/pages/Scene-and-Heard" className={`${linkClasses}`}>Scene and Heard</Link>
         <Link href="/pages/Contact" className={`${linkClasses}`}>Contact Us</Link>
-        <Link href="/pages/Djs" className={`${linkClasses}`}>DJ's</Link>
       </div>
 
       {/* RIGHT — Auth (Desktop) */}
@@ -88,9 +87,6 @@ export default function Navbar() {
           </Link>
           <Link href="/pages/Contact"  onClick={() => setIsOpen(false)}>
             Contact Us
-          </Link>
-          <Link href="/pages/Djs"  onClick={() => setIsOpen(false)}>
-            DJ's
           </Link>
         </div>
       )}

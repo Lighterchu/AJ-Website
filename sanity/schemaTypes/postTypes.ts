@@ -48,7 +48,8 @@ export const postType = defineType({
     defineField({
         name: 'description',
         title: 'Description',
-        type: 'text',
+        type: "array",
+        of: [{ type: "block" }],
         description: 'Add as much detail as you want about the Post post',
     }),    
     defineField({

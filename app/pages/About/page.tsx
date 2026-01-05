@@ -48,13 +48,43 @@ export default async function About() {
             section.content && (
               <section
                 key={index}
-                className="w-full md:w-3/4 lg:w-1/2 px-4 md:px-0 text-center space-y-4"
+                className="prose prose-lg prose-invert mt-6 max-w-full"
               >
-                <h2 className="text-xl md:text-2xl font-semibold mb-2">
+                {/* <h2 className="text-xl md:text-2xl font-semibold mb-2">
                   {section.title}
-                </h2>
+                </h2> */}
                 <div className="text-sm md:text-base leading-relaxed">
-                  <PortableText value={section.content} />
+                  <PortableText
+                    value={section.content}
+                    components={{
+                      types: {},
+                      marks: {},
+                      block: ({ children, value }) => {
+                        switch (value.style) {
+                          case "h1":
+                            return (
+                              <h1 className="text-4xl font-bold text-center my-6">
+                                {children}
+                              </h1>
+                            );
+                          case "h2":
+                            return (
+                              <h2 className="text-3xl font-semibold my-4">
+                                {children}
+                              </h2>
+                            );
+                          case "h3":
+                            return (
+                              <h3 className="text-2xl font-medium my-3">
+                                {children}
+                              </h3>
+                            );
+                          default:
+                            return <p className="mb-4">{children}</p>;
+                        }
+                      },
+                    }}
+                  />
                 </div>
               </section>
             )

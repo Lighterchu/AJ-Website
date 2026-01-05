@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     title: string;
     shortDescription: string;
     description: string;
-    postDate: string;
+    PostDate: string;
     approved: boolean;
     slug: {
       _type: string;
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
     title: body.title,
     shortDescription: body.shortDescription,
     description: body.description,
-    postDate: new Date().toISOString(),
+    PostDate: new Date().toISOString(),
     approved: role === 'admin',
     slug: {
       _type: 'slug',

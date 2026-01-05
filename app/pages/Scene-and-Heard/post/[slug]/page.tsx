@@ -3,6 +3,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { groq } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
+import { PortableText } from "@portabletext/react";
 
 const POST_QUERY = groq`
   *[_type == "posts" && slug.current == $slug][0] {
@@ -10,14 +11,18 @@ const POST_QUERY = groq`
     title,
     date,
     "slug": slug.current,
-    postDate,
+    PostDate,
     shortDescription,
     description,
     "imageUrl": image.asset->url
   }
 `;
 
-export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const slugID = (await params).slug;
 
   const blog = await sanityFetch({
@@ -26,6 +31,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
   });
 
   const blogData = blog?.data;
+  console.log(blogData);
 
   if (!blogData) {
     return (
@@ -52,10 +58,14 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       </Link>
 
       {/* Title */}
-      <h1 className="text-5xl font-extrabold leading-tight">{blogData.title}</h1>
+      <h1 className="text-5xl font-extrabold leading-tight">
+        {blogData.title}
+      </h1>
 
       {/* Date */}
-      <p className="text-gray-400">{new Date(blogData.postDate).toLocaleDateString()}</p>
+      <p className="text-gray-400">
+        {new Date(blogData.PostDate).toLocaleDateString()}
+      </p>
 
       {/* Image */}
       {blogData.imageUrl && (
@@ -69,12 +79,35 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         </div>
       )}
 
-
       {/* Body */}
       <div className="prose prose-lg prose-invert mt-6 max-w-full">
-        {blogData.description.split("\n\n").map((para: string, idx: number) => (
-          <p key={idx}>{para}</p>
-        ))}
+        <PortableText
+          value={blogData.description}
+          components={{
+            types: {},
+            marks: {},
+            block: ({ children, value }) => {
+              switch (value.style) {
+                case "h1":
+                  return (
+                    <h1 className="text-4xl font-bold text-center my-6">
+                      {children}
+                    </h1>
+                  );
+                case "h2":
+                  return (
+                    <h2 className="text-3xl font-semibold my-4">{children}</h2>
+                  );
+                case "h3":
+                  return (
+                    <h3 className="text-2xl font-medium my-3">{children}</h3>
+                  );
+                default:
+                  return <p className="mb-4">{children}</p>;
+              }
+            },
+          }}
+        />
       </div>
     </main>
   );

@@ -1,5 +1,6 @@
 import Gallery from "@/app/components/Client/GalleryList";
 import EventList from "@/app/components/Client/EventList"; // <-- client component
+import Djs from "@/app/components/Client/Djs";
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 import { notFound } from "next/navigation";
@@ -53,14 +54,19 @@ export default async function Events() {
   if (!eventsResData) return notFound();
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-extrabold mb-12 text-center text-gray-900 dark:text-gray-100">
-        Photos Of Recent Events
+      <h1 className="text-5xl font-extrabold tracking-tight mb-14">
+        Photos
       </h1>
       <Gallery photos={events} />
       <h1 className="text-4xl font-extrabold my-12 text-center text-gray-900 dark:text-gray-100">
         Past Events
       </h1>
       <EventList events={eventsResData} showNewEvents={false}/>
+      <h1 className="text-4xl font-extrabold my-12 text-center text-gray-900 dark:text-gray-100">
+        Our DJs 
+      </h1>
+      <Djs />
+
     </main>
   );
 }
