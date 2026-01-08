@@ -35,6 +35,16 @@ export const metadata: Metadata = {
   description: `MVMNT Entertainment — Bringing chaos to order, bass to basements,
               and community to the concrete.  
               We throw parties that don’t ask for permission — just your presence.`,
+  openGraph: {
+    images: [
+      {
+        url: "/logos/main.jpg", // 👈 image path
+        width: 1200,
+        height: 630,
+        alt: "MVMNT Entertainment",
+      },
+    ],
+  },
   verification: {
     probely: "6ee8e9ca-1f49-4977-bbd4-4f8e93a05c71", // ✅ Probely verification
   },
