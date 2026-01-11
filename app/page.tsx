@@ -9,13 +9,13 @@ export default async function Home() {
   const event = await client.fetch(nextEventQuery);
   const imageEvent = await client.fetch(ImagesFromEvent);
   return (
-    <div className="bg-black h-1/2" >
+    <div className="bg-black" >
       <VideoSection
         src="/video/_AHymsNz.mp4"
         poster="/images/video-poster.jpg"
         aspectRatio="16/9"
       />
-      <HeroText />
+     {/* <HeroText /> */}
       <SliderSection data={imageEvent} event={event} />
     </div>
   );
