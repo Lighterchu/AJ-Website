@@ -85,7 +85,7 @@ export default function MainEventList({ events }: { events: Event[] }) {
             className="block p-6 bg-gray-100/30 text-center mt-auto hover:bg-gray-200/40 transition-colors rounded-lg"
           >
             <div className="text-gray-900 dark:text-gray-50 font-medium">
-              Check Out Line Up →
+              More Details →
             </div>
           </Link>
         </article>
