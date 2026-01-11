@@ -111,7 +111,7 @@ export default async function EventPage({
             rel="noopener noreferrer"
             className="inline-block bg-green-500 text-black font-semibold px-6 py-3 rounded-lg text-lg sm:text-xl hover:bg-green-400 transition-colors"
           >
-            Get Tickets
+            TBA
           </Link>
         </div>
       )}
