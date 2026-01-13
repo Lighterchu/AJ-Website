@@ -31,7 +31,10 @@ const geistMono = Geist_Mono({
 });
 
 // 🚀 SET YOUR LAUNCH DATE (WITH TIMEZONE)
-const LAUNCH_DATE = new Date("2026-01-17T00:00:00+11:00");
+//our live date
+// const LAUNCH_DATE = new Date("2026-01-17T00:00:00+11:00");
+
+const LAUNCH_DATE = new Date("2026-01-13T18:15:00+11:00");
 
 export const revalidate = 60; // re-check every minute
 
