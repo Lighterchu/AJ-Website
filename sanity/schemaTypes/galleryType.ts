@@ -27,7 +27,8 @@ export const galleryType = defineType({
     }),
     defineField({
         name: 'short',
-        type: 'text',
+        type: "array",
+        of: [{ type: "block" }],
         title: 'Gallery Description',
         description: 'Short description of the gallery, suitable for listings or previews.',
     }),

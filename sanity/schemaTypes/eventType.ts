@@ -76,7 +76,8 @@ export const eventCrewType = defineType({
     }),
     defineField({
       name: 'description',
-      type: 'text',
+      type: "array",
+      of: [{ type: "block" }],
       title: 'Event Description',
       description: 'A detailed description of the event, including activities, speakers, and any other relevant information.',
     }),

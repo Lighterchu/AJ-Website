@@ -60,7 +60,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   // 🧠 SERVER-SIDE TIME CHECK
-  const isLive = Date.now() >= LAUNCH_DATE.getTime();
+  // const isLive = Date.now() >= LAUNCH_DATE.getTime();
+
+  //used for testing pre-launch view
+  const isLive = true
 
   return (
     <ClerkProvider>

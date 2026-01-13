@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DjProfiles from "../../../../components/Client/Djprofile"; // <-- client component
 import { urlFor } from "@/sanity/lib/image";
+import { PortableText } from "@portabletext/react";
 
 const EVENT_QUERY = groq`
   *[_type == "event" && slug.current == $slug][0] {
@@ -81,9 +82,39 @@ export default async function EventPage({
 
       {/* Description */}
       {eventData.description && (
-        <p className="text-lg text-gray-200 leading-relaxed">
-          {eventData.description}
-        </p>
+        <div className="text-sm md:text-base leading-relaxed">
+        <PortableText
+          value={eventData.description}
+          components={{
+            types: {},
+            marks: {},
+            block: ({ children, value }) => {
+              switch (value.style) {
+                case "h1":
+                  return (
+                    <h1 className="text-4xl font-bold text-center my-6">
+                      {children}
+                    </h1>
+                  );
+                case "h2":
+                  return (
+                    <h2 className="text-3xl font-semibold my-4">
+                      {children}
+                    </h2>
+                  );
+                case "h3":
+                  return (
+                    <h3 className="text-2xl font-medium my-3">
+                      {children}
+                    </h3>
+                  );
+                default:
+                  return <p className="mb-4">{children}</p>;
+              }
+            },
+          }}
+        />
+      </div>
       )}
 
       {/* Lineup */}

@@ -7,6 +7,7 @@ import FullscreenImage from "@/app/components/Client/FullscreenImage";
 import Link from "next/link";
 export const revalidate = 60;
 export const dynamic = "force-dynamic";
+import { PortableText } from "@portabletext/react";
 
 const EVENT_QUERY = groq`
   *[_type == "gallery" && slug.current == $slug][0] {
@@ -45,9 +46,42 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {/* <h1 className="text-4xl font-bold mb-4">{eventData.name}</h1> */}
       <div className=" flex justify-center mb-6">
         <div>
-          <div>
+          {/* <div>
             <h1>{eventData.short}</h1>
-          </div>
+          </div> */}
+          <div className="text-sm md:text-base leading-relaxed">
+        <PortableText
+          value={eventData.short}
+          components={{
+            types: {},
+            marks: {},
+            block: ({ children, value }) => {
+              switch (value.style) {
+                case "h1":
+                  return (
+                    <h1 className="text-4xl font-bold text-center my-6">
+                      {children}
+                    </h1>
+                  );
+                case "h2":
+                  return (
+                    <h2 className="text-3xl font-semibold my-4">
+                      {children}
+                    </h2>
+                  );
+                case "h3":
+                  return (
+                    <h3 className="text-2xl font-medium my-3">
+                      {children}
+                    </h3>
+                  );
+                default:
+                  return <p className="mb-4">{children}</p>;
+              }
+            },
+          }}
+        />
+      </div>
           <div className="text-center">
             <time className="block text-sm text-white mb-6">
               {new Date(eventData.eventDate).toLocaleDateString()}
