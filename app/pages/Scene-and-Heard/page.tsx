@@ -45,7 +45,6 @@ export default async function BlogPage() {
   const ALLevents = await sanityFetch({ query: allEvents });
   const AllCommunityEvents = await sanityFetch({ query: allCommunityEvents });
   const blogPosts = res.data; // ✅ <- important
-  console.log(blogPosts);
   if(!blogPosts){
     return notFound()
   }
@@ -79,7 +78,7 @@ export default async function BlogPage() {
 
   calendarEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
 
- 
+  
   
  
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { PortableText } from "@portabletext/react";
 
 interface Event {
   name: string;
@@ -10,7 +11,7 @@ interface Event {
   paided: boolean;
   genre?: string;
   type: "official" | "community";
-  description?: string;
+  description?: PortableTextBlock[];
 }
 
 export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
@@ -26,42 +27,38 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
 
   const safeEvents = Array.isArray(events) ? events : [];
 
-  const normalizedEvents = safeEvents.map(ev => ({
+  const normalizedEvents = safeEvents.map((ev) => ({
     ...ev,
     date: normalizeDate(ev.date),
   }));
 
-  
+  console.log(safeEvents);
 
   // Collect genres dynamically
   const genres = Array.from(
-    new Set(
-      normalizedEvents
-        .map(ev => ev.genre)
-        .filter(Boolean)
-    )
+    new Set(normalizedEvents.map((ev) => ev.genre).filter(Boolean))
   ) as string[];
 
   // Filtered events based on selected genre for calendar highlighting
-  const eventsForCalendar = selectedGenre === "all"
-    ? normalizedEvents
-    : normalizedEvents.filter(ev => ev.genre === selectedGenre);
+  const eventsForCalendar =
+    selectedGenre === "all"
+      ? normalizedEvents
+      : normalizedEvents.filter((ev) => ev.genre === selectedGenre);
 
   // Calendar modifiers
   const officialDays = eventsForCalendar
-    .filter(ev => ev.type === "official")
-    .map(ev => ev.date as Date);
+    .filter((ev) => ev.type === "official")
+    .map((ev) => ev.date as Date);
 
   const communityDays = eventsForCalendar
-    .filter(ev => ev.type === "community")
-    .map(ev => ev.date as Date);
+    .filter((ev) => ev.type === "community")
+    .map((ev) => ev.date as Date);
 
   // Events for selected date AND genre
   const eventsForSelectedDate = selectedDate
-    ? normalizedEvents.filter(ev => {
+    ? normalizedEvents.filter((ev) => {
         const sameDay =
-          (ev.date as Date).getTime() ===
-          normalizeDate(selectedDate).getTime();
+          (ev.date as Date).getTime() === normalizeDate(selectedDate).getTime();
 
         const matchesGenre =
           selectedGenre === "all" || ev.genre === selectedGenre;
@@ -73,7 +70,6 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
   return (
     <div className="bg-gray-900 p-4 rounded-xl text-white shadow-md w-full max-w-4xl mx-auto">
       <div className="flex flex-col md:flex-row gap-6">
-
         {/* Calendar */}
         <div className="flex-1">
           <DayPicker
@@ -81,7 +77,7 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
             animate
             mode="single"
             selected={selectedDate}
-            onSelect={date => {
+            onSelect={(date) => {
               setSelectedDate(date);
             }}
             modifiers={{
@@ -100,11 +96,11 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
           <label className="text-sm text-gray-300">Filter by genre</label>
           <select
             value={selectedGenre}
-            onChange={e => setSelectedGenre(e.target.value)}
+            onChange={(e) => setSelectedGenre(e.target.value)}
             className="bg-gray-800 text-white p-2 rounded border border-gray-700"
           >
             <option value="all">All genres</option>
-            {genres.map(genre => (
+            {genres.map((genre) => (
               <option key={genre} value={genre}>
                 {genre}
               </option>
@@ -129,9 +125,7 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
               <li
                 key={idx}
                 className={`p-2 rounded ${
-                  ev.type === "official"
-                    ? "bg-green-500"
-                    : "bg-gray-600"
+                  ev.type === "official" ? "bg-green-500" : "bg-gray-600"
                 }`}
               >
                 <h1 className="font-bold text-center">{ev.name}</h1>
@@ -144,14 +138,17 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
 
                 {ev.description && (
                   <div className="mt-2 bg-gray-700 p-2 rounded">
-                    <p className="text-sm italic">{ev.description}</p>
+                    {ev.description && (
+                      <div className="mt-2 bg-gray-700 p-2 rounded">
+                        <PortableText value={ev.description} />
+                      </div>
+                    )}
                   </div>
                 )}
               </li>
             ))}
           </ul>
         </div>
-
       </div>
     </div>
   );
