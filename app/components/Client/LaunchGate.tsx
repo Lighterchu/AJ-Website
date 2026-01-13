@@ -13,8 +13,9 @@ export default function LaunchGate({
   const [isLive, setIsLive] = useState(
     Date.now() >= new Date(launchDate).getTime()
   );
-
-  useEffect(() => {
+  console.log(launchDate)
+  
+useEffect(() => {
     const timer = setInterval(() => {
       if (Date.now() >= new Date(launchDate).getTime()) {
         setIsLive(true);
