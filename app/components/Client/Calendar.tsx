@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { PortableText } from "@portabletext/react";
+import { PortableTextBlock } from "@portabletext/types";
 
 interface Event {
   name: string;
@@ -32,7 +33,7 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
     date: normalizeDate(ev.date),
   }));
 
-  console.log(safeEvents);
+  
 
   // Collect genres dynamically
   const genres = Array.from(
@@ -117,7 +118,7 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
           </h2>
 
           {selectedDate && eventsForSelectedDate.length === 0 && (
-            <p className="text-gray-400">No events for this filter.</p>
+            <p className="text-gray-400">No Events For This Day.</p>
           )}
 
           <ul className="space-y-2 max-h-[350px] overflow-y-auto">
