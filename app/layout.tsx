@@ -1,4 +1,5 @@
 import type { Metadata as NextMetadata } from "next";
+import Image from "next/image";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import Countdown from "./components/Client/Countdown";
@@ -30,7 +31,7 @@ const geistMono = Geist_Mono({
 });
 
 // 🚀 SET YOUR LAUNCH DATE (WITH TIMEZONE)
-const LAUNCH_DATE = new Date("2026-01-15T20:25:00+11:00");
+const LAUNCH_DATE = new Date("2026-01-17T00:00:00+11:00");
 
 export const revalidate = 60; // re-check every minute
 
@@ -60,10 +61,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   // 🧠 SERVER-SIDE TIME CHECK
-  // const isLive = Date.now() >= LAUNCH_DATE.getTime();
+  const isLive = Date.now() >= LAUNCH_DATE.getTime();
 
   //used for testing pre-launch view
-  const isLive = true
+  // const isLive = true;
 
   return (
     <ClerkProvider>
@@ -88,19 +89,19 @@ export default function RootLayout({
           {!isLive ? (
             // 🔒 PRE-LAUNCH VIEW
             <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-4 text-center">
-              <h1 className="text-3xl font-bold tracking-tight">
-                MVMNT
-              </h1>
-
-              <p className="max-w-md text-gray-400">
-                Bringing chaos to order.  
-                The next movement begins in:
-              </p>
-
+              <Image
+                unoptimized
+                src="/images/logo1.png"
+                alt="MVMNT Logo"
+                width={300}
+                height={200}
+                className="object-contain rotate-90"
+                priority
+              />
               <Countdown targetDate={LAUNCH_DATE.toISOString()} />
 
               <p className="mt-6 text-xs uppercase tracking-widest text-gray-500">
-                Victoria · Underground · Bass Culture
+                Modern Visionaries Making New Traditions.
               </p>
             </main>
           ) : (

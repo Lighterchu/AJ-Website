@@ -38,14 +38,6 @@ export default function Countdown({ targetDate }: CountdownProps) {
     return () => clearInterval(timer);
   }, [targetDate]);
 
-  if (!timeLeft) {
-    return (
-      <p className="text-3xl font-extrabold text-neon-green animate-pulse">
-        🎉 LET’S GO!
-      </p>
-    );
-  }
-
   return (
     <div className="flex flex-wrap justify-center gap-6 mt-6">
       {Object.entries(timeLeft).map(([label, value]) => (
