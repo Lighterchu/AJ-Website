@@ -2,7 +2,8 @@ import type { Metadata as NextMetadata } from "next";
 import Image from "next/image";
 import Script from "next/script";
 import { Toaster } from "sonner";
-import Countdown from "./components/Client/Countdown";
+import LaunchGate from "./components/Client/LaunchGate";
+
 
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -34,7 +35,7 @@ const geistMono = Geist_Mono({
 //our live date
 // const LAUNCH_DATE = new Date("2026-01-17T00:00:00+11:00");
 
-const LAUNCH_DATE = new Date("2026-01-13T18:15:00+11:00");
+const LAUNCH_DATE = new Date("2026-01-13T19:36:50+11:00");
 
 export const revalidate = 60; // re-check every minute
 
@@ -63,12 +64,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // 🧠 SERVER-SIDE TIME CHECK
-  const isLive = Date.now() >= LAUNCH_DATE.getTime();
-
-  //used for testing pre-launch view
-  // const isLive = true;
-
   return (
     <ClerkProvider>
       <html lang="en">
@@ -89,37 +84,17 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-black text-white`}
         >
-          {!isLive ? (
-            // 🔒 PRE-LAUNCH VIEW
-            <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-4 text-center">
-              <Image
-                unoptimized
-                src="/images/logo1.png"
-                alt="MVMNT Logo"
-                width={300}
-                height={200}
-                className="object-contain rotate-90"
-                priority
-              />
-              <Countdown targetDate={LAUNCH_DATE.toISOString()} />
-
-              <p className="mt-6 text-xs uppercase tracking-widest text-gray-500">
-                Modern Visionaries Making New Traditions.
-              </p>
-            </main>
-          ) : (
-            // 🌍 LIVE SITE VIEW
-            <>
-              <Navbar />
-              <main className="flex-grow">{children}</main>
-              <SanityLive />
-              <SoundCloudEmbed />
-              <Footer />
-              <Toaster richColors position="top-right" />
-            </>
-          )}
+          <LaunchGate launchDate={LAUNCH_DATE.toISOString()}>
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <SanityLive />
+            <SoundCloudEmbed />
+            <Footer />
+            <Toaster richColors position="top-right" />
+          </LaunchGate>
         </body>
       </html>
     </ClerkProvider>
   );
 }
+
