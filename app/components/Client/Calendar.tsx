@@ -6,15 +6,25 @@ import "react-day-picker/dist/style.css";
 import { PortableText } from "@portabletext/react";
 import { PortableTextBlock } from "@portabletext/types";
 
-interface Event {
+type OfficialEvent = {
   name: string;
   date: string | Date;
   paided: boolean;
   genre?: string;
-  type: "official" | "community";
+  type: "official";
   description?: PortableTextBlock[];
-}
+};
 
+type CommunityEvent = {
+  name: string;
+  date: string | Date;
+  paided: boolean;
+  genre?: string;
+  type: "community";
+  description?: string;
+};
+
+type Event = OfficialEvent | CommunityEvent;
 export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedGenre, setSelectedGenre] = useState<string>("all");
@@ -32,8 +42,6 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
     ...ev,
     date: normalizeDate(ev.date),
   }));
-
-  
 
   // Collect genres dynamically
   const genres = Array.from(
@@ -137,14 +145,15 @@ export default function SimpleCalendar({ events = [] }: { events?: Event[] }) {
                   </p>
                 )}
 
-                {ev.description && (
-                  <div className="mt-2 bg-gray-700 p-2 rounded">
-                    {ev.description && (
-                      <div className="mt-2 bg-gray-700 p-2 rounded">
-                        <PortableText value={ev.description} />
-                      </div>
-                    )}
+                {ev.type === "official" && ev.description && (
+                  <div className="mt-3 bg-gray-700 p-3 rounded">
+                    <PortableText value={ev.description} />
                   </div>
+                )}
+                {ev.type === "community" && ev.description && (
+                  <p className="mt-3 text-xs italic text-center opacity-70">
+                    {ev.description}
+                  </p>
                 )}
               </li>
             ))}
