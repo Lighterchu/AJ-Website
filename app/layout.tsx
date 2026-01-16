@@ -3,6 +3,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import LaunchGate from "./components/Client/LaunchGate";
+import { Analytics } from '@vercel/analytics/next';
 
 
 import { ClerkProvider } from "@clerk/nextjs";
@@ -84,6 +85,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-black text-white`}
         >
+          <Analytics />
           <LaunchGate launchDate={LAUNCH_DATE.toISOString()}>
             <Navbar />
             <main className="flex-grow">{children}</main>
