@@ -44,7 +44,7 @@ export default function Navbar() {
       <div className={`hidden md:flex items-center space-x-4 ${linkClasses} `}>
         <SignedOut>
           <SignInButton />
-          <SignUpButton />
+          <SignUpButton  signInForceRedirectUrl="/pages/Onboarding" />
         </SignedOut>
         <SignedIn>
           <UserButton />

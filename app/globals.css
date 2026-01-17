@@ -72,5 +72,11 @@ body {
   }
 }
 
+.role-card {
+  @apply w-full p-6 border rounded-xl hover:shadow-lg transition
+         text-left bg-white text-gray-800;
+}
+
+
 
 

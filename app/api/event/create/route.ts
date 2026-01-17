@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   const user = await currentUser();
   const role = user?.publicMetadata?.role;
 
-  if (!['admin', 'Poster'].includes(role as string)) {
+  if (!['admin', 'Postxer', 'Artist'].includes(role as string)) {
     return NextResponse.json({ error: 'Not approved' }, { status: 403 });
   }
 
