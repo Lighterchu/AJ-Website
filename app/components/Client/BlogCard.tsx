@@ -67,7 +67,7 @@ export default function BlogCard({ item }: { item: ContentItem }) {
           flex flex-col h-full
         "
       >
-        <div className=" absolute right-0 p-2 mb-3 text-sm text-indigo-400 font-semibold">
+        <div className=" p-2 mb-3 text-sm text-indigo-400 font-semibold">
           <h1>{item.genre}</h1>
         </div>
         {/* Image */}

@@ -18,10 +18,11 @@ export async function POST(req: Request) {
   }
 
   const user = await currentUser();
-  const role = user?.publicMetadata?.role;
-  const allowedRoles = ['admin', 'Poster', 'Artist'];
+  const role = user?.unsafeMetadata?.role;
+  const allowedRoles = ['Poster', 'Artist'];
+  const adminRole = user?.publicMetadata?.role == 'admin';
 
-  if (!allowedRoles.includes(role as string)) {
+  if (!allowedRoles.includes(role as string) && !adminRole  ) {
     return NextResponse.json({ error: 'Not approved' }, { status: 403 });
   }
 
@@ -76,7 +77,7 @@ export async function POST(req: Request) {
     };
   }
 
-  if (!role || role !== 'admin') {
+  if (!role || !adminRole ) {
     doc._id = `drafts.${crypto.randomUUID()}`;
     doc.approved = false;
   }

@@ -116,7 +116,7 @@ export default function CreateEventPage() {
     });
 
     if (!res.ok) {
-      toast.error("Error creating event");
+      toast.error("You are not approved to submit events");
     } else {
       toast.success(isAdmin ? "Event published 🎉" : "Event submitted for approval ✅");
       setForm({
