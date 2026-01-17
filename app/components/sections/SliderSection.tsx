@@ -24,7 +24,6 @@ export default function SliderSection({ data, event }: SliderSectionProps) {
     if (url && typeof window !== "undefined") {
       window.open(url, "_blank");
     }
-    track('Click event Slider');
   }, []);
 
   useEffect(() => {
