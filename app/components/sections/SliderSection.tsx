@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { track } from '@vercel/analytics';
 
 
 interface ImageEvent {
@@ -22,6 +23,7 @@ export default function SliderSection({ data, event }: SliderSectionProps) {
     if (url && typeof window !== "undefined") {
       window.open(url, "_blank");
     }
+    track('Click event Slider');
   }, []);
 
   useEffect(() => {
