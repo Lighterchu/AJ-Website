@@ -20,6 +20,7 @@ export default function SliderSection({ data, event }: SliderSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleClick = useCallback((url: string) => {
+    track('Click event Slider');
     if (url && typeof window !== "undefined") {
       window.open(url, "_blank");
     }
