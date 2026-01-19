@@ -67,7 +67,7 @@ export default function Navbar() {
           {/* Auth (Mobile) */}
           <SignedOut>
             <SignInButton />
-            <SignUpButton />
+            <SignUpButton  signInForceRedirectUrl="/pages/Onboarding" />
           </SignedOut>
           <SignedIn>
             <UserButton />
