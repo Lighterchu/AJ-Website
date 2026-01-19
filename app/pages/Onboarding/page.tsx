@@ -1,62 +1,108 @@
 "use client";
 
-import { useUser } from "@clerk/clerk-react"; // or @clerk/nextjs if using Next.js
-import { useRouter } from "next/navigation"; // remove if not Next.js
+import { useUser } from "@clerk/clerk-react";
+import { useRouter } from "next/navigation";
 
 export default function Onboarding() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
 
-  const handleSelectRole = async (role) => {
+  const handleSelectRole = async (role: string) => {
     if (!user) return;
 
     try {
-      // Merge unsafeMetadata so we don’t overwrite existing data
       const newMetadata = {
         ...user.unsafeMetadata,
-        role // “Promoter”, “Artist”, or “Punter”
+        role,
       };
 
       await user.update({ unsafeMetadata: newMetadata });
-
-      // Optional: reload user so metadata is fresh
       await user.reload();
 
-      // Redirect after selecting
-      router.push("/pages/Scene-and-Heard"); // change to whatever route you want
+      router.push("/pages/Scene-and-Heard");
     } catch (err) {
       console.error("Error saving role:", err);
     }
   };
 
-  if (!isLoaded) return <p>Loading…</p>;
+  if (!isLoaded) return <p className="text-center">Loading…</p>;
 
   return (
-    <main className="max-w-lg mx-auto mt-10  p-8 text-center">
+    <main className="max-w-lg mx-auto mt-10 p-8 text-center
+     
+      text-gray-900 dark:text-gray-100
+      rounded-2xl shadow-sm"
+    >
       {/* Header */}
-      <h1 className="text-3xl font-bold mb-2">Welcome! Choose Your Role</h1>
-      <p className="mb-8">This helps us personalise your experience.</p>
+      <h1 className="text-3xl font-bold mb-2">
+        Welcome! Choose Your Role
+      </h1>
+      <p className="mb-8 text-gray-600 dark:text-gray-400">
+        This helps us personalise your experience.
+      </p>
 
       {/* Role Cards */}
       <div className="grid grid-cols-1 gap-4">
         {/* Promoter */}
-        <button className="role-card cursor-pointer" onClick={() => handleSelectRole("Poster")}>
-          <span className="text-xl font-semibold">Promoter</span>
-          <p className="text-sm text-gray-500">Manage events & promote artists</p>
+        <button
+          onClick={() => handleSelectRole("Poster")}
+          className="
+            w-full p-6 text-left rounded-xl border
+            bg-white dark:bg-neutral-800
+            border-gray-200 dark:border-neutral-700
+            text-gray-900 dark:text-gray-100
+            hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-600
+            transition
+          "
+        >
+          <span className="text-xl font-semibold">
+            Promoter
+          </span>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Manage events & promote artists
+          </p>
         </button>
 
         {/* Artist */}
-        <button className="role-card cursor-pointer" onClick={() => handleSelectRole("Artist")}>
-          <span className="text-xl font-semibold">Artist</span>
-          <p className="text-sm text-gray-500">Showcase your music & grow fans</p>
+        <button
+          onClick={() => handleSelectRole("Artist")}
+          className="
+            w-full p-6 text-left rounded-xl border
+            bg-white dark:bg-neutral-800
+            border-gray-200 dark:border-neutral-700
+            text-gray-900 dark:text-gray-100
+            hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-600
+            transition
+          "
+        >
+          <span className="text-xl font-semibold">
+            Artist
+          </span>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Showcase your music & grow fans
+          </p>
         </button>
 
         {/* Punter */}
-        <button className="role-card cursor-pointer" onClick={() => handleSelectRole("Punter")}>
-          <span className="text-xl font-semibold">Punter</span>
-          <p className="text-sm text-gray-500">Get updates & follow events</p>
+        <button
+          onClick={() => handleSelectRole("Punter")}
+          className="
+            w-full p-6 text-left rounded-xl border
+            bg-white dark:bg-neutral-800
+            border-gray-200 dark:border-neutral-700
+            text-gray-900 dark:text-gray-100
+            hover:shadow-lg hover:border-gray-300 dark:hover:border-neutral-600
+            transition
+          "
+        >
+          <span className="text-xl font-semibold">
+            Punter
+          </span>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Get updates & follow events
+          </p>
         </button>
       </div>
     </main>
-  )
+  );
 }
