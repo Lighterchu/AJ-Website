@@ -4,6 +4,7 @@ import HeroText from "@/app/components/sections/HeroText";
 import { client } from "../sanity/lib/client";
 import { nextEventQuery } from "../sanity/lib/allquries";
 import { ImagesFromEvent } from "@/sanity/lib/imagesFromEventImage";
+import MobileSceneGate from "@/app/components/Client/MobileSceneGate";
 
 
 export default async function Home() {
@@ -11,6 +12,7 @@ export default async function Home() {
   const imageEvent = await client.fetch(ImagesFromEvent);
   return (
     <div className="bg-black" >
+      <MobileSceneGate />
       <VideoSection
         src="/video/_AHymsNz.mp4"
         poster="/images/video-poster.jpg"

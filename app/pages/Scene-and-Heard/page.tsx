@@ -4,14 +4,12 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 import BlogCard from "@/app/components/Client/BlogCard";
 import Link from "next/link";
-import { 
-  allEvents,
-  allCommunityEvents
-} from "@/sanity/lib/allquries";
+import { allEvents, allCommunityEvents } from "@/sanity/lib/allquries";
 import CreateDropdown from "@/app/components/Client/CreateDropdown";
+import ExploreFullSiteButton from "@/app/components/Client/GohomeButton";
 
 import { notFound } from "next/navigation";
-
+import { link } from "fs";
 
 const POSTS_QUERY = defineQuery(`
  *[_type == "posts"] |  order(PostDate desc,  _createdAt desc) {
@@ -45,12 +43,11 @@ export default async function BlogPage() {
   const ALLevents = await sanityFetch({ query: allEvents });
   const AllCommunityEvents = await sanityFetch({ query: allCommunityEvents });
   const blogPosts = res.data; // ✅ <- important
-  if(!blogPosts){
-    return notFound()
+  if (!blogPosts) {
+    return notFound();
   }
 
   const allCommunityEventsData = AllCommunityEvents.data;
-  
 
   const normalizeAllOurEvents = ALLevents.data.map((event: Event) => ({
     title: event.name,
@@ -60,9 +57,6 @@ export default async function BlogPage() {
     description: event.description,
   }));
 
- 
-  
-
   const normalizeAllCommunity = AllCommunityEvents.data.map((event: Event) => ({
     title: event.name,
     date: new Date(event.startDate),
@@ -71,24 +65,23 @@ export default async function BlogPage() {
     description: event.description,
   }));
 
-  const calendarEvents = [
-    ...normalizeAllOurEvents,
-    ...normalizeAllCommunity,
-  ];
+  const calendarEvents = [...normalizeAllOurEvents, ...normalizeAllCommunity];
 
   calendarEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
-
-  
-  
- 
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-20 text-gray-900 dark:text-gray-50">
       {/* Title */}
       <h1 className="text-5xl font-extrabold tracking-tight mb-14">
-      MVMNT & News
+        MVMNT & News
       </h1>
+      <div className=" flex justify-between mb-10">
       <CreateDropdown />
+      <ExploreFullSiteButton />
+      </div>
+    
+      
+
       {/* Blog Posts Grid */}
       <div className=" grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {blogPosts.map((item) => (
