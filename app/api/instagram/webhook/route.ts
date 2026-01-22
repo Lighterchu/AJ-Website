@@ -56,6 +56,11 @@ export async function POST(req: Request) {
           html: `
       <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.5;">
         h12 style="color: #16a34a;">New Instagram Webhook Event Received</h2>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">${JSON.stringify(
+          data,
+          null,
+          2
+        )}</pre>
       </div>
     `,
         });
