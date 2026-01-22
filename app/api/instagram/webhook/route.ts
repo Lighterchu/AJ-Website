@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
@@ -22,6 +23,8 @@ export async function GET(req: NextRequest) {
     });
   }
 
+  
+
   console.error("VERIFICATION FAILED: Token mismatch or missing params");
   return new Response("Forbidden", { status: 403 });
 }
@@ -31,6 +34,31 @@ export async function POST(req: Request) {
     const data = await req.json();
     console.log("--- INSTAGRAM EVENT RECEIVED ---");
     console.log(JSON.stringify(data, null, 2));
+
+    const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // true for 465
+        auth: {
+          user: "benjaminrowe0@gmail.com",
+          pass: process.env.NEXT_PUBLIC_NODEMAIL,
+          
+        },
+      });
+      
+    
+      try {
+        await transporter.sendMail({
+          from: "Testing",
+          to: "benjaminrowe0@gmail.com",
+          subject: "Insta Webhook",
+          text: "Testing",
+          html: `
+      <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.5;">
+        h12 style="color: #16a34a;">New Instagram Webhook Event Received</h2>
+      </div>
+    `,
+        });
 
     // Meta expects a 200 OK to acknowledge receipt
     return new Response("EVENT_RECEIVED", { status: 200 });
