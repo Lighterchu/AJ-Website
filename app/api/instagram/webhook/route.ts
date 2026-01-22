@@ -1,26 +1,41 @@
-export async function GET(req: Request) {
-    const { searchParams } = new URL(req.url);
+import { NextRequest } from "next/server";
+
+export async function GET(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
   
-    const mode = searchParams.get("hub.mode");
-    const token = searchParams.get("hub.verify_token");
-    const challenge = searchParams.get("hub.challenge");
-  
-    console.log("VERIFY:", { mode, token, challenge });
-  
-    if (mode === "subscribe" && token === "mvmnt") {
-      return new Response(challenge, {
-        status: 200,
-        headers: { "Content-Type": "text/plain" }
-      });
-    }
-  
-    return new Response("Invalid token", { status: 403 });
+  const mode = searchParams.get("hub.mode");
+  const token = searchParams.get("hub.verify_token");
+  const challenge = searchParams.get("hub.challenge");
+
+  console.log("--- WEBHOOK VERIFICATION ATTEMPT ---");
+  console.log("Mode:", mode);
+  console.log("Token:", token);
+  console.log("Challenge:", challenge);
+
+  // Replace "mvmnt" with your actual token from the Meta Dashboard
+  if (mode === "subscribe" && token === "mvmnt") {
+    console.log("VERIFICATION SUCCESSFUL");
+    // VERY IMPORTANT: Return the challenge string directly as text/plain
+    return new Response(challenge, {
+      status: 200,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
-  
-  export async function POST(req: Request) {
+
+  console.error("VERIFICATION FAILED: Token mismatch or missing params");
+  return new Response("Forbidden", { status: 403 });
+}
+
+export async function POST(req: Request) {
+  try {
     const data = await req.json();
-    console.log("INSTAGRAM EVENT:", JSON.stringify(data, null, 2));
-  
-    return new Response("OK", { status: 200 });
+    console.log("--- INSTAGRAM EVENT RECEIVED ---");
+    console.log(JSON.stringify(data, null, 2));
+
+    // Meta expects a 200 OK to acknowledge receipt
+    return new Response("EVENT_RECEIVED", { status: 200 });
+  } catch (error) {
+    console.error("POST Error:", error);
+    return new Response("Error processing webhook", { status: 500 });
   }
-  
+}
