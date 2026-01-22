@@ -71,4 +71,8 @@ export async function POST(req: Request) {
     console.error("POST Error:", error);
     return new Response("Error processing webhook", { status: 500 });
   }
+  } catch (error) {
+    console.error("Outer Error:", error);
+    return new Response("Error processing request", { status: 500 });
+  }
 }
