@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function DrunkModeToggle() {
   const router = useRouter();
-  const [mode, setMode] = useState<"scene" | "full">("scene");
+  const [mode, setMode] = useState("full")
 
   // Read current mode on mount
   useEffect(() => {
