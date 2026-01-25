@@ -12,7 +12,8 @@ export default async function Home() {
   const imageEvent = await client.fetch(ImagesFromEvent);
   return (
     <div className="bg-black" >
-      <MobileSceneGate />
+      {/* Needs more work on mobile */}
+      {/* <MobileSceneGate /> */}
       <VideoSection
         src="/video/_AHymsNz.mp4"
         poster="/images/video-poster.jpg"
