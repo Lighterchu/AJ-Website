@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
+import {  urlFor } from "@/sanity/lib/image";
 
 interface ImageEvent {
   _id: string;
@@ -61,14 +62,15 @@ const SlidingImages: React.FC<SlidingImagesProps> = ({ data, event }) => {
             onClick={() => handleClick(event.Link || img.imageUrl)}
           >
             <Image
-              src={img.imageUrl}
-              alt="Event slide"
-              fill
-              unoptimized
-              className="object-cover cursor-pointer"
-              sizes="100vw"
-              priority={isActive && currentIndex === 0}
-            />
+  src={urlFor(img.imageUrl).width(1600).auto('format').quality(80).url()} 
+  alt="Event slide"
+  fill
+  unoptimized
+  className="object-cover cursor-pointer"
+  sizes="(max-width: 768px) 100vw, 824px"
+  priority={isActive && currentIndex === 0}
+/>
+
           </div>
         );
       })}

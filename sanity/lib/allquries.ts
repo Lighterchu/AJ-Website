@@ -42,3 +42,13 @@ export const allCommunityEvents = `*[_type == "communityevent"
   location,
   "image": image.asset->url,
 }`;
+
+export const homepageVideoQuery = `*[_type == "video"] {
+  _id,
+  title,
+  "videoFile": videoFile.asset->url,
+  "poster": poster.asset->url,
+  aspectRatio
+}
+`;
+

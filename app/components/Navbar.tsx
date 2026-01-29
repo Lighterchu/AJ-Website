@@ -1,50 +1,47 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const pathname = usePathname();
 
-  const linkClasses =
+  const linkClasses = useMemo(() => 
     pathname === "/" 
-      ? "text-white"                // always black on home
-      : "text-black dark:text-gray-100"; // regular behavior elsewhere
+      ? "text-white"
+      : "text-black dark:text-gray-100"
+  , [pathname]);
 
+  const links = [
+    { href: "/pages/About", label: "About Us" },
+    { href: "/pages/Events", label: "Events" },
+    { href: "/pages/Gallerys", label: "Galleries" },
+    { href: "/pages/Scene-and-Heard", label: "Scene and Heard" },
+    { href: "/pages/Contact", label: "Contact Us" }
+  ];
 
   return (
-    <nav className="absolute top-0 z-20 w-full px-6 py-4 flex items-center justify-between text-white font-semibold bg-transparent">
-      
+    <nav className="absolute top-0 z-20 w-full px-6 py-4 flex items-center justify-between font-semibold bg-transparent">
+
       {/* LEFT — Logo / Home */}
-      <Link href="/" className={`text-lg ${linkClasses}`}>
-        Home
-      </Link>
+      <Link href="/" className={`text-lg ${linkClasses}`}>Home</Link>
 
       {/* CENTER — Desktop Links */}
       <div className="hidden md:flex space-x-8 text-sm lg:text-base">
-        <Link href="/pages/About" className={`${linkClasses}`}>About Us</Link>
-        <Link href="/pages/Events" className={`${linkClasses}`}>Events</Link>
-        <Link href="/pages/Gallerys" className={`${linkClasses}`}>Galleries</Link>
-        <Link href="/pages/Scene-and-Heard" className={`${linkClasses}`}>Scene and Heard</Link>
-        <Link href="/pages/Contact" className={`${linkClasses}`}>Contact Us</Link>
+        {links.map(link => (
+          <Link key={link.href} href={link.href} className={linkClasses}>{link.label}</Link>
+        ))}
       </div>
 
       {/* RIGHT — Auth (Desktop) */}
-      <div className={`hidden md:flex items-center space-x-4 ${linkClasses} `}>
+      <div className={`hidden md:flex items-center space-x-4 ${linkClasses}`}>
         <SignedOut>
           <SignInButton />
-          <SignUpButton  signInForceRedirectUrl="/pages/Onboarding" />
+          <SignUpButton signInForceRedirectUrl="/pages/Onboarding" />
         </SignedOut>
         <SignedIn>
           <UserButton />
@@ -53,7 +50,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Button */}
       <button
-        className={`md:hidden text-gray-900 dark:text-gray-100 ${linkClasses}`}
+        className={`md:hidden ${linkClasses}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -63,31 +60,16 @@ export default function Navbar() {
       {/* Mobile Dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-black/90 dark:bg-gray-950 flex flex-col items-center py-6 space-y-4 md:hidden">
-          
-          {/* Auth (Mobile) */}
           <SignedOut>
             <SignInButton />
-            <SignUpButton  signInForceRedirectUrl="/pages/Onboarding" />
+            <SignUpButton signInForceRedirectUrl="/pages/Onboarding" />
           </SignedOut>
           <SignedIn>
             <UserButton />
           </SignedIn>
-
-          <Link href="/pages/About"  onClick={() => setIsOpen(false)}>
-            About Us
-          </Link>
-          <Link href="/pages/Events"  onClick={() => setIsOpen(false)}>
-            Events
-          </Link>
-          <Link href="/pages/Gallerys"  onClick={() => setIsOpen(false)}>
-            Galleries
-          </Link>
-          <Link href="/pages/Scene-and-Heard"  onClick={() => setIsOpen(false)}>
-            Scene and Heard
-          </Link>
-          <Link href="/pages/Contact"  onClick={() => setIsOpen(false)}>
-            Contact Us
-          </Link>
+          {links.map(link => (
+            <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)}>{link.label}</Link>
+          ))}
         </div>
       )}
     </nav>

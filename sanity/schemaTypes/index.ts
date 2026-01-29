@@ -8,6 +8,7 @@ import {djType} from './djTypes'
 import {postType} from './postTypes'
 import {eventcommunityType} from './communityeventType'
 import {aboutUs} from './pages/AboutUsType'
+import {videoSchema}  from './videosTypes'
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -19,5 +20,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     djType, 
     postType,
     eventcommunityType,
-    aboutUs],
+    aboutUs,
+    videoSchema],
 }

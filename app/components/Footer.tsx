@@ -2,34 +2,44 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/pages/About", label: "About Us" },
+  { href: "/pages/Events", label: "Upcoming Events" },
+  { href: "/pages/Gallerys", label: "Gallery" },
+];
 
 function Footer() {
+  const navLinks = useMemo(() => links, []);
+
   return (
-    <footer className="bg-black text-white font-medium text-base w-full ">
-      <div className="max-w-6xl mx-auto px-2 grid grid-cols-1 md:grid-cols-3 gap-8 items-center ">
+    <footer className="bg-black text-white font-medium text-base w-full">
+      <div className="max-w-6xl mx-auto px-2 grid grid-cols-1 md:grid-cols-3 gap-y-6 md:gap-8 items-center">
+
         {/* Logo */}
         <div className="flex justify-center md:justify-start">
           <Image
             src="/logos/MVMNT.png"
+            alt="MVMNT Entertainment Logo"
             unoptimized
             width={200}
             height={50}
-            alt="MVMNT Entertainment Logo"
             className="object-contain w-[200px] h-auto"
             loading="lazy"
+            sizes="(max-width: 768px) 150px, 200px"
           />
         </div>
 
         {/* Navigation */}
-        <nav className="flex  flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-center">
-          {[
-            { href: "/", label: "Home" },
-            { href: "/pages/About", label: "About Us" },
-            { href: "/pages/Events", label: "Upcoming Events" },
-            { href: "/pages/Gallerys", label: "Gallery" },
-          ].map((link) => (
-            <Link key={link.href} href={link.href} className="hover:underline">
+        <nav className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-8 text-center">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="hover:underline"
+            >
               {link.label}
             </Link>
           ))}
@@ -37,11 +47,8 @@ function Footer() {
 
         {/* Contact Info */}
         <div className="flex flex-col items-center md:items-end text-sm space-y-1">
-          <a
-            href="mailto:Enquiries@mvmntentertainment.com"
-            className="hover:underline"
-          >
-                        Enquiries@mvmntentertainment.com
+          <a href="mailto:Enquiries@mvmntentertainment.com" className="hover:underline">
+            Enquiries@mvmntentertainment.com
           </a>
           <a href="tel:+1234567890" className="hover:underline">
             0431383674
@@ -57,5 +64,4 @@ function Footer() {
   );
 }
 
-// Prevent unnecessary re-renders
 export default React.memo(Footer);
