@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "../../../sanity/lib/image";
+import { urlFor } from "../../../../aj_studio/sanity/lib/image";
 
 interface DjProfileProps {
   djsprofile: {

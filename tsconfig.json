@@ -36,7 +36,7 @@
     "app/pages/Events/event/[slug]/page.jsx",
     "app/pages/Events/event/[slug]/[slug].jsx",
     ".next/dev/types/**/*.ts"
-  ],
+, "../aj_studio/sanity.config.ts", "../aj_studio/sanity.cli.ts"  ],
   "exclude": [
     "node_modules"
   ]
