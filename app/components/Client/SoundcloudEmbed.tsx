@@ -1,39 +1,36 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react'
 
 export default function SoundCloudEmbed() {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
-  // Lazy load iframe when visible
   useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+        setIsVisible(entry.isIntersecting)
       },
-      { threshold: 0.25 }
-    );
+      {
+        threshold: 0.25,
+        rootMargin: '200px 0px' // preload slightly before visible
+      }
+    )
 
-    observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, []);
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <div ref={ref} className="w-full h-75">
       {isVisible && (
         <iframe
-          className="w-full h-75"
-          allow="autoplay; encrypted-media"
+          className="w-full h-full"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2148527099"
-          frameBorder="0"
-          allowFullScreen
+          loading="lazy"
+          allow="autoplay"
           title="SoundCloud Playlist"
         />
       )}
