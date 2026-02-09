@@ -26,7 +26,7 @@ export default function SoundCloudEmbed() {
   }, []);
 
   return (
-    <div ref={ref} className="w-full aspect-[16/9]">
+    <div ref={ref} className="w-full h-75">
       {isVisible && (
         <iframe
           className="w-full h-75"
