@@ -105,7 +105,7 @@ export default function BlogCard({ item }: { item: ContentItem }) {
               </p>
             )}
 
-            <h3 className="text-2xl font-bold mt-2">{item.title || item.name}</h3>
+            <h3 className="text-2xl font-bold mt-2">{item.title}</h3>
 
             {(item.shortDescription || item.short) && (
               <p className="opacity-80 mt-3 line-clamp-3">
