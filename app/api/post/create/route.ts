@@ -42,6 +42,7 @@ export async function POST(req: Request) {
       current: string;
     };
     authorId: string;
+    authorName: string;
     image?: {
       _type: string;
       asset: {
@@ -64,6 +65,8 @@ export async function POST(req: Request) {
       current: slug,
     },
     authorId: authObject.userId,
+    authorName: user.username || 'Unknown',
+
   };
 
   if (body.image) {

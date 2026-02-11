@@ -15,6 +15,7 @@ const POSTS_QUERY = defineQuery(`
  *[_type == "posts"] |  order(PostDate desc,  _createdAt desc) {
   _id,
   _createdAt,
+  authorName,
   _type,
   PostDate,
   title,
@@ -22,7 +23,8 @@ const POSTS_QUERY = defineQuery(`
   "image": image.asset->url,
   blogDate,
   shortDescription,
-  description
+  description,
+  authorId
 }`);
 
 interface Event {
@@ -33,6 +35,7 @@ interface Event {
   genre?: string;
   _type?: string;
   description?: string;
+  authorId: string;
 }
 
 export const revalidate = 60;

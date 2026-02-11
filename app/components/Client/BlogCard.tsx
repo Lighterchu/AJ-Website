@@ -8,8 +8,9 @@ import { urlFor } from "@/sanity/lib/image";
 
 type ContentItem = {
   _id: string;
+  authorId: string;
   title: string;
-  name?: string;
+  authorName?: string;
   short?: string;
   image?: string;
   genre?: string;
@@ -23,6 +24,7 @@ type ContentItem = {
 
 export default function BlogCard({ item }: { item: ContentItem }) {
   const { user, isLoaded } = useUser();
+  console.log(item)
   if (!isLoaded) return null;
 
   const role = user?.publicMetadata?.role;
@@ -83,6 +85,12 @@ export default function BlogCard({ item }: { item: ContentItem }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           </div>
         )}
+        <div className=" p-2 mt-3 text-sm text-indigo-400 font-semibold">
+        {item._type === "posts" && (
+             <p>Posted By: {item.authorName}</p>
+        )}
+        </div>
+        
         {/* Content */}
         <div className="mt-5 flex-1 flex flex-col justify-between">
           <div>

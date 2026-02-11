@@ -57,7 +57,13 @@ export const postType = defineType({
       title: 'Author ID',
       type: 'text',
       description: 'User ID',
-  }), 
+    }), 
+    defineField({
+      name: 'authorName',
+      title: 'User Name',
+      type: 'text',
+      description: 'User Name',
+    }), 
   defineField({
     name: 'approved',
     type: 'boolean',
