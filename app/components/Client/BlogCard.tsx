@@ -80,7 +80,7 @@ export default function BlogCard({ item }: { item: ContentItem }) {
               unoptimized
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-700"
-              alt={item.title || item.name || "Image"}
+              alt={item.title || "Image"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           </div>
