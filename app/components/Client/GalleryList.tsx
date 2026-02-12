@@ -24,7 +24,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
                 alt={photo.name} // better alt text
                 fill
                 unoptimized // keep unoptimized so Vercel doesn't charge extra
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover rounded-sm group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw,
          (max-width: 1200px) 50vw,
          33vw"
