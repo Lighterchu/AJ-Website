@@ -13,10 +13,18 @@ export default function FullscreenImage({ src, alt }) {
       <div onClick={() => setOpen(true)} className="cursor-pointer">
         <Image
           unoptimized
-          src={urlFor(src).url()}
-          alt={alt}
-          fill
-          className="object-cover rounded"
+          src={urlFor(src)
+            .width(600) // resize for gallery
+            .height(400)
+            .auto("format") // serve WebP/AVIF automatically
+            .quality(75) // good compression
+            .url()}
+            alt={alt} // better alt text
+            fill
+            className="object-cover rounded-sm group-hover:scale-105 transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw,
+     (max-width: 1200px) 50vw,
+     33vw"
         />
       </div>
 

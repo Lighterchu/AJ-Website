@@ -1,5 +1,5 @@
 import { defineType, defineField } from 'sanity'
-import { MultiImageSelector } from '@/app/components/Sanity/MultiImageSelector'
+import { MultiImageSelector } from '../../components/Sanity/MultiImageSelector'
 
 export const djType = defineType({
   name: 'dj',
