@@ -1,5 +1,5 @@
 import {defineField, defineType} from 'sanity'
-import { MultiImageSelector } from '../../components/Sanity/MultiImageSelector'
+import { MultiImageSelector } from '../components/Sanity/MultiImageSelector'
 
 export const galleryType = defineType({
   name: 'gallery',
