@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,10 +15,15 @@ export default function Gallery({ photos }: { photos: any[] }) {
           >
             <div className="relative h-64 w-full">
               <Image
-                src={urlFor(photo.image).url()}
-                alt={"something"}
+                src={urlFor(photo.image)
+                  .width(600) // resize for gallery
+                  .height(400)
+                  .auto("format") // serve WebP/AVIF automatically
+                  .quality(75) // good compression
+                  .url()}
+                alt={photo.name} // better alt text
                 fill
-                unoptimized // <-- THIS DISABLES VERCEL IMAGE OPTIMIZATION
+                unoptimized // keep unoptimized so Vercel doesn't charge extra
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw,
          (max-width: 1200px) 50vw,
