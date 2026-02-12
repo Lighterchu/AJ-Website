@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.36.2",
@@ -16,6 +17,7 @@
     "@sanity/vision": "^4.2.0",
     "@types/formidable": "^3.4.6",
     "@vercel/analytics": "^1.6.1",
+    "dotenv": "^17.2.4",
     "formidable": "^3.5.4",
     "isomorphic-dompurify": "2.33.0",
     "next": "^16.0.7",
@@ -35,13 +37,19 @@
     "@eslint/eslintrc": "^3",
     "@next/bundle-analyzer": "^16.1.6",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
   },
   "overrides": {
     "@sanity/client": "7.13.2",
