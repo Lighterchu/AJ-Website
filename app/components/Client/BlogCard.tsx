@@ -76,11 +76,19 @@ export default function BlogCard({ item }: { item: ContentItem }) {
         {item.image && (
           <div className="relative h-60 w-full overflow-hidden rounded-xl flex-shrink-0">
             <Image
-              src={urlFor(item.image).url()}
+              src={urlFor(item.image)
+                .width(600) // resize for gallery
+                .height(400)
+                .auto("format") // serve WebP/AVIF automatically
+                .quality(75) // good compression
+                .url()}
               unoptimized
               fill
-              className="object-cover group-hover:scale-110 transition-transform duration-700"
-              alt={item.title || "Image"}
+              className="object-cover rounded-sm group-hover:scale-105 transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw,
+     (max-width: 1200px) 50vw,
+     33vw"
+              alt={item.title ||  "Image"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           </div>

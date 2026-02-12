@@ -40,11 +40,19 @@ export default function EventList({
         >
           <div className="relative h-48 w-full">
             <Image
-              src={urlFor(event.imageUrl).url()}
+             src={urlFor(event.imageUrl)
+              .width(600) // resize for gallery
+              .height(400)
+              .auto("format") // serve WebP/AVIF automatically
+              .quality(75) // good compression
+              .url()}
               unoptimized
               alt={event.name}
               fill
-              className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw,
+         (max-width: 1200px) 50vw,
+         33vw"
             />
           </div>
 

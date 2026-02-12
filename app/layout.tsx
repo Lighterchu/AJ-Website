@@ -14,7 +14,6 @@ import "./globals.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import SoundCloudEmbed from "./components/Client/SoundcloudEmbed";
-import { SanityLive } from "@/sanity/lib/live";
 
 interface Metadata extends NextMetadata {
   verification?: NextMetadata["verification"] & {
@@ -89,7 +88,6 @@ export default function RootLayout({
           <LaunchGate launchDate={LAUNCH_DATE.toISOString()}>
             <Navbar />
             <main className="flex-grow">{children}</main>
-            <SanityLive />
             <SoundCloudEmbed />
             <Footer />
             <Toaster richColors position="top-right" />
