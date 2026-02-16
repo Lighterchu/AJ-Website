@@ -15,6 +15,10 @@ const EVENTS_QUERY = defineQuery(`
   }
 `);
 
+export const revalidate = 60;
+export const dynamic = "force-dynamic";
+
+
 export default async function EventsPage() {
   const res = await sanityFetch({ query: EVENTS_QUERY });
   const events = res.data; // ✅ <- important
