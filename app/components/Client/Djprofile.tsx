@@ -23,8 +23,8 @@ interface DjProfileProps {
 export default function DjProfiles({ djsprofile }: DjProfileProps) {
   const { name, slug, duration, imageUrl } = djsprofile;
 
-  const start = duration?.start ?? "9:00 PM";
-  const end = duration?.end ?? "11:00 PM";
+  const start = duration?.start 
+  const end = duration?.end
 
   const finalImage = imageUrl
     ? urlFor(imageUrl).width(2000).height(2500).url()
@@ -36,7 +36,7 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
       {finalImage && (
         <div className="relative w-full aspect-[4/5]">
           <Image
-            src={(finalImage)}
+            src={finalImage}
             unoptimized
             alt={name ?? "DJ profile image"}
             fill
@@ -54,9 +54,11 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
           <h3 className="text-white text-lg font-semibold drop-shadow">
             {name ?? "Unnamed DJ"}
           </h3>
-          <p className="text-white/80 text-sm">
-            {start} – {end}
-          </p>
+          {start && end && (
+            <p className="text-white/80 text-sm">
+              {start} – {end}
+            </p>
+          )}
         </div>
 
         {/* View Profile Link */}
