@@ -27,6 +27,9 @@ const EVENT_QUERY = groq`
   }
 `;
 
+export const revalidate = 60;
+export const dynamic = "force-dynamic";
+
 export default async function EventPage({
   params,
 }: {
