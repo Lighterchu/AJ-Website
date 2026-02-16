@@ -16,6 +16,10 @@ const DJ_QUERY = groq`
   }
 `;
 
+export const revalidate = 60;
+export const dynamic = "force-dynamic";
+
+
 export default async function DjPage() {
   const response = await sanityFetch({ query: DJ_QUERY });
 

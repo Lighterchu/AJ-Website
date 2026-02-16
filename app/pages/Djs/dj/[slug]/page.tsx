@@ -26,6 +26,10 @@ const DJ_QUERY = groq`
   }
 `;
 
+export const revalidate = 60;
+export const dynamic = "force-dynamic";
+
+
 export default async function DjPage({ params }: { params: Promise<{ slug: string }> }) {
   const slugID = (await params).slug;
   const dj = await sanityFetch({
