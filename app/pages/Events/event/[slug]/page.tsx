@@ -21,7 +21,8 @@ const EVENT_QUERY = groq`
       slug,
       name,
       "imageUrl": image.asset->url,
-      bio
+      bio, 
+      released
     },
     Link
   }
@@ -44,6 +45,7 @@ export default async function EventPage({
   const eventLink = eventData?.Link || null;
 
   if (!eventData) return notFound();
+  console.log(eventData)
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-12 space-y-12">

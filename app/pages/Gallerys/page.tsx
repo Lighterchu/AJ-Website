@@ -39,6 +39,8 @@ const EVENTS_QUERY = defineQuery(`
 `);
 
 
+
+
 export const revalidate = 60;
 export const dynamic = "force-dynamic";
 
@@ -65,8 +67,7 @@ export default async function Events() {
       <h1 className="text-4xl font-extrabold my-12 text-center text-gray-900 dark:text-gray-100">
         Our DJs 
       </h1>
-      <Djs />
-
+       <Djs />
     </main>
   );
 }

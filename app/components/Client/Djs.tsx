@@ -6,13 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const DJ_QUERY = groq`
-  *[_type == "dj"] {
+  *[_type == "dj" && released == true] {
     _id,
     name,
     slug,
     "imageUrl": image.asset->url,
     bio,
-    duration
+    duration,
+    released
   }
 `;
 

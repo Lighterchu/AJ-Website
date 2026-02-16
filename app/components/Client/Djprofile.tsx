@@ -7,6 +7,7 @@ import { urlFor } from "../../../sanity/lib/image";
 interface DjProfileProps {
   djsprofile: {
     _id?: string;
+    released?: boolean;
     name?: string;
     slug?: {
       current?: string;
@@ -21,7 +22,7 @@ interface DjProfileProps {
 }
 
 export default function DjProfiles({ djsprofile }: DjProfileProps) {
-  const { name, slug, duration, imageUrl } = djsprofile;
+  const { name, slug, duration, imageUrl, released } = djsprofile;
 
   const start = duration?.start 
   const end = duration?.end
@@ -62,7 +63,7 @@ export default function DjProfiles({ djsprofile }: DjProfileProps) {
         </div>
 
         {/* View Profile Link */}
-        {slug?.current && (
+        {released && slug?.current && (
           <Link
             href={`/pages/Djs/dj/${slug.current}`}
             className="text-sm text-white bg-white/10 backdrop-blur-sm px-3 py-1 rounded-lg border border-white/20 hover:bg-white/20 transition"

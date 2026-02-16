@@ -13,6 +13,11 @@ export const djType = defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
+      title: 'Has played at our Event',
+      name: 'released',
+      type: 'boolean'
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       options: {

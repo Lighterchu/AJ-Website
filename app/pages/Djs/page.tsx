@@ -12,7 +12,8 @@ const DJ_QUERY = groq`
     slug,
     "imageUrl": image.asset->url,
     bio,
-    duration
+    duration,
+    released
   }
 `;
 
@@ -24,6 +25,7 @@ export default async function DjPage() {
   const response = await sanityFetch({ query: DJ_QUERY });
 
   const djs = response?.data || [];
+  
 
   if (!djs) {
     return (
@@ -70,12 +72,14 @@ export default async function DjPage() {
             )}
 
             {/* View Profile Button */}
-            <Link
+            {dj.released && (
+              <Link
               href={`/pages/Djs/dj/${dj.slug?.current}`}
               className="mt-4 inline-block bg-white/10 border border-white/20 backdrop-blur-sm px-4 py-2 rounded-lg text-sm text-white hover:bg-white/20 transition"
             >
               View Artist
             </Link>
+            )}
           </div>
         ))}
       </div>
