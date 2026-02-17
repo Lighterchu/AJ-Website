@@ -1,13 +1,35 @@
 import type { NextConfig } from "next";
 import withBundleAnalyzer from "@next/bundle-analyzer";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true, // <-- THIS STOPS ALL VERCEL IMAGE OPTIMIZATION
+    unoptimized: true,
   },
 };
 
-// Enable bundle analyzer only when ANALYZE=true
-export default withBundleAnalyzer({
+const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
-})(nextConfig);
+});
+
+// Wrap Next config → bundle analyzer → sentry
+const config = bundleAnalyzer(nextConfig);
+
+export default withSentryConfig(config, {
+  org: "mvmnt",
+  project: "javascript-nextjs",
+
+  silent: !process.env.CI,
+
+  widenClientFileUpload: true,
+
+  tunnelRoute: "/monitoring",
+
+  webpack: {
+    automaticVercelMonitors: true,
+
+    treeshake: {
+      removeDebugLogging: true,
+    },
+  },
+});

@@ -48,3 +48,6 @@ next-env.d.ts
 *.mkv
 *.flv
 *.wmv
+
+# Sentry Config File
+.env.sentry-build-plugin
