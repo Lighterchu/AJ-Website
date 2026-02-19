@@ -6,18 +6,20 @@ import { nextEventQuery } from "../sanity/lib/allquries";
 import { ImagesFromEvent } from "@/sanity/lib/imagesFromEventImage";
 import MobileSceneGate from "@/app/components/Client/MobileSceneGate";
 import { homepageVideoQuery } from "@/sanity/lib/allquries";
+import  Popup  from "@/app/components/Client/popup";
 
 
 export default async function Home() {
   const event = await client.fetch(nextEventQuery);
   const imageEvent = await client.fetch(ImagesFromEvent);
   const video = await client.fetch(homepageVideoQuery);
-  console.log(video)
+  
 
   return (
     <div className="bg-black" >
       {/* Needs more work on mobile */}
       {/* <MobileSceneGate /> */}
+      <Popup />
       <VideoSection
         src={video[0]?.videoFile}
         poster={video[0]?.poster ?? "/images/video-poster.jpg"} // fallback

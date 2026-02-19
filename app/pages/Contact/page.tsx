@@ -92,7 +92,6 @@ export default function Contact() {
         setStatus("Failed to send message.");
       }
     } catch (err) {
-      console.error(err);
       setStatus("Error sending message.");
     }
   };
