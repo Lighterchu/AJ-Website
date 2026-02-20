@@ -19,7 +19,7 @@ export default async function Home() {
     <div className="bg-black" >
       {/* Needs more work on mobile */}
       {/* <MobileSceneGate /> */}
-      <Popup />
+      {/* <Popup /> */}
       <VideoSection
         src={video[0]?.videoFile}
         poster={video[0]?.poster ?? "/images/video-poster.jpg"} // fallback
