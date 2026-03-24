@@ -1,5 +1,5 @@
 // app/events/page.tsx
-import MainEventList from "../../components/Client/MainEvents"; // <-- client component
+import MainEventList from "../../components/MainEvents"; // <-- client component
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 import { notFound } from "next/navigation";
@@ -10,7 +10,7 @@ const EVENTS_QUERY = defineQuery(`
     name,
     short,  
     startDate,
-    slug, 
+    slug,
     "imageUrl": imageUrl.asset->url
   }
 `);
@@ -24,10 +24,6 @@ export default async function EventsPage() {
   const events = res.data; // ✅ <- important
 
   if (!events) return notFound();
-  
-
-  
-
   return (
     <main className="w-full mx-2  px-6 py-12">
       <h1 className="text-4xl font-bold mb-8 text-center">Events</h1>
