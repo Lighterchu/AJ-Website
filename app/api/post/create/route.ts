@@ -21,10 +21,11 @@ export async function POST(req: Request) {
   const role = user?.unsafeMetadata?.role;
   const allowedRoles = ['Poster', 'Artist'];
   const adminRole = user?.publicMetadata?.role == 'admin';
-
-  if (!allowedRoles.includes(role as string) && !adminRole  ) {
-    return NextResponse.json({ error: 'Not approved' }, { status: 403 });
-  }
+  
+  // Remove this for now so anyone can post, but we can add it back in later when we have more users and want to restrict posting to certain roles
+  // if (!allowedRoles.includes(role as string) && !adminRole  ) {
+  //   return NextResponse.json({ error: 'Not approved' }, { status: 403 });
+  // }
 
   const body = await req.json(); // JSON now, no FormData
   const slug = generateSlug(body.title);

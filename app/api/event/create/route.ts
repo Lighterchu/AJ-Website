@@ -26,10 +26,10 @@ export async function POST(req: Request) {
 
   const user = await currentUser();
   const role = user?.publicMetadata?.role;
-
-  if (!['admin', 'Postxer', 'Artist'].includes(role as string)) {
-    return NextResponse.json({ error: 'Not approved' }, { status: 403 });
-  }
+  // Remove this for now so anyone can post, but we can add it back in later when we have more users and want to restrict posting to certain roles
+  // if (!['admin', 'Postxer', 'Artist'].includes(role as string)) {
+  //   return NextResponse.json({ error: 'Not approved' }, { status: 403 });
+  // }
 
   const body = await req.json();
   const slug = generateSlug(body.title);
