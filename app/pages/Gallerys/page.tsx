@@ -64,10 +64,7 @@ export default async function Events() {
         Past Events
       </h1>
       <EventList events={eventsResData} showNewEvents={false}/>
-      <h1 className="text-4xl font-extrabold my-12 text-center text-gray-900 dark:text-gray-100">
-        Our DJs 
-      </h1>
-       <Djs />
+      
     </main>
   );
 }
