@@ -59,7 +59,7 @@ const SlidingImages: React.FC<SlidingImagesProps> = ({ data, event }) => {
               transition-opacity duration-700
               ${isActive ? "opacity-100 z-10" : "opacity-0 z-0"}
             `}
-            onClick={() => handleClick(event.Link || img.imageUrl)}
+            onClick={() => handleClick(event.Link)}
           >
             <Image
   src={urlFor(img.imageUrl).width(1600).auto('format').quality(80).url()} 
