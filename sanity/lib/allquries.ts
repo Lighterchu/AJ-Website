@@ -1,13 +1,7 @@
-export const nextEventQuery = `*[_type == "event" && dateTime(startDate) > dateTime(now())] 
-| order(startDate asc)[0] {
+export const nextEventQuery = `*[_type == "event" && dateTime(startDate) > dateTime(now())]
+| order(startDate asc) {
   _id,
-  name,
-  slug,
   Link,
-  startDate,
-  description,
-  short,
-  location,
   "imageUrl": imageUrl.asset->url
 }`;
 

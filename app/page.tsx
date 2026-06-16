@@ -26,7 +26,7 @@ export default async function Home() {
         aspectRatio={video[0]?.aspectRatio ?? "16/9"}
       />
       {/* <HeroText /> */}
-      <SliderSection data={imageEvent} event={event} />
+      <SliderSection data={imageEvent} />
     </div>
   );
 }
